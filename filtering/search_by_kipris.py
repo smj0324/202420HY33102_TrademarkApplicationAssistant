@@ -1,0 +1,161 @@
+import os
+import re
+import requests
+import xmltodict
+
+KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
+
+class CodeSearchKipris:
+    '''
+    입력 상표명에 해당하는 정보 관리
+    '''
+    def __init__(self, application_code, title, single_flag=True) -> None:
+        self.application_code = application_code
+        self.title = title
+        self.applicant_name = ""
+        self.nice_code = []
+        self.similar_code = []
+        self.application_status = ""
+        self.single_flag = single_flag
+
+    def _search_by_code(self):
+        # 단일 검색 및 다중 검색 URL 구분
+        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY}"
+        
+        response_general = requests.get(url_general)
+        if response_general.status_code != 200:
+            print("Failed to retrieve general data from KIPRIS API")
+            return None
+        
+        application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
+        
+        if self.single_flag:
+            # 단일 데이터
+            self.applicant_name = application_general_dict.get('applicantName', "")
+            self.title = application_general_dict.get('title', "")
+            self.application_status = application_general_dict.get('applicationStatus', "")
+        else:
+            # 다중 데이터
+            self.application_code = [item.get('applicationNumber', "") for item in application_general_dict]
+            self.applicant_name = [item.get('applicantName', "") for item in application_general_dict]
+            self.title = [item.get('title', "") for item in application_general_dict]
+            self.application_status = [item.get('applicationStatus', "") for item in application_general_dict]
+
+    def _search_by_application_code(self):
+        if self.single_flag:
+            # 단일 데이터의 경우
+            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY}"
+            
+            response_similar = requests.get(url_similar)
+            if response_similar.status_code != 200:
+                print("Failed to retrieve similar group data from KIPRIS API")
+                return None
+            
+            classification_codes_list, similar_group_codes_list = parsing_nice_code(response_similar)
+            self.nice_code = classification_codes_list
+            self.similar_code = similar_group_codes_list
+        else:
+            # 다중 데이터의 경우
+            all_nice_codes = []
+            all_similar_codes = []
+
+            for target_code in self.application_code:
+                url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY}"
+                
+                response_similar = requests.get(url_similar)
+                if response_similar.status_code != 200:
+                    print(f"Failed to retrieve similar group data for application number {target_code} from KIPRIS API")
+                    continue
+
+                classification_codes_list, similar_group_codes_list = parsing_nice_code(response_similar)
+                all_nice_codes.append(classification_codes_list)
+                all_similar_codes.append(similar_group_codes_list)
+
+            self.nice_code = all_nice_codes
+            self.similar_code = all_similar_codes
+
+
+def parsing_application_data(response_general, application_code, single=True):
+    dict_general = xml_to_dict(response_general)
+    items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
+
+    if single:
+        # 단일 데이터 처리
+        parsed_data = next((item for item in items if item['applicationNumber'] == application_code), None)
+        if parsed_data:
+            title_no_english = re.sub(r'[A-Za-z]', '', parsed_data['title'])
+            return {
+                'applicationStatus': parsed_data['applicationStatus'],
+                'title': title_no_english,
+                'applicantName': parsed_data['applicantName'],
+            }
+        else:
+            print("해당 applicationNumber에 대한 정보가 없습니다.")
+            return {}
+    
+    extracted_info = []
+    for item in items:
+        application_status = item.get('applicationStatus', "")
+        application_date = item.get('applicationDate', "")
+
+        # 조건에 맞는 데이터만 저장
+        if application_status == "등록" and application_date and int(application_date[:4]) < 2019:
+            title_no_english = re.sub(r'[A-Za-z]', '', item['title'])
+            data = {
+                'applicationNumber': item['applicationNumber'],
+                'applicationStatus': application_status,
+                'title': title_no_english,
+                'applicantName': item['applicantName'],
+                'applicationDate': application_date,
+            }
+            extracted_info.append(data)
+
+    return extracted_info
+
+
+def parsing_nice_code(response_similar):
+    dict_similar = xml_to_dict(response_similar)
+    items = dict_similar.get('response', {}).get('body', {}).get('items', {}).get('trademarkDesignationGoodstInfo', [])
+
+    classification_codes = {int(item['DesignationGoodsClassificationInformationCode']) for item in items}
+    similar_group_codes = {item['SimilargroupCode'] for item in items}
+
+    classification_codes_list = [str(code) for code in classification_codes]
+    similar_group_codes_list = list(similar_group_codes)
+
+    return classification_codes_list, similar_group_codes_list
+
+
+def xml_to_dict(response):
+    try:
+        return xmltodict.parse(response.content)
+    except Exception as e:
+        print(f"Error parsing XML response: {e}")
+        return {}
+
+
+# 단일 application_code 테스트
+print("===== 단일 application_code 테스트 =====")
+single_code_test = CodeSearchKipris(application_code="4020190003795", title="", single_flag=True)
+single_code_test._search_by_code()
+single_code_test._search_by_application_code()
+
+print("단일 상표명 검색 결과:")
+print(f"신청자 이름: {single_code_test.applicant_name}")
+print(f"제목: {single_code_test.title}")
+print(f"상태: {single_code_test.application_status}")
+print(f"니스 코드: {single_code_test.nice_code}")
+print(f"유사 코드: {single_code_test.similar_code}")
+
+# 여러 application_code 테스트
+print("\n===== 여러 application_code 테스트 =====")
+multi_code_test = CodeSearchKipris(application_code="", title="교촌", single_flag=False)
+multi_code_test._search_by_code()
+multi_code_test._search_by_application_code()
+
+print("여러 상표명 검색 결과:")
+print(f"신청자 이름 리스트: {multi_code_test.applicant_name}")
+print(f"제목 리스트: {multi_code_test.title}")
+print(f"상태 리스트: {multi_code_test.application_status}")
+print(f"니스 코드 리스트: {multi_code_test.nice_code}")
+print(f"유사 코드 리스트: {multi_code_test.similar_code}")
