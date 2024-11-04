@@ -1,5 +1,7 @@
 import os
 import wikipediaapi
+import requests
+import xml.etree.ElementTree as ET
 from src.worker import convert
 from model.model import embedding_model
 from tools.load_data import load_dict_from_json
@@ -7,7 +9,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 from pinecone import Pinecone
 
 
+KOREAN_API = os.getenv('KOREAN_API')
+BASIC_KOREAN_API = os.getenv('BASIC_KOREAN_API')
+
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("heymin")
 
@@ -73,6 +79,60 @@ def serch_by_wikipidia(brand):
     return page_py.exists(), wiki_content
 
 
-# 한국어 기초사전 api (한자)
-# 국립 국어원 api (사전)
-# 검색 api (아직 모름)
+def search_chinese_character(query):
+    '''
+    TODO: 반환형식 통일 및 PRINT문 삭제
+    '''
+    url = f"https://krdict.korean.go.kr/api/search?key={BASIC_KOREAN_API}&q={query}&advanced=y&trans_lang=2"
+
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        root = ET.fromstring(response.content)
+        hanja_words = []
+
+        for item in root.findall('.//item'):
+
+            origin = item.find('origin').text if item.find('origin') is not None else '정보 없음'  # origin 추가
+            
+            if origin != '정보 없음':
+                hanja_words.append(origin)
+
+        print("\n한자어 리스트:")
+        print(", ".join(hanja_words) if hanja_words else '없음')
+
+    else:
+        print(f"Error: {response.status_code}")
+
+    return hanja_words
+
+
+def search_korean_character(query):
+    '''
+    TODO: 반환형식 통일 및 PRINT문 삭제
+    '''
+    url = f"https://stdict.korean.go.kr/api/search.do?key={KOREAN_API}&q={query}&advanced=y&type2=all"
+
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        root = ET.fromstring(response.text)
+        items = root.findall(".//item")
+
+        if not items:  # 검색 결과가 없을 때
+            print("결과가 없습니다.")
+        else:
+            for item in items:
+                word = item.find("word").text
+                if word == query:
+                    definition = item.find(".//definition").text
+
+                    print(f"Word: {word}")
+                    print(f"Definition: {definition}")
+                    print("-" * 40)
+    else:
+        print(f"Error: {response.status_code}")
+
+
+def search_by_query(query):
+    ...
