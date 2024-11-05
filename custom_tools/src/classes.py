@@ -3,7 +3,7 @@
 
 import csv
 import regex as re
-from src.hangul_tools import hangul_to_jamos
+from custom_tools.src.hangul_tools import hangul_to_jamos
 from pathlib import Path
 
 

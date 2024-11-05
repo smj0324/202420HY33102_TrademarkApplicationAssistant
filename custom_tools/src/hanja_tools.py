@@ -1,5 +1,5 @@
 import csv
-from src.hangul_tools import hangul_to_jamos, jamo_to_hangul
+from custom_tools.src.hangul_tools import hangul_to_jamos, jamo_to_hangul
 from pathlib import Path
 
 HIGHV_DIPHTHONGS = ("ㅑ", "ㅕ", "ㅖ", "ㅛ", "ㅠ", "ㅣ")

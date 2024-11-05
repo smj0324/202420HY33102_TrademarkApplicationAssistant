@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import requests
 import xmltodict
 
@@ -9,7 +10,7 @@ class CodeSearchKipris:
     '''
     입력 상표명에 해당하는 정보 관리
     '''
-    def __init__(self, application_code, title, single_flag=True) -> None:
+    def __init__(self, application_code="", title="", single_flag=True) -> None:
         self.application_code = application_code
         self.title = title
         self.applicant_name = ""
@@ -40,6 +41,7 @@ class CodeSearchKipris:
             self.applicant_name = [item.get('applicantName', "") for item in application_general_dict]
             self.title = [item.get('title', "") for item in application_general_dict]
             self.application_status = [item.get('applicationStatus', "") for item in application_general_dict]
+
 
     def _search_by_application_code(self):
         if self.single_flag:
@@ -75,9 +77,38 @@ class CodeSearchKipris:
             self.similar_code = all_similar_codes
 
 
+    def to_dict(self) -> dict:
+        """
+        객체의 상태를 딕셔너리 형태로 변환하여 반환.
+
+        Returns:
+            dict: 객체의 모든 속성과 그 값을 포함한 딕셔너리.
+        """
+        return {
+            "application_code": self.application_code,
+            "title": self.title,
+            "single_flag": self.single_flag,
+            "applicant_name": self.applicant_name,
+            # "application_status": self.application_status,
+            "nice_code": self.nice_code,
+            "similar_code": self.similar_code
+        }
+
+    # def save_to_dict_attribute(self):
+    #     """
+    #     객체의 상태를 딕셔너리 형태로 내부 속성에 저장.
+    #     """
+    #     self.state_dict = self.to_dict()
+
+
 def parsing_application_data(response_general, application_code, single=True):
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
+
+    if isinstance(items, dict):
+        items = [items]
+    elif not isinstance(items, list):
+        items = []
 
     if single:
         # 단일 데이터 처리
@@ -94,6 +125,7 @@ def parsing_application_data(response_general, application_code, single=True):
             return {}
     
     extracted_info = []
+
     for item in items:
         application_status = item.get('applicationStatus', "")
         application_date = item.get('applicationDate', "")
@@ -129,14 +161,15 @@ def parsing_nice_code(response_similar):
 def xml_to_dict(response):
     try:
         return xmltodict.parse(response.content)
+    
     except Exception as e:
         print(f"Error parsing XML response: {e}")
         return {}
 
-
+"""
 # 단일 application_code 테스트
 print("===== 단일 application_code 테스트 =====")
-single_code_test = CodeSearchKipris(application_code="4020190003795", title="", single_flag=True)
+single_code_test = CodeSearchKipris(application_code="4020190003795", single_flag=True)
 single_code_test._search_by_code()
 single_code_test._search_by_application_code()
 
@@ -147,9 +180,12 @@ print(f"상태: {single_code_test.application_status}")
 print(f"니스 코드: {single_code_test.nice_code}")
 print(f"유사 코드: {single_code_test.similar_code}")
 
+print(json.dumps(single_code_test.to_dict(), ensure_ascii=False, indent=4))
+
+
 # 여러 application_code 테스트
 print("\n===== 여러 application_code 테스트 =====")
-multi_code_test = CodeSearchKipris(application_code="", title="교촌", single_flag=False)
+multi_code_test = CodeSearchKipris(title="교촌", single_flag=False)
 multi_code_test._search_by_code()
 multi_code_test._search_by_application_code()
 
@@ -159,3 +195,6 @@ print(f"제목 리스트: {multi_code_test.title}")
 print(f"상태 리스트: {multi_code_test.application_status}")
 print(f"니스 코드 리스트: {multi_code_test.nice_code}")
 print(f"유사 코드 리스트: {multi_code_test.similar_code}")
+
+print(json.dumps(multi_code_test.to_dict(), ensure_ascii=False, indent=4))
+"""

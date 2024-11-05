@@ -1,7 +1,7 @@
 # phonological rules
 import regex as re
 
-from src.classes import Word, ConversionTable
+from custom_tools.src.classes import Word, ConversionTable
 from typing import Union
 
 
