@@ -1,16 +1,10 @@
-from custom_tools.tools import ryu_and_similarity_code
+from custom_tools.tools import compare_ipa_similarity
 
 def result_by_simple_test(application_info, similar_application_info):
-    # TODO: 류에 해당하는 적절한 유사군을 적지않음 RETURN; 무조건 특허등록 거절
-    _self_code_result = ryu_and_similarity_code(application_info.nice_code, application_info.similar_code)
-    if not _self_code_result:
-        # 적절하지 않을 경우 처리
-        ...
-
-    # TODO: 검색한 상표 중에 동일한 출원인이 존재하는지 RETURN; INFO 제공
-    
-    # TODO: 검색한 상표명에 유사도를 같이 정보로 전달 RETURN; INFO 제공
-    ...
+    similar_application_info_record = convert_similar_application_info(similar_application_info)
+    result = compare_records(application_info, similar_application_info_record)
+    # print("단순 식별력 검사:", result)
+    return result
 
 def convert_similar_application_info(similar_application_info):
     num_records = len(similar_application_info['application_code'])
@@ -19,14 +13,13 @@ def convert_similar_application_info(similar_application_info):
         record = {
             'application_code': similar_application_info['application_code'][i],
             'title': similar_application_info['title'][i],
-            'single_flag': similar_application_info['single_flag'],
             'applicant_name': similar_application_info['applicant_name'][i],
             'similar_code': similar_application_info['similar_code'][i]
         }
         records.append(record)
     return records
 
-def compare_records(input_record, main_records, 
+def compare_records(application_info, similar_records, 
                    title_threshold=80, 
                    applicant_name_threshold=80):
     """
@@ -52,31 +45,32 @@ def compare_records(input_record, main_records,
              ]
     """
     results = []
-    input_title = input_record.get('title', '')
-    input_applicant = input_record.get('applicant_name', '')
-    input_similar_codes = input_record.get('similar_code', [])
+    input_title = application_info.get('title', '')
+    input_applicant = application_info.get('applicant_name', '')
+    input_similar_codes = application_info.get('similar_code', [])
     
-    for main_record in main_records:
+    for similar_record in similar_records:
         record_result = {
-            'application_code': main_record['application_code'],
-            'title': main_record['title'],
-            'title_similar': False,
-            'applicant_name_similar': False,
-            'similar_code_similar': False
+            '출원 번호': similar_record['application_code'],
+            '상표명': similar_record['title'],
+            '상표의 IPA 발음 유사도 thrsehold 0.8': 0.0,
+            '출원인이 같음': False,
+            '유사군이 같음': False
         }
         
         # Title 유사성 체크
-        record_result['title_similar'] = check_title_similarity(
-            input_title, main_record['title'], title_threshold)
+        record_result['상표의 IPA 발음 유사도 thrsehold 0.8'] = compare_ipa_similarity(input_title, similar_record['title'])
         
         # Applicant Name 유사성 체크
-        record_result['applicant_name_similar'] = check_applicant_name_similarity(
-            input_applicant, main_record['applicant_name'], applicant_name_threshold)
+        record_result['출원인이 같음'] = (input_applicant == similar_record['applicant_name'])
         
         # Similar Code 유사성 체크
-        record_result['similar_code_similar'] = check_similar_code_similarity(
-            input_similar_codes, main_record['similar_code'])
+        record_result['유사군이 같음'] = is_subset(input_similar_codes, similar_record['similar_code'])
         
         results.append(record_result)
     
     return results
+
+
+def is_subset(input_list, comparison_list):
+    return all(item in comparison_list for item in input_list)

@@ -1,14 +1,17 @@
 import os
+import sys
 import requests
 import wikipediaapi
 import xml.etree.ElementTree as ET
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
 from custom_tools.src.worker import convert
 from model.model import embedding_model
 from custom_tools.load_data import load_nice_dict_from_json
 from sklearn.metrics.pairwise import cosine_similarity
 from pinecone import Pinecone
 from langchain.tools import tool
-
 
 KOREAN_API = os.getenv('KOREAN_API')
 BASIC_KOREAN_API = os.getenv('BASIC_KOREAN_API')
@@ -36,17 +39,9 @@ def ryu_and_similarity_code(nice_codes, similar_codes):
     return True
 
 
-# TODO: 출원인의 유사도를 비교하는 TOOL
-# TODO: 비교할 상표명의 유사도를 비교하는 TOOL
-
 def asigned_tools():
     tools = [
-        similarity, 
-        calculate_similarity, 
         search_by_wiki, 
-        search_law_by_pdf, 
-        convert_ipa, 
-        compare_ipa_similarity, 
         search_chinese_character, 
         search_korean_character
         ]
@@ -66,14 +61,12 @@ def search_by_wiki(query):
         return "No good Wikipedia Search Result was found"
 
 
-@tool
 def similarity(a, b):
     """Calculate the cosine similarity between two vectors."""
     
     return cosine_similarity([a], [b])[0][0]
 
 
-@tool
 def calculate_similarity(target, comparison_list):
     """A tool used to identify similar trademarks.Returns each similarity list of list elements given a list with input and comparison words."""
     
@@ -88,9 +81,8 @@ def calculate_similarity(target, comparison_list):
     return cal_similar_list
 
 
-@tool
 def search_law_by_pdf(query):
-    """Search for laws related to the query by analyzing about Trademark precedent PDF documents and return the top 3 results."""
+    """Search for laws related to the query by analyzing about Trademark precedent PDF documents and return the top 3 results. An example of a query is "저명한 명칭인 경우와 관련된 판례"."""
     
     embedded_sentences = embeddings.embed_documents(query)
 
@@ -104,7 +96,6 @@ def search_law_by_pdf(query):
     return law_search_results
 
 
-@tool
 def convert_ipa(word):
     """Convert a given word to its International Phonetic Alphabet (IPA) representation."""
     
@@ -116,17 +107,14 @@ def convert_ipa(word):
         return None
     
 
-@tool
 def compare_ipa_similarity(word1: str, word2: str) -> float:
     """As a tool for pronunciation similarity testing, we convert two words into International Phonetic Symbols (IPAs) and then calculate the similarity of their IPA expressions."""
     try:
-        # 첫 번째 단어를 IPA로 변환
         ipa1 = convert_ipa(word1)
         if ipa1 is None:
             print(f"Error: Failed to convert ipa for '{word1}'")
             return None
 
-        # 두 번째 단어를 IPA로 변환
         ipa2 = convert_ipa(word2)
         if ipa2 is None:
             print(f"Error: Failed to convert ipa for '{word2}'")
@@ -201,8 +189,3 @@ def search_korean_character(query):
         "word": hangle_words,
         "definitions": hangle_definitions
     }
-
-
-# @tool
-# def search_similar_kipris(brand):
-#     ...

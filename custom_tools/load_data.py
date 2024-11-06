@@ -1,7 +1,7 @@
 import os
 import json
 
-def load_nice_dict_from_json(json_file='.\custom_tools\data\_nice_to_similar.json'):
+def load_nice_dict_from_json(json_file='.\custom_tools\data\sorted_output.json'):
     if not os.path.exists(json_file):
             print(f"JSON 파일을 찾을 수 없습니다: {json_file}")
             return {}
