@@ -1,6 +1,9 @@
 import os
 import json
 
+
+# TODO: 한글 상표명 search 하기 위한 교수님 데이터 load 하는 코드 필요
+
 def load_nice_dict_from_json(json_file='.\custom_tools\data\sorted_output.json'):
     if not os.path.exists(json_file):
             print(f"JSON 파일을 찾을 수 없습니다: {json_file}")

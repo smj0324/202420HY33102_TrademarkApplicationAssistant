@@ -23,7 +23,7 @@ def compare_records(application_info, similar_records,
                    title_threshold=80, 
                    applicant_name_threshold=80):
     """
-    입력 데이터와 기존 데이터의 각 레코드를 비교하여 유사성을 체크합니다.
+    입력 데이터와 기존 데이터의 각 레코드를 비교하여 유사성을 체크
     
     Parameters:
     - input_record (dict): 입력 데이터 레코드

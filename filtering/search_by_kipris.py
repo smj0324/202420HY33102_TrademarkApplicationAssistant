@@ -162,7 +162,6 @@ def parsing_nice_code(response_similar):
     # defaultdict(list)를 사용하여 중복 제거 없이 순서대로 'SimilargroupCode'를 수집
     grouped_data = defaultdict(list)
 
-    # 필요한 값들을 수집하는 부분
     classification_codes = set()
     hangeul_names = set()
     for item in items:
@@ -170,17 +169,15 @@ def parsing_nice_code(response_similar):
         similargroup_code = item['SimilargroupCode']
         hangeul_name = item['DesignationGoodsHangeulName']
         
-        # Classification code 및 한글 이름 추가
         classification_codes.add(classification_code)
         hangeul_names.add(hangeul_name)
         
         # 'DesignationGoodsHangeulName' 별로 'SimilargroupCode'를 리스트에 추가 (중복 제거 없이)
         grouped_data[hangeul_name].append(similargroup_code)
 
-    # 각 항목의 'SimilargroupCodes' 리스트 추출 및 중복 제거
     classification_codes_list = [str(code) for code in classification_codes]
-    similar_group_codes_list = list(grouped_data.values())  # 각 항목의 'SimilargroupCodes' 리스트
-
+    similar_group_codes_list = list(grouped_data.values())  
+    
     # 중복된 'SimilargroupCodes' 리스트 제거 후 문자열로 결합 (오름차순 정렬)
     unique_similar_group_codes_set = {
         ",".join(sorted(x)) if len(x) > 1 else x[0] 
