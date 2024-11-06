@@ -98,8 +98,9 @@ def generate_template(input_brand, application_info, similar_application_info):
     the 'Trademark Examination Guidelines' below and 
     inform us whether the application is approved or not in Korean.
     
-    Trademark Information = {application_info}
-    List of trademarks similar to {application_info} trademarks = {similar_application_info}
+    Trademark Information = {application_info},
+    Search results for "patent information search service" of "{input_brand}" = {similar_application_info},
+    Trademark Examination Guidelines = ""
 
     Registration status: (Must you choose between 승인 or 거절)
     Reason:
