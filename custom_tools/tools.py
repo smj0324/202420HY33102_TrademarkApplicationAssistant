@@ -24,14 +24,16 @@ embeddings = embedding_model()
 wiki_wiki = wikipediaapi.Wikipedia('MyProject/1.0 (das@naver.com)', 'ko', extract_format=wikipediaapi.ExtractFormat.WIKI)
 
 
-def ryu_and_similarity_code(nice_code, similar_code):
-
-    """Verify whether the provided similar_code is an appropriate classification for the given nice_code."""
-
-    if nice_code not in nice_to_similar:
-        return False
-    
-    return similar_code in nice_to_similar[nice_code]
+def ryu_and_similarity_code(nice_codes, similar_codes):
+    for nice_code in nice_codes:
+        if nice_code in nice_to_similar:
+            mapped_similar_codes = nice_to_similar.get(nice_code, [])
+            
+            for code in similar_codes:
+                if code not in mapped_similar_codes:
+                    return False
+                
+    return True
 
 
 # TODO: 출원인의 유사도를 비교하는 TOOL
