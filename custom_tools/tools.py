@@ -15,8 +15,9 @@ from langchain.tools import tool
 
 KOREAN_API = os.getenv('KOREAN_API')
 BASIC_KOREAN_API = os.getenv('BASIC_KOREAN_API')
-
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+GOOGLE_SEARCH_KEY = os.getenv('GOOGLE_SEARCH_KEY')
+GOOGLE_ID = os.getenv('GOOGLE_ID')
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index("heymin")
@@ -43,7 +44,8 @@ def asigned_tools():
     tools = [
         search_by_wiki, 
         search_chinese_character, 
-        search_korean_character
+        search_korean_character,
+        google_search
         ]
     
     return tools
@@ -189,3 +191,30 @@ def search_korean_character(query):
         "word": hangle_words,
         "definitions": hangle_definitions
     }
+
+
+@tool
+def google_search(query:str) -> list:
+    """It can be used to search for news or blogs about the brand name, returning 3 titles and a little description of the Google search results."""
+    search_url = "https://www.googleapis.com/customsearch/v1"
+    params = {
+        'key': GOOGLE_SEARCH_KEY,
+        'cx': GOOGLE_ID,
+        'q': query,
+        'num': 3  # top -k 3
+    }
+
+    response = requests.get(search_url, params=params)
+    if response.status_code == 200:
+        try:
+            items = response.json().get('items', [])
+            print(items)
+            google_search_list = [{"title": item.get("title", ""), "description": item.get("snippet", "")} for item in items]
+            return google_search_list
+        except ValueError:
+            print("Error: JSON decoding fail")
+            return []
+    else:
+        print(f"Error: {response.status_code}")
+        print("Response Body:", response.text)
+        return []

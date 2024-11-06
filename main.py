@@ -34,6 +34,7 @@ def main_gpt(application_code):
     similar_application_info = _similar_application_info.to_dict()
 
     similar_application_info = result_by_simple_test(application_info, similar_application_info)
+    print("*"*50)
     print(application_info)
     print("*"*50)
     print(similar_application_info)
