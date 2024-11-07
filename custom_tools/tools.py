@@ -42,25 +42,26 @@ def ryu_and_similarity_code(nice_codes, similar_codes):
 
 def asigned_tools():
     tools = [
-        search_by_wiki, 
-        search_chinese_character, 
+        # search_by_wiki, 
+        # search_chinese_character, 
         search_korean_character,
-        google_search
+        # google_search,
+        # search_law_by_pdf
         ]
     
     return tools
 
 
-@tool
-def search_by_wiki(query):
-    """Search Wikipedia for a given query and return a summary of the page."""
+# @tool
+# def search_by_wiki(query):
+#     """Search Wikipedia for a given query and return a summary of the page."""
 
-    page_py = wiki_wiki.page(query)
+#     page_py = wiki_wiki.page(query)
     
-    if page_py.exists():
-        return page_py.summary[0:1000]
-    else:
-        return "No good Wikipedia Search Result was found"
+#     if page_py.exists():
+#         return page_py.summary[0:1000]
+#     else:
+#         return "No good Wikipedia Search Result was found"
 
 
 def similarity(a, b):
@@ -83,6 +84,7 @@ def calculate_similarity(target, comparison_list):
     return cal_similar_list
 
 
+# @tool
 def search_law_by_pdf(query):
     """Search for laws related to the query by analyzing about Trademark precedent PDF documents and return the top 3 results. An example of a query is "저명한 명칭인 경우와 관련된 판례"."""
     
@@ -134,7 +136,7 @@ def compare_ipa_similarity(word1: str, word2: str) -> float:
         return None
 
 
-@tool
+# @tool
 def search_chinese_character(query):
     """Search for Chinese characters (Hanja) corresponding to the Korean query using the Korean dictionary API."""
     
@@ -193,28 +195,28 @@ def search_korean_character(query):
     }
 
 
-@tool
-def google_search(query:str) -> list:
-    """It can be used to search for news or blogs about the brand name, returning 3 titles and a little description of the Google search results."""
-    search_url = "https://www.googleapis.com/customsearch/v1"
-    params = {
-        'key': GOOGLE_SEARCH_KEY,
-        'cx': GOOGLE_ID,
-        'q': query,
-        'num': 3  # top -k 3
-    }
+# @tool
+# def google_search(query:str) -> list:
+#     """It can be used to search for news or blogs about the brand name, returning 3 titles and a little description of the Google search results."""
+#     search_url = "https://www.googleapis.com/customsearch/v1"
+#     params = {
+#         'key': GOOGLE_SEARCH_KEY,
+#         'cx': GOOGLE_ID,
+#         'q': query,
+#         'num': 3  # top -k 3
+#     }
 
-    response = requests.get(search_url, params=params)
-    if response.status_code == 200:
-        try:
-            items = response.json().get('items', [])
-            print(items)
-            google_search_list = [{"title": item.get("title", ""), "description": item.get("snippet", "")} for item in items]
-            return google_search_list
-        except ValueError:
-            print("Error: JSON decoding fail")
-            return []
-    else:
-        print(f"Error: {response.status_code}")
-        print("Response Body:", response.text)
-        return []
+#     response = requests.get(search_url, params=params)
+#     if response.status_code == 200:
+#         try:
+#             items = response.json().get('items', [])
+#             print(items)
+#             google_search_list = [{"title": item.get("title", ""), "description": item.get("snippet", "")} for item in items]
+#             return google_search_list
+#         except ValueError:
+#             print("Error: JSON decoding fail")
+#             return []
+#     else:
+#         print(f"Error: {response.status_code}")
+#         print("Response Body:", response.text)
+#         return []

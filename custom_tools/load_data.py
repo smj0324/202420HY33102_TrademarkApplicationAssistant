@@ -23,7 +23,7 @@ def load_nice_dict_from_json(json_file='.\custom_tools\data\sorted_output.json')
         return {}
     
 
-def load_json_law_guidelines(json_file='.\custom_tools\data\law_text.json'):
+def load_json_law_guidelines(json_file='.\custom_tools\data\law_text_final.json'):
     try:
         with open(json_file, 'r', encoding='utf-8') as file:
             data = json.load(file)

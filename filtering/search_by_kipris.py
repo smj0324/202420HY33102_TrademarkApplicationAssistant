@@ -227,9 +227,9 @@ def xml_to_dict(response):
 # print(xmltodict.parse(response_similar.content))
 # # 여러 application_code 테스트
 # print("\n===== 여러 application_code 테스트 =====")
-# multi_code_test = CodeSearchKipris(title="교촌", single_flag=False)
-# multi_code_test._search_by_code()
-# multi_code_test._search_by_application_code()
+multi_code_test = CodeSearchKipris(title="탑퓨전포차 무한리필", single_flag=False)
+multi_code_test._search_by_code()
+multi_code_test._search_by_application_code()
 
 # print("여러 상표명 검색 결과:")
 # print(f"신청자 이름 리스트: {multi_code_test.applicant_name}")

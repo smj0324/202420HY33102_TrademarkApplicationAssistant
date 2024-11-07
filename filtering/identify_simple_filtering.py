@@ -3,7 +3,7 @@ from custom_tools.tools import compare_ipa_similarity
 def result_by_simple_test(application_info, similar_application_info):
     similar_application_info_record = convert_similar_application_info(similar_application_info)
     result = compare_records(application_info, similar_application_info_record)
-    # print("단순 식별력 검사:", result)
+    print("단순 식별력 검사:", result)
     return result
 
 def convert_similar_application_info(similar_application_info):
@@ -53,19 +53,20 @@ def compare_records(application_info, similar_records,
         record_result = {
             '출원 번호': similar_record['application_code'],
             '상표명': similar_record['title'],
-            '상표의 IPA 발음 유사도 thrsehold 0.8': 0.0,
-            '출원인이 같음': False,
-            '유사군이 같음': False
+            # '출원인': similar_record['applicant_name'],
+            '상표의 IPA 발음 유사도': 0.0,
+            '출원인 일치 여부': False,
+            '유사군 일치 여부': False
         }
         
         # Title 유사성 체크
-        record_result['상표의 IPA 발음 유사도 thrsehold 0.8'] = compare_ipa_similarity(input_title, similar_record['title'])
+        record_result['상표의 IPA 발음 유사도'] = compare_ipa_similarity(input_title, similar_record['title'])
         
         # Applicant Name 유사성 체크
-        record_result['출원인이 같음'] = (input_applicant == similar_record['applicant_name'])
+        record_result['출원인 일치 여부'] = (input_applicant == similar_record['applicant_name'])
         
         # Similar Code 유사성 체크
-        record_result['유사군이 같음'] = is_subset(input_similar_codes, similar_record['similar_code'])
+        record_result['유사군 일치 여부'] = is_subset(input_similar_codes, similar_record['similar_code'])
         
         results.append(record_result)
     

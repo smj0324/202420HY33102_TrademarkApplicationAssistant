@@ -41,23 +41,25 @@ def main_gpt(application_code):
     return ...
 
 
-def main_agent(application_code):
+def main_agent(application_code, input_brand):
     _application_info = CodeSearchKipris(application_code=application_code, single_flag=True)
     _application_info._search_by_code()
     _application_info._search_by_application_code()
 
     application_info = _application_info.to_dict()
 
-    _similar_application_info = CodeSearchKipris(title="좋은 집 좋은 자재", single_flag=False)
+    _similar_application_info = CodeSearchKipris(title=input_brand, single_flag=False)
     _similar_application_info._search_by_code()
     _similar_application_info._search_by_application_code()
 
     similar_application_info = _similar_application_info.to_dict()
 
-    similar_application_info = result_by_simple_test(application_info, similar_application_info)
-
-    final_result = final_excute_agent(application_info, similar_application_info[0])
-
+    if not similar_application_info['application_code']:
+        final_result = final_excute_agent(application_info, "No search results.")
+    else:
+        similar_application_info = result_by_simple_test(application_info, similar_application_info)
+        final_result = final_excute_agent(application_info, similar_application_info[0])
+        
     return final_result
 
 
@@ -118,26 +120,27 @@ def final_excute_agent(application_info, similar_application_info):
 def generate_template(input_brand, application_info, similar_application_info):
 
     template =f'''
-    Please check the application status of {input_brand} based on 
-    the 'Trademark Examination Guidelines' below and 
-    inform us whether the application is approved or not in Korean.
+    Please go through each criterion in the  "판단시 유의사항" of Trademark Examination Guidelines one by one and confirm whether {input_brand} meets the standards for approval, If there is a highly similar trademark registered by the same applicant, this application should be considered permissible as a primary criterion.
 
-    Trademark Examination Guidelines = "{standards_trademark}"
+    Trademark Information = [{application_info}],
 
-    Trademark Information = {application_info},
+    Trademark Examination Guidelines = [{standards_trademark}]
     Search results for "patent information search service" of "{input_brand}" = {similar_application_info},
-    
 
-    Registration status: (Must you choose between 승인 or 거절)
-    Reason:
-
+    Please fill out the trademark application in the following format.
+    등록 상태: (Must you choose between 승인 or 거절)
+    이유:
     '''
 
     return template
     
+# "Please answer without using tools."
+# If there is an identical trademark by the same applicant, the application is permissible
 
+print(main_agent('4020230020425', '탑퓨전포차 무한리필')['output']) # 탑퓨전포차 무한리필
+print(main_agent('4020190084056', '좋은 집 좋은 자재')['output']) # 좋은 집 좋은 자재
+print(main_agent('4020190099709', '메이크케어')['output']) # 메이크케어
+print(main_agent('4020190109038', "자연 담은 유리병")['output']) # 자연 담은 유리병
 
-# print(main_agent('4020190084056')) # 좋은 집 좋은 자재
-print('*'*50)
-# print(main_agent('4020190099709')) # 메이크케어
-main_gpt('4020190084056')
+# print("타입:", main_agent('4020190109038')['output'])
+
