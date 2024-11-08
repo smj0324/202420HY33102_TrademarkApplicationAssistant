@@ -50,6 +50,7 @@ def main_gpt(application_code):
     #print(application_info)
     #print("*"*50)
     #print(similar_application_info)
+
     return final_result
 
 
