@@ -121,7 +121,7 @@ def parsing_application_data(response_general, application_code, single=True):
         items = [items]
     elif not isinstance(items, list):
         items = []
-
+    
     if single:
         # 단일 데이터 처리
         parsed_data = next((item for item in items if item['applicationNumber'] == application_code), None)

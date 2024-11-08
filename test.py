@@ -1,6 +1,8 @@
 import os
 import re
 import pandas as pd
+import time
+from datetime import datetime
 from mains import main_agent
 from mains import main_gpt
 
@@ -19,15 +21,22 @@ def write_results(status_file_path, details_file_path, output_results, details_r
     with open(details_file_path, 'w', encoding='utf-8') as details_file:
         details_file.writelines(details_results)
 
-
 def test_by_sample_data(file_path):
-    base_name = os.path.basename(file_path)  
-    status_file_path = os.path.join(base_path, f"result_{base_name}")
-    details_file_path = os.path.join(base_path, f"details_{base_name}")
+    base_name = os.path.basename(file_path)
+    
+    # Get current date and time for file naming
+    current_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
+    
+    # Create file paths with date and time
+    status_file_path = os.path.join(base_path, f"result_{base_name}_{current_datetime}.txt")
+    details_file_path = os.path.join(base_path, f"details_{base_name}_{current_datetime}.txt")
     
     output_results = []
     details_results = []
-
+    
+    # Start timing the entire process
+    start_time = time.time()
+    
     with open(file_path, 'r', encoding='utf-8') as file:
         for line in file:
             data = line.strip().split('^B')
@@ -35,7 +44,11 @@ def test_by_sample_data(file_path):
             if len(data) > 5:
                 application_code = data[0]
                 input_brand = data[6]
-                predict_registration_status, reason = parsing_gpt_output_result(main_gpt(application_code, input_brand)['output'])
+                # Pass input_brand to parsing_gpt_output_result for output formatting
+                predict_registration_status, reason = parsing_gpt_output_result(
+                    main_gpt(application_code, input_brand)['output'],
+                    input_brand
+                )
             else:
                 input_brand = "N/A"
                 predict_registration_status = "N/A"
@@ -46,35 +59,59 @@ def test_by_sample_data(file_path):
             details_results.append(f"Registration Status: {predict_registration_status}\n")
             details_results.append(f"Reason: {reason}\n")
             details_results.append("="*40 + "\n")
-
+    
+    # End timing the entire process
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    
+    # Save results
     write_results(status_file_path, details_file_path, output_results, details_results)
-
+    
+    # Print total time taken
+    print(f"전체 데이터를 처리하는 데 걸린 시간: {elapsed_time:.2f}초")
 
 def test_by_myj_test_data(excel_file_path):
-    base_name = os.path.basename(excel_file_path).replace('.xlsx', '')  
-    status_file_path = os.path.join(base_path, f"predict_status_{base_name}.txt")
-    details_file_path = os.path.join(base_path, f"details_{base_name}.txt")
+    base_name = os.path.basename(excel_file_path).replace('.xlsx', '')
+    
+    # Get current date and time for file naming
+    current_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
+    
+    # Create file paths with date and time
+    status_file_path = os.path.join(base_path, f"predict_status_{base_name}_{current_datetime}.txt")
+    details_file_path = os.path.join(base_path, f"details_{base_name}_{current_datetime}.txt")
 
     output_results = []
     details_results = []
 
     df = pd.read_excel(excel_file_path)
-    application_code_list = df.iloc[:, 0].tolist() 
+    application_code_list = df.iloc[:, 0].tolist()
     input_brand_list = df.iloc[:, 1].tolist()
     application_status_list = df.iloc[:, 3].tolist()
 
+    # Start timing the entire process
+    start_time = time.time()
+
     for i in range(len(application_code_list)):
-        predict_registration_status, reason = parsing_agent_output_result(main_agent(application_code_list[i], input_brand_list[i])['output'])
-        
+        predict_registration_status, reason = parsing_agent_output_result(
+            main_agent(application_code_list[i], input_brand_list[i])['output']
+        )
+
         output_results.append(predict_registration_status)
         details_results.append(f"Application Code: {application_code_list[i]}\n")
         details_results.append(f"Predict Registration Status: {predict_registration_status}\n")
         details_results.append(f"Reason: {reason}\n")
         details_results.append(f"Registration Status: {application_status_list[i]}\n")
         details_results.append("="*40 + "\n")
-
+    
+    # End timing the entire process
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    
+    # Save results
     write_results(status_file_path, details_file_path, output_results, details_results)
-
+    
+    # Print total time taken
+    print(f"전체 데이터를 처리하는 데 걸린 시간: {elapsed_time:.2f}초")
 
 def parsing_agent_output_result(output):
     status_match = re.search(r"등록 상태:\s*(.+)", output)
@@ -85,8 +122,7 @@ def parsing_agent_output_result(output):
 
     return predict_registration_status, reason
 
-
-def parsing_gpt_output_result(output):
+def parsing_gpt_output_result(output, input_brand):
     status_match = re.search(r"등록 상태:\s*(.+)", output)
     predict_registration_status = status_match.group(1).strip() if status_match else "Unknown"
 
@@ -94,15 +130,13 @@ def parsing_gpt_output_result(output):
     reason = reason_match.group(1).strip() if reason_match else "No reason provided"
 
     if "승인" in predict_registration_status:
-        predict_registration_status = "O"
+        predict_registration_status = f"{input_brand},O"
     elif "거절" in predict_registration_status:
-        predict_registration_status = "X"
+        predict_registration_status = f"{input_brand},X"
     else:
-        predict_registration_status = "Unknown"
+        predict_registration_status = f"{input_brand},Unknown"
 
     return predict_registration_status, reason
 
-
-
-sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
 test_by_sample_data(sample_file_path)

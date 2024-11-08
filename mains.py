@@ -172,7 +172,7 @@ def generate_template(input_brand, application_info, similar_application_info):
 # "Please answer without using tools."
 # If there is an identical trademark by the same applicant, the application is permissible
 
-print(main_gpt('4020230020425', '탑퓨전포차 무한리필')['output']) # 탑퓨전포차 무한리필
+#print(main_gpt('4020230020425', '탑퓨전포차 무한리필')['output']) # 탑퓨전포차 무한리필
 #print(main_gpt('4020190084056', '좋은 집 좋은 자재')['output']) # 좋은 집 좋은 자재
 #print(main_gpt('4020190099709', '메이크케어')['output']) # 메이크케어
 #print(main_gpt('4020190109038', "자연 담은 유리병")['output']) # 자연 담은 유리병
