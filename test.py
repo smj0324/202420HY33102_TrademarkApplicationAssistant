@@ -2,6 +2,7 @@ import os
 import re
 import pandas as pd
 from mains import main_agent
+from mains import main_gpt
 
 output_results = []
 file_path = '.\\custom_tools\\data\\sorted_output.json'
@@ -34,7 +35,7 @@ def test_by_sample_data(file_path):
             if len(data) > 5:
                 application_code = data[0]
                 input_brand = data[6]
-                predict_registration_status, reason = parsing_agent_output_result(main_agent(application_code, input_brand)['output'])
+                predict_registration_status, reason = parsing_gpt_output_result(main_gpt(application_code, input_brand)['output'])
             else:
                 input_brand = "N/A"
                 predict_registration_status = "N/A"
@@ -86,8 +87,21 @@ def parsing_agent_output_result(output):
 
 
 def parsing_gpt_output_result(output):
-    # Placeholder for GPT parsing function logic
-    pass
+    status_match = re.search(r"등록 상태:\s*(.+)", output)
+    predict_registration_status = status_match.group(1).strip() if status_match else "Unknown"
+
+    reason_match = re.search(r"이유:\s*(.+)", output, re.DOTALL)
+    reason = reason_match.group(1).strip() if reason_match else "No reason provided"
+
+    if "승인" in predict_registration_status:
+        predict_registration_status = "O"
+    elif "거절" in predict_registration_status:
+        predict_registration_status = "X"
+    else:
+        predict_registration_status = "Unknown"
+
+    return predict_registration_status, reason
+
 
 
 sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
