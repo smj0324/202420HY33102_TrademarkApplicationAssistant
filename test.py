@@ -77,22 +77,24 @@ def test_by_myj_test_data(excel_file_path):
 
 def parsing_agent_output_result(text):
     # Extract Predict Status
-    status_match = re.search(r"\*\*Predict Status\*\*:\s*(\w+)", text)
-    status = status_match.group(1) if status_match else "Status not found"
-    
-    # Extract Reason
-    reason_match = re.search(r"\*\*Reason\*\*:\s*(.+?)(?=\n\n|\Z)", text, re.DOTALL)
-    reason = reason_match.group(1).strip() if reason_match else "Reason not found"
-    
+    lines = text.splitlines()
+    lines = [line.strip() for line in lines if line.strip()]
+
+    for line in lines:
+        if "Trademark Status:" in line:
+            status = line.split("Trademark Status:")[-1].strip()
+        elif "Reason:" in line:
+            reason = line.split("Reason:")[-1].strip()
+
     return status, reason
 
 
 def parsing_gpt_output_result(output):
     # Placeholder for GPT parsing function logic
     pass
+   
 
-
-# sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
-sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
+# sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
 
 test_by_sample_data(sample_file_path)

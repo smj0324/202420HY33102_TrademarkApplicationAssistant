@@ -84,7 +84,7 @@ def calculate_similarity(target, comparison_list):
     return cal_similar_list
 
 
-@tool
+# @tool
 def search_law_by_pdf(query):
     """Search for laws related to the query by analyzing about Trademark precedent PDF documents and return the top 3 results. An example of a query is "Case law related to prominent names"."""
     

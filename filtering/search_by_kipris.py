@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
+KIPRIS_API_KEY = os.getenv('_KIPRIS_API_KEY')
 # DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
 # TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
 
@@ -32,7 +32,7 @@ class CodeSearchKipris:
         self.single_flag = single_flag
 
     def _search_by_code(self):
-        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&docsStart=1&docsCount=4&ServiceKey={KIPRIS_API_KEY}"
+        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY}"
         
         response_general = requests.get(url_general)
         if response_general.status_code != 200:
@@ -128,6 +128,7 @@ class CodeSearchKipris:
 
 
 def parsing_application_data(response_general, application_code, single=True):
+    
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
 
@@ -170,8 +171,9 @@ def parsing_application_data(response_general, application_code, single=True):
 
 
 def parsing_nice_code(response_similar):
+    # print("*****************,",response_similar.text)
     dict_similar = xml_to_dict(response_similar)
-
+    # print("***************\n")
     response = dict_similar.get('response')
     
     if response is None:
@@ -235,10 +237,11 @@ def xml_to_dict(response):
 
 
 #단일 application_code 테스트
-# print("===== 단일 application_code 테스트 =====")
-# single_code_test = CodeSearchKipris(application_code="4020190099709", single_flag=True)
-# single_code_test._search_by_code()
-# single_code_test._search_by_application_code()
+print("===== 단일 application_code 테스트 =====")
+single_code_test = CodeSearchKipris(application_code="4020190099709", single_flag=True)
+single_code_test._search_by_code()
+single_code_test._search_by_application_code()
+print(json.dumps(single_code_test.to_dict(), ensure_ascii=False, indent=4))
 
 # print("단일 상표명 검색 결과:")
 # print(f"신청자 이름: {single_code_test.applicant_name}")
@@ -251,8 +254,7 @@ def xml_to_dict(response):
 
 # print(ryu_and_similarity_code(single_code_test.nice_code, single_code_test.similar_code))
 # print(ryu_and_similarity_code("3", ["G1201", "S120907", "S128302"]))
-# print(json.dumps(single_code_test.to_dict(), ensure_ascii=False, indent=4))
-
+ 
 # url = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkVfersionInfo?applicationNumber=4020190099709&accessKey={KIPRIS_API_KEY}"
 # response_similar = requests.get(url)
 # print(xmltodict.parse(response_similar.content))

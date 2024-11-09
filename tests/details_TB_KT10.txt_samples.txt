@@ -2,39 +2,7 @@ Input Brand: 자연 담은 유리병
 Registration Status: Status not found
 Reason: Reason not found
 ========================================
-Input Brand: 포모나
-Registration Status: Status not found
-Reason: Reason not found
-========================================
 Input Brand: 예지미인 데일리 코튼
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 메이크케어
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 래쉬픽
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 패티온
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 좋은 집 좋은 자재
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 엑토인
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 한국정품인증
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수
 Registration Status: Status not found
 Reason: Reason not found
 ========================================
