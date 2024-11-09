@@ -46,7 +46,7 @@ def asigned_tools():
         # search_chinese_character, 
         search_korean_character,
         # google_search,
-        # search_law_by_pdf
+        search_law_by_pdf
         ]
     
     return tools
@@ -84,9 +84,9 @@ def calculate_similarity(target, comparison_list):
     return cal_similar_list
 
 
-# @tool
+@tool
 def search_law_by_pdf(query):
-    """Search for laws related to the query by analyzing about Trademark precedent PDF documents and return the top 3 results. An example of a query is "저명한 명칭인 경우와 관련된 판례"."""
+    """Search for laws related to the query by analyzing about Trademark precedent PDF documents and return the top 3 results. An example of a query is "Case law related to prominent names"."""
     
     embedded_sentences = embeddings.embed_documents(query)
 
@@ -162,7 +162,7 @@ def search_chinese_character(query):
 
 @tool
 def search_korean_character(query):
-    """Search for Korean characters and their definitions using the standard Korean dictionary API."""
+    """If there are **no search results** for "trademark", it indicates that the trademark may possess distinctiveness."""
 
     url = f"https://stdict.korean.go.kr/api/search.do?key={KOREAN_API}&q={query}&advanced=y&type2=all"
 
@@ -196,27 +196,27 @@ def search_korean_character(query):
 
 
 # @tool
-# def google_search(query:str) -> list:
-#     """It can be used to search for news or blogs about the brand name, returning 3 titles and a little description of the Google search results."""
-#     search_url = "https://www.googleapis.com/customsearch/v1"
-#     params = {
-#         'key': GOOGLE_SEARCH_KEY,
-#         'cx': GOOGLE_ID,
-#         'q': query,
-#         'num': 3  # top -k 3
-#     }
+def google_search(query:str) -> list:
+    """It can be used to search for news or blogs about the brand name, returning 3 titles and a little description of the Google search results."""
+    search_url = "https://www.googleapis.com/customsearch/v1"
+    params = {
+        'key': GOOGLE_SEARCH_KEY,
+        'cx': GOOGLE_ID,
+        'q': query,
+        'num': 3  # top -k 3
+    }
 
-#     response = requests.get(search_url, params=params)
-#     if response.status_code == 200:
-#         try:
-#             items = response.json().get('items', [])
-#             print(items)
-#             google_search_list = [{"title": item.get("title", ""), "description": item.get("snippet", "")} for item in items]
-#             return google_search_list
-#         except ValueError:
-#             print("Error: JSON decoding fail")
-#             return []
-#     else:
-#         print(f"Error: {response.status_code}")
-#         print("Response Body:", response.text)
-#         return []
+    response = requests.get(search_url, params=params)
+    if response.status_code == 200:
+        try:
+            items = response.json().get('items', [])
+            print(items)
+            google_search_list = [{"title": item.get("title", ""), "description": item.get("snippet", "")} for item in items]
+            return google_search_list
+        except ValueError:
+            print("Error: JSON decoding fail")
+            return []
+    else:
+        print(f"Error: {response.status_code}")
+        print("Response Body:", response.text)
+        return []

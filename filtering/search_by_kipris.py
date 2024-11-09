@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import json
+import deepl
 import requests
 import xmltodict
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -9,7 +10,10 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
+KIPRIS_API_KEY = os.getenv('_KIPRIS_API_KEY')
+DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
+TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
+
 
 class CodeSearchKipris:
     '''
@@ -18,6 +22,7 @@ class CodeSearchKipris:
     def __init__(self, application_code="", title="", single_flag=True) -> None:
         self.application_code = application_code
         self.title = title
+        self.fulltitle = ""
         self.applicant_name = ""
         self.nice_code = []
         self.similar_code = []
@@ -27,18 +32,22 @@ class CodeSearchKipris:
         self.single_flag = single_flag
 
     def _search_by_code(self):
-        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY}"
+        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&docsStart=1&docsCount=4&ServiceKey={KIPRIS_API_KEY}"
         
         response_general = requests.get(url_general)
         if response_general.status_code != 200:
             print("Failed to retrieve general data from KIPRIS API")
             return None
         
-        application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
+        if not response_general.text or "<response>" not in response_general.text:
+            return None
+        
+        else:
+            application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
         
         if self.single_flag:
             self.applicant_name = application_general_dict.get('applicantName', "")
-            self.title = application_general_dict.get('title', "")
+            self.fulltitle = application_general_dict.get('fulltitle', "")
             self.application_status = application_general_dict.get('applicationStatus', "")
         else:
             self.application_code = [item.get('applicationNumber', "") for item in application_general_dict]
@@ -73,14 +82,19 @@ class CodeSearchKipris:
                 url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY}"
                 
                 response_similar = requests.get(url_similar)
+
                 if response_similar.status_code != 200:
                     print(f"Failed to retrieve similar group data for application number {target_code} from KIPRIS API")
                     continue
 
-                classification_codes_list, similar_group_codes_list, similar_group_hangle_list = parsing_nice_code(response_similar)
-                all_nice_codes.append(classification_codes_list)
-                all_similar_codes.append(similar_group_codes_list)
-                # all_similar_hangle.append(similar_group_hangle_list)
+                if not response_similar.text or "<response>" not in response_similar.text:
+                    return None
+                
+                else:
+                    classification_codes_list, similar_group_codes_list, similar_group_hangle_list = parsing_nice_code(response_similar)
+                    all_nice_codes.append(classification_codes_list)
+                    all_similar_codes.append(similar_group_codes_list)
+                    # all_similar_hangle.append(similar_group_hangle_list)
 
             self.nice_code = all_nice_codes
             self.similar_code = all_similar_codes
@@ -97,12 +111,12 @@ class CodeSearchKipris:
         return {
             "application_code": self.application_code,
             "title": self.title,
-            "single_flag": self.single_flag,
+            "fulltitle": self.fulltitle,
             "applicant_name": self.applicant_name,
             # "application_status": self.application_status,
             "nice_code": self.nice_code,
             "similar_code": self.similar_code,
-            "similar_code_hangle": self.similar_code_hangle,
+            "similar_code_name": self.similar_code_hangle,
             "is_valid_category_match": self.is_valid_category_match
         }
 
@@ -157,36 +171,57 @@ def parsing_application_data(response_general, application_code, single=True):
 
 def parsing_nice_code(response_similar):
     dict_similar = xml_to_dict(response_similar)
-    items = dict_similar.get('response', {}).get('body', {}).get('items', {}).get('trademarkDesignationGoodstInfo', [])
+
+    response = dict_similar.get('response')
     
+    if response is None:
+        print("Warning: 'response'가 None입니다.")
+        return [], [], []
+
+    body = response.get('body')
+    if body is None:
+        print("Warning: 'body'가 None입니다.")
+        return [], [], []
+
+    items = body.get('items')
+    if items is None:
+        print("Warning: 'items'가 None입니다.")
+        return [], [], []
+    
+    trademark_info = items.get('trademarkDesignationGoodstInfo', [])
+    if trademark_info is None:
+        trademark_info = []
+
     # defaultdict(list)를 사용하여 중복 제거 없이 순서대로 'SimilargroupCode'를 수집
     grouped_data = defaultdict(list)
 
     classification_codes = set()
-    hangeul_names = set()
-    for item in items:
-        classification_code = int(item['DesignationGoodsClassificationInformationCode'])
-        similargroup_code = item['SimilargroupCode']
-        hangeul_name = item['DesignationGoodsHangeulName']
-        
-        classification_codes.add(classification_code)
-        hangeul_names.add(hangeul_name)
-        
-        # 'DesignationGoodsHangeulName' 별로 'SimilargroupCode'를 리스트에 추가 (중복 제거 없이)
-        grouped_data[hangeul_name].append(similargroup_code)
+    en_names = set()
+    for item in trademark_info:
+        try:
+            classification_code = int(item.get('DesignationGoodsClassificationInformationCode', 0))
+            similargroup_code = item.get('SimilargroupCode', "")
+            en_name = item.get('DesignationGoodsHangeulName', "")
+
+            if classification_code and similargroup_code and en_name:
+                classification_codes.add(classification_code)
+                en_names.add(en_name)
+                grouped_data[en_name].append(similargroup_code)
+        except (ValueError, KeyError) as e:
+            print(f"데이터 항목에서 오류 발생: {e}")
+            continue
 
     classification_codes_list = [str(code) for code in classification_codes]
-    similar_group_codes_list = list(grouped_data.values())  
-    
-    # 중복된 'SimilargroupCodes' 리스트 제거 후 문자열로 결합 (오름차순 정렬)
+    similar_group_codes_list = list(grouped_data.values())
+
     unique_similar_group_codes_set = {
         ",".join(sorted(x)) if len(x) > 1 else x[0] 
         for x in set(tuple(codes) for codes in similar_group_codes_list)
     }
     unique_similar_group_codes_list = list(unique_similar_group_codes_set)
-    hangeul_names_list = list(hangeul_names)
+    en_names_list = list(en_names)
 
-    return classification_codes_list, unique_similar_group_codes_list, hangeul_names_list
+    return classification_codes_list, unique_similar_group_codes_list, en_names_list
 
 
 
@@ -227,9 +262,9 @@ def xml_to_dict(response):
 # print(xmltodict.parse(response_similar.content))
 # # 여러 application_code 테스트
 # print("\n===== 여러 application_code 테스트 =====")
-multi_code_test = CodeSearchKipris(title="탑퓨전포차 무한리필", single_flag=False)
-multi_code_test._search_by_code()
-multi_code_test._search_by_application_code()
+# multi_code_test = CodeSearchKipris(title="하프밀  -", single_flag=False)
+# multi_code_test._search_by_code()
+# multi_code_test._search_by_application_code()
 
 # print("여러 상표명 검색 결과:")
 # print(f"신청자 이름 리스트: {multi_code_test.applicant_name}")
@@ -241,3 +276,5 @@ multi_code_test._search_by_application_code()
 
 
 # print(json.dumps(multi_code_test.to_dict(), ensure_ascii=False, indent=4))
+# en_name = TRANSLATOR.translate_text("모두웰"+"'", target_lang="EN-US").text
+# print(en_name)

@@ -90,5 +90,5 @@ def parsing_gpt_output_result(output):
     pass
 
 
-sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
 test_by_sample_data(sample_file_path)

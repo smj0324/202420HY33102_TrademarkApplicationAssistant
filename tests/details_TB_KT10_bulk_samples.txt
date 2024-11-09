@@ -1,0 +1,80 @@
+Input Brand: 모두웰
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 한의원 무본자강 무본자강
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 버드리
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 다함께 차차차
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 하프밀
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 히비초
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 별미당 별미당
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 살박사은좌
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 통일한의원
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 태양점보히터
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 문영월
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 칼로바이 프로틴 에이드
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 무스웰 미니컵
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 당신의 피부혈액형은 무엇입니까?
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 나티커
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 살 빼주는 언니
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 어른이놀이터
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 현자의 돌 생활과 윤리
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 대성자동문
+Registration Status: Unknown
+Reason: No reason provided
+========================================
+Input Brand: 아마존펫
+Registration Status: Unknown
+Reason: No reason provided
+========================================

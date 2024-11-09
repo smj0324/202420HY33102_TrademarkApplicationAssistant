@@ -10,13 +10,18 @@ def convert_similar_application_info(similar_application_info):
     num_records = len(similar_application_info['application_code'])
     records = []
     for i in range(num_records):
-        record = {
-            'application_code': similar_application_info['application_code'][i],
-            'title': similar_application_info['title'][i],
-            'applicant_name': similar_application_info['applicant_name'][i],
-            'similar_code': similar_application_info['similar_code'][i]
-        }
+        try:
+            record = {
+                'application_code': similar_application_info['application_code'][i],
+                'title': similar_application_info['title'][i],
+                'applicant_name': similar_application_info['applicant_name'][i],
+                'similar_code': similar_application_info['similar_code'][i]
+            }
+        except:
+            records = {}
+            continue
         records.append(record)
+
     return records
 
 def compare_records(application_info, similar_records, 
@@ -51,23 +56,23 @@ def compare_records(application_info, similar_records,
     
     for similar_record in similar_records:
         record_result = {
-            '출원 번호': similar_record['application_code'],
-            '상표명': similar_record['title'],
-            # '출원인': similar_record['applicant_name'],
-            '상표의 IPA 발음 유사도': 0.0,
-            '출원인 일치 여부': False,
-            '유사군 일치 여부': False
+            'application_number': similar_record['application_code'],
+            'trademark_name': similar_record['title'],
+            'applicant_name': similar_record['applicant_name'],
+            'trademark_IPA_similarity': 0.0,
+            'applicant_name_match': False,
+            'similar_code_match': False
         }
-        
-        # Title 유사성 체크
-        record_result['상표의 IPA 발음 유사도'] = compare_ipa_similarity(input_title, similar_record['title'])
-        
-        # Applicant Name 유사성 체크
-        record_result['출원인 일치 여부'] = (input_applicant == similar_record['applicant_name'])
-        
-        # Similar Code 유사성 체크
-        record_result['유사군 일치 여부'] = is_subset(input_similar_codes, similar_record['similar_code'])
-        
+
+        # Title similarity check
+        record_result['trademark_IPA_similarity'] = compare_ipa_similarity(input_title, similar_record['title'])
+
+        # Applicant name similarity check
+        record_result['applicant_match'] = (input_applicant == similar_record['applicant_name'])
+
+        # Similar class similarity check
+        record_result['similar_code_match'] = is_subset(input_similar_codes, similar_record['similar_code'])
+
         results.append(record_result)
     
     return results
