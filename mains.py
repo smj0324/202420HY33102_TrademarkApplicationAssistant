@@ -18,7 +18,8 @@ load_dotenv(verbose=True)
 OPENAI_API_KEY = os.getenv('_OPENAI_API_KEY')
 standards_trademark = load_json_law_guidelines()
 
-def main_gpt(input_brand, fulltitle, applicant_name):
+
+def main_gpt(template):
     client = OpenAI(
         api_key=OPENAI_API_KEY,
     )
@@ -26,37 +27,62 @@ def main_gpt(input_brand, fulltitle, applicant_name):
     completion = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines."},
             {
                 "role": "user",
-                "content": f"""Extract the primary component from each compound name by removing the secondary part. If there is no distinct primary component, return the entire name. For example:
-
-미래테크놀로지 -> 미래+테크놀로지
-삼성전자서비스 -> 삼성+전자서비스
-네이버클라우드 -> 네이버+클라우드
-현대 -> 현대
-인스타그램 -> 인스타그램
-Instructions:
-- {fulltitle} / applicant name = {applicant_name}
-- Including only values relevant to the result.
-- If a main part is identified, briefly describe its overall meaning (no need to analyze each word separately).
-- If the main part is a well-known brand not owned by the applicant, note this in the "Reason" section, as it may risk rejection due to potential free-riding.
-- If separation creates ambiguity or generalizes the brand's specific meaning, explain this in a single sentence in the "Reason" section, focusing on how separation may confuse the intended impression of the full trademark.
-- For Korean brand names, add the English translation alongside the result.
-
-Apply this method to the provided name.
-
-- {input_brand} → Result (Original / English Translation)
-Reason:
-"""
+                "content": template
             }
-        ]
+        ],
+        temperature=0
     )
 
     response = completion.choices[0].message.content
-    print(response)
-
     return response
+
+def final_execute_gpt(application_code, input_brand):
+    _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
+    _application_info._search_by_code()
+    _application_info._search_by_application_code()
+    application_info = _application_info.to_dict()
+
+    _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
+    _similar_application_info._search_by_code()
+    _similar_application_info._search_by_application_code()
+    similar_application_info = _similar_application_info.to_dict()
+
+    result = []
+
+    # Determine codes based on the presence of similar application info
+    if not similar_application_info.get('application_code') or not similar_application_info.get('applicant_name'):
+        codes = [2, 3, 4]
+    else:
+        similar_application_info = result_by_simple_test(application_info, similar_application_info)
+        codes = [1, 2, 3, 4]
+    
+    for code in codes:
+        template = generate_gpt_template(application_info, similar_application_info, code)
+        each_result = main_gpt(template)
+        formatted_result = f"--- Result for Code {code} ---\n{each_result}\n"
+        result.append(formatted_result)
+        print(formatted_result)
+        
+        # Check for rejection in the current result
+        if "reject" in each_result.lower():
+            if code == 1:
+                # Immediate return if code 1 produces a rejection
+                final_template = generate_gpt_template(application_info, similar_application_info, code, result=each_result)
+                final_result = main_gpt(final_template)
+                return final_result
+            else:
+                # Skip the current result if rejection is found for codes other than 1
+                continue
+    
+    # If no rejections for code 1 or if all codes complete, compile and return final result
+    final_template = generate_gpt_template(application_info, similar_application_info, code, result=result)
+    final_result = main_gpt(final_template)
+    print(f"--- Final Result ---\n{final_result}\n")
+    result.append(f"--- Final Result ---\n{final_result}\n")
+    return final_result
 
 
 
@@ -134,30 +160,111 @@ def final_excute_agent(application_info, similar_application_info):
 
     return final_result
 
+def generate_gpt_template(application_info, similar_application_info, code, result=""):
+    """
+    Generates a template for GPT based on the given code.
+    
+    Parameters:
+    - code = 1: Check for similar trademarks (if similar_application_info is present).
+    - code = 2: Check for distinctiveness of the trademark name.
+    - code = 3: Verify compliance with trademark examination criteria.
+    """
 
+    title = application_info['title']
+    template = ""
+    result_summary = ""
 
-def generate_template(input_brand, application_info, similar_application_info):
+    # Include a summary of previous results, if any
+    if result:
+        result_summary = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
+        result_summary = f"\nPrevious examination results:\n{result_summary}\n"
 
-    split_brand = main_gpt(input_brand, application_info['fulltitle'], application_info['applicant_name'])
+    if code == 1:
+        template = f"""
+        Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
 
-    if not similar_application_info == 'No search results.':
-        condition= f"""
-        ""\n\nSearch results for "patent information search service" of "{input_brand}"" = {similar_application_info}. 
-        \n\nIf there is a highly similar trademark registered by the same applicant, this application should be considered permissible as a primary criterion. Additionally, even if a previously registered trademark is identical or similar, it does not constitute trademark infringement if the designated goods or services are dissimilar, except in cases where the previously registered trademark is well-known."""
-    else:
-        condition= ""
+        **Patent Information Search**:
+        - Start by checking the "patent information search service" results for "{title}":
+        - Input Brand: "{application_info}"
+        - Search Result: {similar_application_info}
+        - If a highly similar trademark is already registered by the same applicant, consider this application permissible.
+        - Note: Identical or similar trademarks do not infringe if the designated goods or services differ, except if the registered trademark is well-known.
+
+        **Trademark Name Analysis**:
+        - Determine if separating components would alter or weaken the intended meaning.
+        - If a main part is identified, describe its overall meaning. Avoid separation if it dilutes the brand’s unique impression.
+        - If the main part represents a well-known brand not owned by the applicant, note this as it may lead to rejection due to potential free-riding.
+
+        **Output Format**:
+        Predict Status: choice approve or reject
+        Reason: [Your summary reason here]
+        """
+
+    elif code == 2:
+        template = f"""
+        Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
+        {result_summary}
+        
+        - Evaluate whether "{title}" has distinctive qualities. Avoid separating components if it weakens the brand’s intended impression.
+        
+        - Example Separations:
+            - 미래테크놀로지 → 미래 + 테크놀로지
+            - 삼성전자서비스 → 삼성전자 + 서비스
+            - 네이버클라우드 → 네이버 + 클라우드
+            - 현대 → 현대
+            - 인스타그램 → 인스타그램
+
+        - If a main part is identified, briefly describe its overall meaning. Avoid separating if it risks diluting the unique impression of the brand.
+        - If the main part represents a well-known brand not owned by the applicant, note this as it may lead to rejection due to potential free-riding.
+        
+        **Output Format**:
+        Predict Status: choice approve or reject
+        Reason: [Your summary reason here]
+        """
+
+    elif code == 3:
+        template = f"""
+        Please verify the trademark registration eligibility of "{title}" according to the Trademark Examination Guidelines.
+        {result_summary}
+
+        Trademark Examination Guidelines:
+        - As the guidelines are extensive, please divide them into parts for a thorough review of each section.
+        - Ensure that "{title}" meets all necessary criteria by carefully evaluating each guideline.
+
+        **Trademark Examination Standards**: [{standards_trademark}]
+
+        **Output Format**:
+        Predict Status: choice approve or reject
+        Reason: [Your summary reason here]
+        """
+
+    # For final result compilation after all codes
+    if result and code > 3:
+        detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
+        template = f"""
+        Based on the results of each examination criterion, please predict the Registration Status.
+
+        Detailed examination results:
+        {detailed_results}
+
+        Please provide the output in the following format:
+        Trademark status: (Must choose between approve or reject)
+        Reason: [Your summary reason here]
+        """
+    
+    return template
+
+def generate_template(input_brand, application_info):
 
     template =f'''
     Please go through each criterion in the  "Cautions When Judging" of Trademark Examination Guidelines one by one and confirm whether "{input_brand}" meets the standards for approval.
 
-    Trademark Information = [{application_info}], and {split_brand}
+    Trademark Information = [{application_info}]
 
     "The trademark examination criteria are broad, so please consider them in three separate sections."
     **Trademark Examination Guidelines = [{standards_trademark}]**
 
     "Please answer without using tools."
-
-    {condition}
 
     Fill out the trademark application in the following format.
 
@@ -168,11 +275,16 @@ def generate_template(input_brand, application_info, similar_application_info):
     
 # "Please answer without using tools."
 # If there is an identical trademark by the same applicant, the application is permissible
-# print(main_agent('4020190066112', '모두웰')['output'])
+# final_execute_gpt('4020190066112', '모두웰')
+final_execute_gpt('4020190068309', '대성자동문')
 # print(main_agent('4020190068309', '대성자동문')['output'])
 # print(main_agent('4020190054525', '아마존펫')['output'])
 # print(main_agent('4020190087323', '하프밀')['output'])
 # print(main_agent('4020190053381', '통일한의원')['output'])
+# final_execute_gpt('4020190084056', '좋은 집 좋은 자재')
+# final_execute_gpt('4020190099709', '메이크케어')
+# final_execute_gpt('4020190109038', '자연 담은 유리병')
+# final_execute_gpt('4020190087323', '하프밀')
 
 
 # print(main_agent('4020190015159', '당신의 피부혈액형은 무엇입니까?')['output'])

@@ -2,7 +2,7 @@ import os
 import re
 import sys
 import json
-import deepl
+# import deepl
 import requests
 import xmltodict
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -11,8 +11,8 @@ from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
 KIPRIS_API_KEY = os.getenv('_KIPRIS_API_KEY')
-DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
-TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
+# DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
+# TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
 
 
 class CodeSearchKipris:
