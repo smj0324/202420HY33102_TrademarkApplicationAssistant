@@ -3,7 +3,7 @@ from custom_tools.tools import compare_ipa_similarity
 def result_by_simple_test(application_info, similar_application_info):
     similar_application_info_record = convert_similar_application_info(similar_application_info)
     result = compare_records(application_info, similar_application_info_record)
-    print("단순 식별력 검사:", result)
+    # print("단순 식별력 검사:", result)
     return result
 
 def convert_similar_application_info(similar_application_info):
@@ -74,7 +74,6 @@ def compare_records(application_info, similar_records,
         if [] in input_similar_codes or [] in similar_record['similar_code']:
             record_result['similar_code_match'] = False
         else:
-            print(f"input brand: {input_similar_codes} / output brand: {similar_record['similar_code']}")
             record_result['similar_code_match'] = is_subset(input_similar_codes, similar_record['similar_code'])
         
         results.append(record_result)

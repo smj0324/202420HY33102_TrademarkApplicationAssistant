@@ -1,24 +1,8 @@
-Input Brand: 메이크케어
-Registration Status: approve
-Reason: The trademark "메이크케어" (Make Care) is eligible for registration as it demonstrates distinctiveness by combining the familiar terms "메이크" (make) and "케어" (care) in a unique manner that suggests a specific source related to personal care or wellness. It does not closely resemble any well-known international brands, and its pronunciation does not evoke confusion with existing trademarks. Additionally, there is no indication of it being a generic or descriptive mark that would limit its distinctiveness. Overall, "메이크케어" effectively indicates a unique source, making it suitable for trademark registration according to the Trademark Examination Guidelines.
-========================================
-Input Brand: 래쉬픽
+Input Brand: 자연 담은 유리병
 Registration Status: Status not found
 Reason: Reason not found
 ========================================
 Input Brand: 포모나
-Registration Status: reject
-Reason: The trademark "포모나" has multiple existing registrations that are highly similar, including "포모나 POMONA" registered by 주식회사 빙그레 and others. These trademarks share a near-identical IPA similarity, indicating a strong likelihood of confusion among consumers. Since the applicant for the current application is different from those of the existing trademarks, this application is likely to be rejected due to the potential for confusion with the already registered marks. Additionally, the presence of well-known brands associated with the name may further complicate the registration process.
-========================================
-Input Brand: 패티온
-Registration Status: Status not found
-Reason: Reason not found
-========================================
-Input Brand: 좋은 집 좋은 자재
-Registration Status: reject
-Reason: The trademark "좋은 집 좋은 자재" translates to "Good House Good Materials," which consists of common and descriptive terms in the construction and home improvement industry. According to the Trademark Examination Guidelines, such descriptive marks lack distinctiveness and are generally not eligible for trademark registration unless they have acquired distinctiveness through extensive use. Given the generic nature of the terms used, it is unlikely that this trademark meets the criteria for registration.
-========================================
-Input Brand: 엑토인
 Registration Status: Status not found
 Reason: Reason not found
 ========================================
@@ -26,15 +10,31 @@ Input Brand: 예지미인 데일리 코튼
 Registration Status: Status not found
 Reason: Reason not found
 ========================================
+Input Brand: 메이크케어
+Registration Status: Status not found
+Reason: Reason not found
+========================================
+Input Brand: 래쉬픽
+Registration Status: Status not found
+Reason: Reason not found
+========================================
+Input Brand: 패티온
+Registration Status: Status not found
+Reason: Reason not found
+========================================
+Input Brand: 좋은 집 좋은 자재
+Registration Status: Status not found
+Reason: Reason not found
+========================================
+Input Brand: 엑토인
+Registration Status: Status not found
+Reason: Reason not found
+========================================
 Input Brand: 한국정품인증
-Registration Status: reject
-Reason: The trademark "한국정품인증" translates to "Korean Genuine Product Certification," which is primarily descriptive and lacks distinctiveness. It directly describes the certification of Korean products, which diminishes its ability to function as a unique identifier for goods or services. According to the Trademark Examination Guidelines, descriptive marks are generally non-distinctive unless they have acquired distinctiveness through extensive use, which does not appear to be the case here. Therefore, it fails to meet the necessary criteria for trademark registration.
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수
 Registration Status: Status not found
 Reason: Reason not found
-========================================
-Input Brand: 자연 담은 유리병
-Registration Status: approve
-Reason: The trademark "자연 담은 유리병" (translated as "Glass Bottle Filled with Nature") meets the distinctiveness requirements outlined in the Trademark Examination Guidelines. The mark is not merely descriptive; rather, it combines familiar terms in a unique way that creates a distinctive impression, particularly in relation to eco-friendly or natural products. There are no indications that it closely resembles any well-known international trademarks, and it does not infringe on existing rights, especially considering the multiple existing applications by the same applicant, 신재원. Therefore, it is eligible for trademark registration.
 ========================================

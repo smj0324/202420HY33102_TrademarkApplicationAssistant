@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY = os.getenv('_KIPRIS_API_KEY')
+KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
 # DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
 # TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
 
@@ -173,7 +173,6 @@ def parsing_nice_code(response_similar):
     dict_similar = xml_to_dict(response_similar)
 
     response = dict_similar.get('response')
-    print(f"response: {response}")
     
     if response is None:
         print("Warning: 'response'가 None입니다.")
