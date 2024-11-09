@@ -1,7 +1,7 @@
 import os
 import re
 import pandas as pd
-from mains import main_agent
+from mains import final_execute_gpt
 
 output_results = []
 file_path = '.\\custom_tools\\data\\sorted_output.json'
@@ -34,7 +34,7 @@ def test_by_sample_data(file_path):
             if len(data) > 5:
                 application_code = data[0]
                 input_brand = data[6]
-                predict_registration_status, reason = parsing_agent_output_result(main_agent(application_code, input_brand)['output'])
+                predict_registration_status, reason = parsing_agent_output_result(final_execute_gpt(application_code, input_brand))
             else:
                 input_brand = "N/A"
                 predict_registration_status = "N/A"
@@ -75,14 +75,16 @@ def test_by_myj_test_data(excel_file_path):
     write_results(status_file_path, details_file_path, output_results, details_results)
 
 
-def parsing_agent_output_result(output):
-    status_match = re.search(r"등록 상태:\s*(.+)", output)
-    predict_registration_status = status_match.group(1).strip() if status_match else "Unknown"
-
-    reason_match = re.search(r"이유:\s*(.+)", output, re.DOTALL)
-    reason = reason_match.group(1).strip() if reason_match else "No reason provided"
-
-    return predict_registration_status, reason
+def parsing_agent_output_result(text):
+    # Extract Predict Status
+    status_match = re.search(r"\*\*Predict Status\*\*:\s*(\w+)", text)
+    status = status_match.group(1) if status_match else "Status not found"
+    
+    # Extract Reason
+    reason_match = re.search(r"\*\*Reason\*\*:\s*(.+?)(?=\n\n|\Z)", text, re.DOTALL)
+    reason = reason_match.group(1).strip() if reason_match else "Reason not found"
+    
+    return status, reason
 
 
 def parsing_gpt_output_result(output):

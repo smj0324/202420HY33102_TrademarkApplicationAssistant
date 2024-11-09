@@ -71,8 +71,12 @@ def compare_records(application_info, similar_records,
         record_result['applicant_match'] = (input_applicant == similar_record['applicant_name'])
 
         # Similar class similarity check
-        record_result['similar_code_match'] = is_subset(input_similar_codes, similar_record['similar_code'])
-
+        if [] in input_similar_codes or [] in similar_record['similar_code']:
+            record_result['similar_code_match'] = False
+        else:
+            print(f"input brand: {input_similar_codes} / output brand: {similar_record['similar_code']}")
+            record_result['similar_code_match'] = is_subset(input_similar_codes, similar_record['similar_code'])
+        
         results.append(record_result)
     
     return results

@@ -173,6 +173,7 @@ def parsing_nice_code(response_similar):
     dict_similar = xml_to_dict(response_similar)
 
     response = dict_similar.get('response')
+    print(f"response: {response}")
     
     if response is None:
         print("Warning: 'response'가 None입니다.")

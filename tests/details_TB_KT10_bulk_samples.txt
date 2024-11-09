@@ -1,80 +1,80 @@
 Input Brand: 모두웰
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 한의원 무본자강 무본자강
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 버드리
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: approve
+Reason: The trademark "버드리" meets the criteria for trademark registration as it is distinctive and does not closely resemble any common terms or well-known references in Korean. It has been assessed that "버드리" creates a unique impression for consumers, indicating a specific source of goods or services. Additionally, there are no conflicts with existing trademarks owned by different entities, and the applicant is the same as a previously registered trademark, which further supports its eligibility for registration.
 ========================================
 Input Brand: 다함께 차차차
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: approve
+Reason: The trademark "다함께 차차차" (translated as "Let's All Cha Cha Cha") demonstrates distinctiveness as it combines the common term "차차차" (Cha Cha Cha) with the unique phrase "다함께" (Let's All), creating a memorable brand identity. This combination does not merely describe the goods or services but suggests a specific source related to entertainment or social activities. The mark does not closely resemble any well-known international trademarks, and while "차차차" is a recognizable dance style, its use in this context enhances rather than diminishes the distinctiveness of the brand. Additionally, there is no indication that the existing similar trademark registration poses a conflict, as the applicant is different and the goods or services can be distinct. Therefore, it meets the criteria for trademark registration under the Trademark Examination Guidelines.
 ========================================
 Input Brand: 하프밀
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: approve
+Reason: The trademark "하프밀" (translating to "Half Meal") demonstrates distinctiveness as it combines the familiar term "하프" (half) with "밀" (meal) to create a unique phrase that suggests a specific type of food product or service. The analysis indicates that "하프밀" does not closely resemble any well-known international trademarks, and it does not evoke significant cultural references that would dilute its distinctiveness. Additionally, there are no existing trademarks that conflict with this application, and it does not fall under the categories of generic, descriptive, or commonly used marks. Therefore, it meets the eligibility criteria for trademark registration under the Trademark Examination Guidelines.
 ========================================
 Input Brand: 히비초
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 별미당 별미당
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: approve
+Reason: The trademark "별미당 별미당" demonstrates distinctiveness due to its unique combination and repetition of terms that suggest a specific source of goods or services, particularly in the culinary market. The term "별미" translates to "delicacy" or "special dish," and "당" implies a place or house, which collectively creates a memorable brand impression. Although "별미" is a common term, the overall mark does not merely describe the goods but rather indicates a specific establishment, thus avoiding the pitfalls of generic or descriptive marks. Additionally, there are no significant existing trademarks that would cause confusion, and the cultural significance of the term in the Korean market further supports its eligibility for registration.
 ========================================
 Input Brand: 살박사은좌
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 통일한의원
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 태양점보히터
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 문영월
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 칼로바이 프로틴 에이드
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 무스웰 미니컵
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 당신의 피부혈액형은 무엇입니까?
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 나티커
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 살 빼주는 언니
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 어른이놀이터
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: approve
+Reason: The trademark "어른이놀이터" (translated as "Adult Playground") demonstrates distinctiveness as it combines familiar terms in a unique way that suggests a specific concept not typically associated with playgrounds. This unique combination enhances its distinctiveness and indicates a specific source of goods or services. The term does not fall under generic, descriptive, or common marks, as it does not merely describe the goods or services but rather suggests a novel idea. Additionally, there are no well-known international trademarks that closely resemble "어른이놀이터," which reduces the likelihood of confusion. The cultural context adds a layer of meaning that resonates with the intended market, further supporting its eligibility for trademark registration.
 ========================================
 Input Brand: 현자의 돌 생활과 윤리
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 대성자동문
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================
 Input Brand: 아마존펫
-Registration Status: Unknown
-Reason: No reason provided
+Registration Status: Status not found
+Reason: Reason not found
 ========================================

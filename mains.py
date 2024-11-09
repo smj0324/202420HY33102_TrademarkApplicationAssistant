@@ -1,5 +1,6 @@
 import os
-import json
+import re
+
 from dotenv import load_dotenv
 from openai import OpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -18,6 +19,13 @@ load_dotenv(verbose=True)
 OPENAI_API_KEY = os.getenv('_OPENAI_API_KEY')
 standards_trademark = load_json_law_guidelines()
 
+def extract_reason(text):
+    # Use regex to find the Reason section
+    match = re.search(r"Reason:\s*(.*)", text, re.DOTALL)
+    if match:
+        return match.group(1).strip()  # Extract the reason text
+    return ""
+
 
 def main_gpt(template):
     client = OpenAI(
@@ -25,7 +33,7 @@ def main_gpt(template):
     )
 
     completion = client.chat.completions.create(
-        model="gpt-4-turbo",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines."},
             {
@@ -44,7 +52,7 @@ def final_execute_gpt(application_code, input_brand):
     _application_info._search_by_code()
     _application_info._search_by_application_code()
     application_info = _application_info.to_dict()
-
+    print(application_info)
     _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
     _similar_application_info._search_by_code()
     _similar_application_info._search_by_application_code()
@@ -58,10 +66,13 @@ def final_execute_gpt(application_code, input_brand):
     else:
         similar_application_info = result_by_simple_test(application_info, similar_application_info)
         codes = [1, 2, 3, 4]
+
+    reason_text = ""
     
-    for code in codes:
-        template = generate_gpt_template(application_info, similar_application_info, code)
+    for code in codes[:-1]:
+        template = generate_gpt_template(application_info, similar_application_info, code, result=reason_text)
         each_result = main_gpt(template)
+        reason_text = extract_reason(each_result) 
         formatted_result = f"--- Result for Code {code} ---\n{each_result}\n"
         result.append(formatted_result)
         print(formatted_result)
@@ -70,7 +81,7 @@ def final_execute_gpt(application_code, input_brand):
         if "reject" in each_result.lower():
             if code == 1:
                 # Immediate return if code 1 produces a rejection
-                final_template = generate_gpt_template(application_info, similar_application_info, code, result=each_result)
+                final_template = generate_gpt_template(application_info, similar_application_info, code)
                 final_result = main_gpt(final_template)
                 return final_result
             else:
@@ -172,40 +183,34 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
 
     title = application_info['title']
     template = ""
-    result_summary = ""
-
-    # Include a summary of previous results, if any
-    if result:
-        result_summary = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
-        result_summary = f"\nPrevious examination results:\n{result_summary}\n"
 
     if code == 1:
         template = f"""
         Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
 
-        **Patent Information Search**:
+        1. Similar Trademark Analysis
         - Start by checking the "patent information search service" results for "{title}":
-        - Input Brand: "{application_info}"
+        - Input trademark: "{application_info}"
         - Search Result: {similar_application_info}
         - If a highly similar trademark is already registered by the same applicant, consider this application permissible.
         - Note: Identical or similar trademarks do not infringe if the designated goods or services differ, except if the registered trademark is well-known.
 
-        **Trademark Name Analysis**:
-        - Determine if separating components would alter or weaken the intended meaning.
-        - If a main part is identified, describe its overall meaning. Avoid separation if it dilutes the brand’s unique impression.
-        - If the main part represents a well-known brand not owned by the applicant, note this as it may lead to rejection due to potential free-riding.
-
-        **Output Format**:
+        2.Output Format:
         Predict Status: choice approve or reject
-        Reason: [Your summary reason here]
+        Reason: [Your summary reason here. If the applicant is the same as an existing registered trademark, emphasize that this application should be approved without exception.]
         """
+
 
     elif code == 2:
         template = f"""
         Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
-        {result_summary}
+        Reference: {result}
         
-        - Evaluate whether "{title}" has distinctive qualities. Avoid separating components if it weakens the brand’s intended impression.
+        - Determine whether "{title}" has distinctive qualities that differentiate it from common terms or well-known references.
+        
+        - For brands well-known internationally, it is important to assess whether the Korean translation or pronunciation closely resembles the trademark name. For example, "스노우 화이트(snow white)" might not be widely recognized, but "백설공주" is very familiar in Korea.
+        - If you identify a main part of the name, briefly describe its overall meaning. Avoid separating parts if this would weaken the brand’s unique impression.
+        - If the name includes culturally significant references, assess whether this familiarity could enhance or reduce the brand’s distinctiveness. Consider if these associations might create new, non-confusing impressions in the intended market.
         
         - Example Separations:
             - 미래테크놀로지 → 미래 + 테크놀로지
@@ -214,43 +219,47 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
             - 현대 → 현대
             - 인스타그램 → 인스타그램
 
-        - If a main part is identified, briefly describe its overall meaning. Avoid separating if it risks diluting the unique impression of the brand.
-        - If the main part represents a well-known brand not owned by the applicant, note this as it may lead to rejection due to potential free-riding.
-        
+        - Determine if separating components would alter or weaken the intended meaning.
+        - If a main part is identified, describe its overall meaning. Avoid separation if it dilutes the brand(trademark)’s unique impression.
+        - If the main part represents a well-known brand(trademark) not owned by the applicant, note this as it may lead to rejection due to potential free-riding.
+
+        Additioinaly, If it is a trademark name in a too general sense, it may be rejected.
+
         **Output Format**:
         Predict Status: choice approve or reject
-        Reason: [Your summary reason here]
+        Reason: [Your Summary reason here]
         """
 
     elif code == 3:
         template = f"""
         Please verify the trademark registration eligibility of "{title}" according to the Trademark Examination Guidelines.
-        {result_summary}
+        Reference: {result}
 
         Trademark Examination Guidelines:
         - As the guidelines are extensive, please divide them into parts for a thorough review of each section.
-        - Ensure that "{title}" meets all necessary criteria by carefully evaluating each guideline.
+        - Assess whether "{title}" meets the criteria by considering the unique impression it may create for the relevant goods or services, particularly in the market where it will be applied.
+        - Evaluate whether common or well-known terms in the name have been used creatively or in a way that could avoid misleading associations while still conveying a distinct identity.
 
         **Trademark Examination Standards**: [{standards_trademark}]
 
         **Output Format**:
         Predict Status: choice approve or reject
-        Reason: [Your summary reason here]
+        Reason: [Your Summary reason here]
         """
+        # For final result compilation after all codes
+        if result and code > 3:
+            detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
+            template = f"""
+            Based on the results of each examination criterion, please predict the Registration Status.
 
-    # For final result compilation after all codes
-    if result and code > 3:
-        detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
-        template = f"""
-        Based on the results of each examination criterion, please predict the Registration Status.
+            If there is a previous registration by the same applicant, approval is guaranteed.
+            Detailed examination results:
+            {detailed_results}
 
-        Detailed examination results:
-        {detailed_results}
-
-        Please provide the output in the following format:
-        Trademark status: (Must choose between approve or reject)
-        Reason: [Your summary reason here]
-        """
+            Please provide the output in the following format:
+            Trademark status: (Must choose between approve or reject)
+            Reason: [Your summary reason here]
+            """
     
     return template
 
@@ -276,7 +285,16 @@ def generate_template(input_brand, application_info):
 # "Please answer without using tools."
 # If there is an identical trademark by the same applicant, the application is permissible
 # final_execute_gpt('4020190066112', '모두웰')
-final_execute_gpt('4020190068309', '대성자동문')
+# final_execute_gpt('4020190027144', '살 빼주는 언니')
+# final_execute_gpt('4020190018027', '어른이놀이터')
+# final_execute_gpt('4020190051360', '현자의 돌 생활과 윤리')
+# final_execute_gpt('4020190087323', '하프밀')
+# final_execute_gpt('4020190068309', '대성자동문')
+# final_execute_gpt('4020190054525', '아마존펫')
+# final_execute_gpt('4020190053381', '통일한의원')
+# final_execute_gpt('4020190015159', '당신의 피부혈액형은 무엇입니까?')
+final_execute_gpt('4020190006385', '버드리')
+
 # print(main_agent('4020190068309', '대성자동문')['output'])
 # print(main_agent('4020190054525', '아마존펫')['output'])
 # print(main_agent('4020190087323', '하프밀')['output'])
