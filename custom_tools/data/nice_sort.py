@@ -98,7 +98,7 @@ def main(input_file, output_file):
 
 if __name__ == "__main__":
     # Default file names (you can change these or pass as command-line arguments)
-    DEFAULT_INPUT_FILE = 'custom_tools/data/_nice_to_similar.json'
+    DEFAULT_INPUT_FILE = 'custom_tools/data/nice_to_similar.json'
     DEFAULT_OUTPUT_FILE = 'sorted_output.json'
 
     # Check if user provided custom file names via command-line arguments
