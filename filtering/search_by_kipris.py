@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
+KIPRIS_API_KEY1 = os.getenv('KIPRIS_API_KEYs')
 
 class CodeSearchKipris:
     '''
@@ -26,19 +26,43 @@ class CodeSearchKipris:
         self.is_valid_category_match = True
         self.single_flag = single_flag
 
+    # def _search_by_code(self):
+    #     url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY1}"
+        
+    #     response_general = requests.get(url_general)
+    #     if response_general.status_code != 200:
+    #         print("Failed to retrieve general data from KIPRIS API")
+    #         return None
+        
+    #     application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
+        
+    #     if self.single_flag:
+    #         self.applicant_name = application_general_dict.get('applicantName', "")
+    #         self.title = application_general_dict.get('title', "")
+    #         self.application_status = application_general_dict.get('applicationStatus', "")
+    #     else:
+    #         self.application_code = [item.get('applicationNumber', "") for item in application_general_dict]
+    #         self.applicant_name = [item.get('applicantName', "") for item in application_general_dict]
+    #         self.title = [item.get('title', "") for item in application_general_dict]
+    #         self.application_status = [item.get('applicationStatus', "") for item in application_general_dict]
+
     def _search_by_code(self):
-        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY}"
+        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY1}"
         
         response_general = requests.get(url_general)
         if response_general.status_code != 200:
             print("Failed to retrieve general data from KIPRIS API")
             return None
         
-        application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
+        if not response_general.text or "<response>" not in response_general.text:
+            return None
+        
+        else:
+            application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
         
         if self.single_flag:
             self.applicant_name = application_general_dict.get('applicantName', "")
-            self.title = application_general_dict.get('title', "")
+            self.fulltitle = application_general_dict.get('fulltitle', "")
             self.application_status = application_general_dict.get('applicationStatus', "")
         else:
             self.application_code = [item.get('applicationNumber', "") for item in application_general_dict]
@@ -50,7 +74,7 @@ class CodeSearchKipris:
     def _search_by_application_code(self):
 
         if self.single_flag:
-            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY}"
+            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY1}"
             
             response_similar = requests.get(url_similar)
             if response_similar.status_code != 200:
@@ -70,7 +94,7 @@ class CodeSearchKipris:
             # all_similar_hangle = []
 
             for target_code in self.application_code:
-                url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY}"
+                url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY1}"
                 
                 response_similar = requests.get(url_similar)
                 if response_similar.status_code != 200:
@@ -116,6 +140,7 @@ class CodeSearchKipris:
 def parsing_application_data(response_general, application_code, single=True):
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
+    # print(items)
 
     if isinstance(items, dict):
         items = [items]
