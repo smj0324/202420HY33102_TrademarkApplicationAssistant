@@ -76,7 +76,7 @@ class CodeSearchKipris:
         else:
             all_nice_codes = []
             all_similar_codes = []
-            # all_similar_hangle = []
+            all_similar_hangle = []
 
             for target_code in self.application_code:
                 url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY}"
@@ -94,11 +94,11 @@ class CodeSearchKipris:
                     classification_codes_list, similar_group_codes_list, similar_group_hangle_list = parsing_nice_code(response_similar)
                     all_nice_codes.append(classification_codes_list)
                     all_similar_codes.append(similar_group_codes_list)
-                    # all_similar_hangle.append(similar_group_hangle_list)
+                    all_similar_hangle.append(similar_group_hangle_list)
 
             self.nice_code = all_nice_codes
             self.similar_code = all_similar_codes
-            # self.similar_code_hangle = all_similar_hangle
+            self.similar_code_hangle = all_similar_hangle
 
 
     def to_dict(self) -> dict:
@@ -128,7 +128,7 @@ class CodeSearchKipris:
 
 
 def parsing_application_data(response_general, application_code, single=True):
-    
+    # print("*****************,",response_general.text)
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
 
@@ -237,11 +237,11 @@ def xml_to_dict(response):
 
 
 #단일 application_code 테스트
-print("===== 단일 application_code 테스트 =====")
-single_code_test = CodeSearchKipris(application_code="4020190099709", single_flag=True)
-single_code_test._search_by_code()
-single_code_test._search_by_application_code()
-print(json.dumps(single_code_test.to_dict(), ensure_ascii=False, indent=4))
+# print("===== 단일 application_code 테스트 =====")
+# single_code_test = CodeSearchKipris(application_code="4020190099709", single_flag=True)
+# single_code_test._search_by_code()
+# single_code_test._search_by_application_code()
+# print(json.dumps(single_code_test.to_dict(), ensure_ascii=False, indent=4))
 
 # print("단일 상표명 검색 결과:")
 # print(f"신청자 이름: {single_code_test.applicant_name}")

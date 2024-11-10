@@ -15,292 +15,6 @@ from custom_tools.load_data import load_json_law_guidelines
 from filtering.search_by_kipris import CodeSearchKipris
 from filtering.identify_simple_filtering import result_by_simple_test
 
-load_dotenv(verbose=True)
-OPENAI_API_KEY = os.getenv('_OPENAI_API_KEY')
-standards_trademark = load_json_law_guidelines()
-
-def extract_reason(text):
-    # Use regex to find the Reason section
-    match = re.search(r"Reason:\s*(.*)", text, re.DOTALL)
-    if match:
-        return match.group(1).strip()  # Extract the reason text
-    return ""
-
-
-def main_gpt(template):
-    client = OpenAI(
-        api_key=OPENAI_API_KEY,
-    )
-
-    completion = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines."},
-            {
-                "role": "user",
-                "content": template
-            }
-        ],
-        temperature=0
-    )
-
-    response = completion.choices[0].message.content
-    return response
-
-def final_execute_gpt(application_code, input_brand):
-    _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
-    _application_info._search_by_code()
-    _application_info._search_by_application_code()
-    application_info = _application_info.to_dict()
-    print("\n\n\n\n\napplication_info:",application_info)
-    _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
-    _similar_application_info._search_by_code()
-    _similar_application_info._search_by_application_code()
-    similar_application_info = _similar_application_info.to_dict()
-    print("\n\n\n\n\nsimilar_application_info:",similar_application_info)
-
-    result = []
-
-    # Determine codes based on the presence of similar application info
-    if not similar_application_info.get('application_code') or not similar_application_info.get('applicant_name'):
-        codes = [2, 3, 4]
-    else:
-        similar_application_info = result_by_simple_test(application_info, similar_application_info)
-        codes = [1, 2, 3, 4]
-    
-    for code in codes[:-1]:
-        template = generate_gpt_template(application_info, similar_application_info, code)
-        each_result = main_gpt(template)
-        # reason_text = extract_reason(each_result) 
-        formatted_result = f"--- Result for Code {code} ---\n{each_result}\n"
-        print(formatted_result)
-        result.append(formatted_result)
-        
-        # Check for rejection in the current result
-        if "reject" in each_result.lower():
-            if code == 1:
-                # Immediate return if code 1 produces a rejection
-                final_template = generate_gpt_template(application_info, similar_application_info, code)
-                final_result = main_gpt(final_template)
-                return final_result
-            else:
-                continue
-    
-    # If no rejections for code 1 or if all codes complete, compile and return final result
-    final_template = generate_gpt_template(application_info, similar_application_info, 4, result=result)
-    final_result = main_gpt(final_template)
-    result.append(f"--- Final Result ---\n{final_result}\n")
-    print(final_result)
-    return final_result
-
-
-
-def main_agent(application_code, input_brand):
-    _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
-    _application_info._search_by_code()
-    _application_info._search_by_application_code()
-
-    application_info = _application_info.to_dict()
-
-    _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
-    _similar_application_info._search_by_code()
-    _similar_application_info._search_by_application_code()
-
-    similar_application_info = _similar_application_info.to_dict()
-
-    if not similar_application_info['application_code'] or not similar_application_info['applicant_name']:
-        final_result = final_excute_agent(application_info, "No search results.")
-    else:
-        similar_application_info = result_by_simple_test(application_info, similar_application_info)
-        final_result = final_excute_agent(application_info, similar_application_info[0])
-        
-    return final_result
-
-
-def final_excute_agent(application_info, similar_application_info):
-
-    input_brand = application_info.get('title')
-
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0.00001,
-        max_tokens=None,
-        timeout=None,
-        api_key=OPENAI_API_KEY,
-    )
-
-    tools = asigned_tools()
-    llm_with_tools = llm.bind_tools(tools)
-
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                "You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines."
-            ),
-            ("user", "{input}"),
-            MessagesPlaceholder(variable_name="agent_scratchpad"),
-        ]
-    )
-
-    agent = (
-        {
-            "input": lambda x: x["input"],
-            "agent_scratchpad": lambda x: format_to_openai_tool_messages(
-                x["intermediate_steps"]
-            ),
-        }
-        | prompt
-        | llm_with_tools
-        | OpenAIToolsAgentOutputParser()
-    )
-
-
-    agent_executor = AgentExecutor(
-        agent=agent,
-        tools=tools,
-        verbose=True,
-        max_iterations=5,
-    )
-
-    final_result = agent_executor.invoke({
-        "input": f"{generate_template(input_brand, application_info, similar_application_info)}"
-    })
-
-    return final_result
-
-def generate_gpt_template(application_info, similar_application_info, code, result=""):
-    """
-    Generates a template for GPT based on the given code.
-    
-    Parameters:
-    - code = 1: Check for similar trademarks (if similar_application_info is present).
-    - code = 2: Check for distinctiveness of the trademark name.
-    - code = 3: Verify compliance with trademark examination criteria.
-    """
-
-    title = application_info['title']
-    template = ""
-
-    if code == 1:
-        template = f"""
-        Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
-
-        1. Similar Trademark Analysis
-        - Start by checking the "patent information search service" results for "{title}":
-        - Input trademark: "{application_info}"
-        - Search Results: {similar_application_info}
-        
-        - Guidelines:
-            1. If a highly similar trademark is already registered by the same applicant, this application must be approved without exception. In such cases, ignore any other considerations—this trademark must be approved.
-            2. Check similarity based only on the trademark name, not the applicant.
-            3. If the Simliar code is false, the designated product is different, so there is still a review standard to consider. Therefore, please write down the approval for now.
-
-        2. Output Format
-        Predict Status: choice approve or reject
-        Reason: [Do not state whether the application is approved or rejected in the rationale. Only mention approval if the applicant is the same as an existing registered trademark.]
-        """
-
-
-    elif code == 2:
-        template = f"""
-            Here’s a refined version that emphasizes the need for detailed and precise reasoning:
-
-            Please evaluate the trademark registration eligibility of "{title}" based on the following criteria and provide a response with specific and accurate reasoning grounded in the trademark examination standards.
-
-            If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{sample}]
-            Please use the following format for your response:
-
-            Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
-
-            Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
-        """
-
-    elif code == 3:
-        template = f"""
-        Please verify the trademark registration eligibility of "{title}" according to the Trademark Examination Guidelines.
-
-        Trademark Examination Guidelines:
-        - The guidelines are broad, so please review them by table of contents for a thorough review of each section..
-        - Assess whether "{title}" meets the criteria by considering the unique impression it may create for the relevant goods or services, particularly in the market where it will be applied.
-
-        **Trademark Examination Standards**: [{standards_trademark}]
-
-        **Output Format**:
-        Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
-        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
-        """
-
-    elif code == 4:
-        detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
-        template = f"""
-        1. Please make a comprehensive conclusion based on the results of each examination, 
-        If "Result for Code Code 1" finds that a similar trademark is already registered by the same applicant, this application must be approved without exception.
-        
-        Note: While Code 1 > Code 3 > Code 2 may generally indicate the relative importance of criteria, this order is flexible and should not limit the assessment.
-
-        Detailed Examination Results:
-        {detailed_results}
-        
-        Please provide the output in the following format:
-        Trademark Status: (Must choose between approve or reject)
-        Reason: [Your summary reason here]
-        """
-    
-    return template
-
-def generate_template(input_brand, application_info):
-
-    template =f'''
-    Please go through each criterion in the  "Cautions When Judging" of Trademark Examination Guidelines one by one and confirm whether "{input_brand}" meets the standards for approval.
-
-    Trademark Information = [{application_info}]
-
-    "The trademark examination criteria are broad, so please consider them in three separate sections."
-    **Trademark Examination Guidelines = [{standards_trademark}]**
-
-    "Please answer without using tools."
-
-    Fill out the trademark application in the following format.
-
-    Trademark status: (Must you choose between O(approve) or X(reject))
-    Reason:
-    '''
-    return template
-    
-# "Please answer without using tools."
-# If there is an identical trademark by the same applicant, the application is permissible
-# final_execute_gpt('4020190066112', '모두웰')
-# final_execute_gpt('4020190027144', '살 빼주는 언니')
-# final_execute_gpt('4020190018027', '어른이놀이터')
-# final_execute_gpt('4020190051360', '현자의 돌 생활과 윤리')
-# final_execute_gpt('4020190087323', '하프밀')
-# final_execute_gpt('4020190068309', '대성자동문')
-# final_execute_gpt('4020190054525', '아마존펫')
-# final_execute_gpt('4020190053381', '통일한의원')
-# final_execute_gpt('4020190015159', '당신의 피부혈액형은 무엇입니까?')
-# final_execute_gpt('4020190006385', '버드리')
-
-# print(main_agent('4020190068309', '대성자동문')['output'])
-# print(main_agent('4020190054525', '아마존펫')['output'])
-# print(main_agent('4020190087323', '하프밀')['output'])
-# print(main_agent('4020190053381', '통일한의원')['output'])
-# final_execute_gpt('4020190084056', '좋은 집 좋은 자재')
-# final_execute_gpt('4020190099709', '메이크케어')
-# final_execute_gpt('4020190109038', '자연 담은 유리병')
-# final_execute_gpt('4020190087323', '하프밀')
-
-
-# print(main_agent('4020190015159', '당신의 피부혈액형은 무엇입니까?')['output'])
-# print(main_agent('4020190084056', '좋은 집 좋은 자재')['output']) # 좋은 집 좋은 자재
-# print(main_agent('4020190099709', '메이크케어')['output']) # 메이크케어
-# print(main_agent('4020190109038', "자연 담은 유리병")['output']) # 자연 담은 유리병
-# main_gpt()
-# print("타입:", main_agent('4020190109038')['output'])
-# main_gpt('대성자동문')
-# main_gpt('통일한의원')
-
-
 
 sample = """
 Chapter 2 Requirements for Trademark Registration
@@ -459,3 +173,295 @@ For combinations of technical (descriptive) marks related to goods, if they conv
 For trademarks indicating qualities that may mislead or deceive consumers regarding the nature or characteristics of goods, Article 7, Paragraph 1, Item 11 applies.
 
 """
+
+
+load_dotenv(verbose=True)
+OPENAI_API_KEY = os.getenv('_OPENAI_API_KEY')
+standards_trademark = load_json_law_guidelines()
+
+def extract_reason(text):
+    # Use regex to find the Reason section
+    match = re.search(r"Reason:\s*(.*)", text, re.DOTALL)
+    if match:
+        return match.group(1).strip()  # Extract the reason text
+    return ""
+
+
+def main_gpt(template):
+    client = OpenAI(
+        api_key=OPENAI_API_KEY,
+    )
+
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines."},
+            {
+                "role": "user",
+                "content": template
+            }
+        ],
+        temperature=0
+    )
+
+    response = completion.choices[0].message.content
+    return response
+
+def final_execute_gpt(application_code, input_brand):
+    _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
+    _application_info._search_by_code()
+    _application_info._search_by_application_code()
+    application_info = _application_info.to_dict()
+    print("\n\n\n\n\napplication_info:",application_info)
+    _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
+    _similar_application_info._search_by_code()
+    _similar_application_info._search_by_application_code()
+    similar_application_info = _similar_application_info.to_dict()
+
+    result = []
+
+    # Determine codes based on the presence of similar application info
+    if not similar_application_info.get('application_code') or not similar_application_info.get('applicant_name'):
+        codes = [2, 3, 4]
+    else:
+        similar_application_info = result_by_simple_test(application_info, similar_application_info)
+        print("\n\n\n\n\nsimilar_application_info:",similar_application_info)
+        codes = [1, 2, 3, 4]
+    
+    for code in codes[:-1]:
+        template = generate_gpt_template(application_info, similar_application_info, code)
+        each_result = main_gpt(template)
+        # reason_text = extract_reason(each_result) 
+        formatted_result = f"--- Result for Code {code} ---\n{each_result}\n"
+        print(formatted_result)
+        result.append(formatted_result)
+        
+        # Check for rejection in the current result
+        if "reject" in each_result.lower():
+            if code == 1:
+                # Immediate return if code 1 produces a rejection
+                final_template = generate_gpt_template(application_info, similar_application_info, code)
+                final_result = main_gpt(final_template)
+                return final_result
+            else:
+                continue
+    
+    # If no rejections for code 1 or if all codes complete, compile and return final result
+    final_template = generate_gpt_template(application_info, similar_application_info, 4, result=result)
+    final_result = main_gpt(final_template)
+    result.append(f"--- Final Result ---\n{final_result}\n")
+    print(final_result)
+    return final_result
+
+
+
+def main_agent(application_code, input_brand):
+    _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
+    _application_info._search_by_code()
+    _application_info._search_by_application_code()
+
+    application_info = _application_info.to_dict()
+
+    _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
+    _similar_application_info._search_by_code()
+    _similar_application_info._search_by_application_code()
+
+    similar_application_info = _similar_application_info.to_dict()
+
+    if not similar_application_info['application_code'] or not similar_application_info['applicant_name']:
+        final_result = final_excute_agent(application_info, "No search results.")
+    else:
+        similar_application_info = result_by_simple_test(application_info, similar_application_info)
+        final_result = final_excute_agent(application_info, similar_application_info[0])
+        
+    return final_result
+
+
+def final_excute_agent(application_info, similar_application_info):
+
+    input_brand = application_info.get('title')
+
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0.00001,
+        max_tokens=None,
+        timeout=None,
+        api_key=OPENAI_API_KEY,
+    )
+
+    tools = asigned_tools()
+    llm_with_tools = llm.bind_tools(tools)
+
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                "You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines."
+            ),
+            ("user", "{input}"),
+            MessagesPlaceholder(variable_name="agent_scratchpad"),
+        ]
+    )
+
+    agent = (
+        {
+            "input": lambda x: x["input"],
+            "agent_scratchpad": lambda x: format_to_openai_tool_messages(
+                x["intermediate_steps"]
+            ),
+        }
+        | prompt
+        | llm_with_tools
+        | OpenAIToolsAgentOutputParser()
+    )
+
+
+    agent_executor = AgentExecutor(
+        agent=agent,
+        tools=tools,
+        verbose=True,
+        max_iterations=5,
+    )
+
+    final_result = agent_executor.invoke({
+        "input": f"{generate_template(input_brand, application_info, similar_application_info)}"
+    })
+
+    return final_result
+
+def generate_gpt_template(application_info, similar_application_info, code, result=""):
+    """
+    Generates a template for GPT based on the given code.
+    
+    Parameters:
+    - code = 1: Check for similar trademarks (if similar_application_info is present).
+    - code = 2: Check for distinctiveness of the trademark name.
+    - code = 3: Verify compliance with trademark examination criteria.
+    """
+
+    title = application_info['title']
+    template = ""
+    print(similar_application_info[0])
+    if code == 1:
+        template = f"""
+        Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
+
+        1. Similar Trademark Analysis
+        - Start by checking the "patent information search service" results for "{title}":
+        - Input trademark: "{application_info}"
+        - Search Results: {similar_application_info[0]}
+        
+        - Guidelines:
+            1. If a highly similar trademark is already registered by the same applicant, this application must be approved without exception. In such cases, ignore any other considerations—this trademark must be approved.
+            2. Check similarity based only on the trademark name, not the applicant.
+            3. If the designated product has a different 'similar_code_match', the application can be temporarily approved.
+            4. If the trademark is similar "and" there is a "similar_code_name" in "Search Results" that is Same to "Input trademark", the application for "Input trademark" is rejected.
+                - Similar_code_name of Input trademark = {application_info['similar_code_name']}
+                - Similar_code_name of Search Results = {similar_application_info[0]['similar_code_name']}
+                => If there is no similar code name, it must be approved temporarily.
+
+        2. Output Format
+        Predict Status: choice approve or reject
+        Reason: [Do not state whether the application is approved or rejected in the rationale. Only mention approval if the applicant is the same as an existing registered trademark.]
+        """
+
+
+    elif code == 2:
+        template = f"""
+            Here’s a refined version that emphasizes the need for detailed and precise reasoning:
+
+            Please evaluate the trademark registration eligibility of "{title}" based on the following criteria and provide a response with specific and accurate reasoning grounded in the trademark examination standards.
+
+            If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{sample}]
+            Please use the following format for your response:
+
+            Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
+
+            Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
+        """
+
+    elif code == 3:
+        template = f"""
+        Please verify the trademark registration eligibility of "{title}" according to the Trademark Examination Guidelines.
+
+        Trademark Examination Guidelines:
+        - The guidelines are broad, so please review them by table of contents for a thorough review of each section..
+        - Assess whether "{title}" meets the criteria by considering the unique impression it may create for the relevant goods or services, particularly in the market where it will be applied.
+
+        **Trademark Examination Standards**: [{standards_trademark}]
+
+        **Output Format**:
+        Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
+        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
+        """
+
+    elif code == 4:
+        detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
+        template = f"""
+        1. Please make a comprehensive conclusion based on the results of each examination, 
+        If "Result for Code Code 1" finds that a similar trademark is already registered by the same applicant, this application must be approved without exception.
+        
+        Note: While Code 1 > Code 3 > Code 2 may generally indicate the relative importance of criteria, this order is flexible and should not limit the assessment.
+
+        Detailed Examination Results:
+        {detailed_results}
+        
+        Please provide the output in the following format:
+        Trademark Status: (Must choose between approve or reject)
+        Reason: [Your summary reason here]
+        """
+    
+    return template
+
+def generate_template(input_brand, application_info):
+
+    template =f'''
+    Please go through each criterion in the  "Cautions When Judging" of Trademark Examination Guidelines one by one and confirm whether "{input_brand}" meets the standards for approval.
+
+    Trademark Information = [{application_info}]
+
+    "The trademark examination criteria are broad, so please consider them in three separate sections."
+    **Trademark Examination Guidelines = [{standards_trademark}]**
+
+    "Please answer without using tools."
+
+    Fill out the trademark application in the following format.
+
+    Trademark status: (Must you choose between O(approve) or X(reject))
+    Reason:
+    '''
+    return template
+    
+# "Please answer without using tools."
+# If there is an identical trademark by the same applicant, the application is permissible
+# final_execute_gpt('4020190066112', '모두웰')
+# final_execute_gpt('4020190027144', '살 빼주는 언니')
+final_execute_gpt('4020190018027', '어른이놀이터')
+# final_execute_gpt('4020190095000', '포모나')
+
+# final_execute_gpt('4020190051360', '현자의 돌 생활과 윤리')
+# final_execute_gpt('4020190087323', '하프밀')
+# final_execute_gpt('4020190068309', '대성자동문')
+# final_execute_gpt('4020190054525', '아마존펫')
+# final_execute_gpt('4020190053381', '통일한의원')
+# final_execute_gpt('4020190015159', '당신의 피부혈액형은 무엇입니까?')
+# final_execute_gpt('4020190006385', '버드리')
+
+# print(main_agent('4020190068309', '대성자동문')['output'])
+# print(main_agent('4020190054525', '아마존펫')['output'])
+# print(main_agent('4020190087323', '하프밀')['output'])
+# print(main_agent('4020190053381', '통일한의원')['output'])
+# final_execute_gpt('4020190084056', '좋은 집 좋은 자재')
+# final_execute_gpt('4020190099709', '메이크케어')
+# final_execute_gpt('4020190109038', '자연 담은 유리병')
+# final_execute_gpt('4020190087323', '하프밀')
+
+
+# print(main_agent('4020190015159', '당신의 피부혈액형은 무엇입니까?')['output'])
+# print(main_agent('4020190084056', '좋은 집 좋은 자재')['output']) # 좋은 집 좋은 자재
+# print(main_agent('4020190099709', '메이크케어')['output']) # 메이크케어
+# print(main_agent('4020190109038', "자연 담은 유리병")['output']) # 자연 담은 유리병
+# main_gpt()
+# print("타입:", main_agent('4020190109038')['output'])
+# main_gpt('대성자동문')
+# main_gpt('통일한의원')

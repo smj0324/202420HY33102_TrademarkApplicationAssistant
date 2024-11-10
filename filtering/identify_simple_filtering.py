@@ -15,7 +15,8 @@ def convert_similar_application_info(similar_application_info):
                 'application_code': similar_application_info['application_code'][i],
                 'title': similar_application_info['title'][i],
                 'applicant_name': similar_application_info['applicant_name'][i],
-                'similar_code': similar_application_info['similar_code'][i]
+                'similar_code': similar_application_info['similar_code'][i],
+                'similar_code_name': similar_application_info['similar_code_name'][i]
             }
         except:
             records = {}
@@ -50,7 +51,7 @@ def compare_records(application_info, similar_records,
              ]
     """
     results = []
-    input_title = application_info.get('title', '')
+
     input_applicant = application_info.get('applicant_name', '')
     input_similar_codes = application_info.get('similar_code', [])
     
@@ -59,6 +60,7 @@ def compare_records(application_info, similar_records,
             'application_number': similar_record['application_code'],
             'trademark_name': similar_record['title'],
             'applicant_name': similar_record['applicant_name'],
+            'similar_code_name': similar_record['similar_code_name'],
             # 'trademark_IPA_similarity': 0.0,
             'applicant_name_match': False,
             'similar_code_match': False
@@ -69,13 +71,14 @@ def compare_records(application_info, similar_records,
 
         # Applicant name similarity check
         record_result['applicant_match'] = (input_applicant == similar_record['applicant_name'])
+        # print("\n\n\n\n코드 비교: ",input_similar_codes, similar_record['similar_code'])
 
         # Similar class similarity check
         if [] in input_similar_codes or [] in similar_record['similar_code']:
             record_result['similar_code_match'] = False
         else:
-            record_result['similar_code_match'] = is_subset(input_similar_codes, similar_record['similar_code'])
-        
+            record_result['similar_code_match'] = bool(set(input_similar_codes) & set(similar_record['similar_code']))
+
         results.append(record_result)
     
     return results
