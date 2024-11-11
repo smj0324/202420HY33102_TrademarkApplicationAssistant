@@ -138,6 +138,7 @@ class CodeSearchKipris:
 
 
 def parsing_application_data(response_general, application_code, single=True):
+    print(response_general.text)
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
     # print(items)
@@ -180,38 +181,58 @@ def parsing_application_data(response_general, application_code, single=True):
     return extracted_info
 
 
-def parsing_nice_code(response_similar):
+def parsing_nice_code(response_similar):     
     dict_similar = xml_to_dict(response_similar)
-    items = dict_similar.get('response', {}).get('body', {}).get('items', {}).get('trademarkDesignationGoodstInfo', [])
+    # print("***************\n")
+    response = dict_similar.get('response')
     
-    # defaultdict(list)를 사용하여 중복 제거 없이 순서대로 'SimilargroupCode'를 수집
+    if response is None:
+        print("Warning: 'response'가 None입니다.")
+        return [], [], []
+
+    body = response.get('body')
+    if body is None:
+        print("Warning: 'body'가 None입니다.")
+        return [], [], []
+
+    items = body.get('items')
+    if items is None:
+        print("Warning: 'items'가 None입니다.")
+        return [], [], []
+    
+    trademark_info = items.get('trademarkDesignationGoodstInfo', [])
+    if isinstance(trademark_info, dict):
+        trademark_info = [trademark_info]
+
     grouped_data = defaultdict(list)
 
     classification_codes = set()
-    hangeul_names = set()
-    for item in items:
-        classification_code = int(item['DesignationGoodsClassificationInformationCode'])
-        similargroup_code = item['SimilargroupCode']
-        hangeul_name = item['DesignationGoodsHangeulName']
-        
-        classification_codes.add(classification_code)
-        hangeul_names.add(hangeul_name)
-        
-        # 'DesignationGoodsHangeulName' 별로 'SimilargroupCode'를 리스트에 추가 (중복 제거 없이)
-        grouped_data[hangeul_name].append(similargroup_code)
+    en_names = set()
+    for item in trademark_info:
+        try:
+            classification_code = int(item.get('DesignationGoodsClassificationInformationCode', 0))
+            similargroup_code = item.get('SimilargroupCode', "")
+            en_name = item.get('DesignationGoodsHangeulName', "")
+
+            if classification_code and similargroup_code and en_name:
+                classification_codes.add(classification_code)
+                en_names.add(en_name)
+                grouped_data[en_name].append(similargroup_code)
+        except (ValueError, KeyError) as e:
+            print(f"데이터 항목에서 오류 발생: {e}")
+            continue
 
     classification_codes_list = [str(code) for code in classification_codes]
-    similar_group_codes_list = list(grouped_data.values())  
-    
-    # 중복된 'SimilargroupCodes' 리스트 제거 후 문자열로 결합 (오름차순 정렬)
+    similar_group_codes_list = list(grouped_data.values())
+
     unique_similar_group_codes_set = {
         ",".join(sorted(x)) if len(x) > 1 else x[0] 
         for x in set(tuple(codes) for codes in similar_group_codes_list)
     }
     unique_similar_group_codes_list = list(unique_similar_group_codes_set)
-    hangeul_names_list = list(hangeul_names)
+    en_names_list = list(en_names)
 
-    return classification_codes_list, unique_similar_group_codes_list, hangeul_names_list
+    return classification_codes_list, unique_similar_group_codes_list, en_names_list
 
 
 

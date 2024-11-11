@@ -1,0 +1,58 @@
+메이크케어,Unknown
+자연 담은 유리병,Unknown
+탑퓨전포차 무한리필,Unknown
+단지마켓,Unknown
+굿데이 GOOD DAY,Unknown
+굿데이 GOODDAY,X
+굿데이 Good Day,Unknown
+메이크케어,O
+자연 담은 유리병,Unknown
+탑퓨전포차 무한리필,Unknown
+단지마켓,Unknown
+굿데이 GOOD DAY,Unknown
+굿데이 GOODDAY,O
+굿데이 Good Day,Unknown
+ simplus ,Unknown
+simplus ,Unknown
+이팔청춘치킨 28청춘치킨,Unknown
+자이언트 숯불 두마리 치킨,Unknown
+치킨 파티 위드 펫 ,Unknown
+짜장치킨 짜장과 치킨의 역대급 맛남!,Unknown
+마유 치킨,O
+안양 중앙시장 가마솥 바베큐 치킨,Unknown
+스타닭스 치킨 닭 STARDACKS STARS ARE EVERYTHING IN THE UNIVERSE CHICKEN IS LIKE THAT FOR US TOO STARDACKS CHICKEN,Unknown
+닭봉씨 치즈 순살 두마리 치킨,Unknown
+메이크케어,Unknown
+자연 담은 유리병,Unknown
+탑퓨전포차 무한리필,Unknown
+단지마켓,Unknown
+굿데이 GOOD DAY,Unknown
+굿데이 GOODDAY,Unknown
+굿데이 Good Day,Unknown
+ simplus ,Unknown
+simplus ,Unknown
+이팔청춘치킨 28청춘치킨,Unknown
+자이언트 숯불 두마리 치킨,Unknown
+치킨 파티 위드 펫 ,O
+짜장치킨 짜장과 치킨의 역대급 맛남!,Unknown
+마유 치킨,X
+안양 중앙시장 가마솥 바베큐 치킨,Unknown
+스타닭스 치킨 닭 STARDACKS STARS ARE EVERYTHING IN THE UNIVERSE CHICKEN IS LIKE THAT FOR US TOO STARDACKS CHICKEN,Unknown
+닭봉씨 치즈 순살 두마리 치킨,Unknown
+메이크케어,Unknown
+자연 담은 유리병,Unknown
+탑퓨전포차 무한리필,Unknown
+단지마켓,O
+굿데이 GOOD DAY,Unknown
+굿데이 GOODDAY,Unknown
+굿데이 Good Day,X
+ simplus ,Unknown
+simplus ,Unknown
+이팔청춘치킨 28청춘치킨,Unknown
+자이언트 숯불 두마리 치킨,Unknown
+치킨 파티 위드 펫 ,Unknown
+짜장치킨 짜장과 치킨의 역대급 맛남!,Unknown
+마유 치킨,Unknown
+안양 중앙시장 가마솥 바베큐 치킨,Unknown
+스타닭스 치킨 닭 STARDACKS STARS ARE EVERYTHING IN THE UNIVERSE CHICKEN IS LIKE THAT FOR US TOO STARDACKS CHICKEN,Unknown
+닭봉씨 치즈 순살 두마리 치킨,Unknown
