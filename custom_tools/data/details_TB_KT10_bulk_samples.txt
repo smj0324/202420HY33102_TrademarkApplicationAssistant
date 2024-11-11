@@ -1,0 +1,80 @@
+Input Brand: 모두웰
+Registration Status: **Reject**
+Reason: While "모두웰" exhibits some potential for distinctiveness and uniqueness, significant concerns arise regarding its interpretation as a combination of common and potentially descriptive terms. The presence of "모두" (meaning "all") raises issues of common name usage, and the overall impression of the mark may suggest a descriptive nature related to health or wellness. Without evidence of acquired distinctiveness, the mark may not meet the necessary criteria for trademark registration, leading to a potential rejection based on its descriptive characteristics and the risk of consumer confusion with existing trademarks.
+========================================
+Input Brand: 한의원 무본자강 무본자강
+Registration Status: Approve
+Reason: The trademark "한의원 무본자강 무본자강" has potential for approval due to the unique composition of the term "무본자강," which may provide a level of distinctiveness that helps it stand out in the market. While "한의원" is a descriptive term for the services offered, the repetition of "무본자강" could be perceived as a unique identifier, fulfilling the distinctiveness requirement. If "무본자강" is not commonly used in the industry and is recognized by consumers as indicating the source of the services, it may acquire distinctiveness through use, supporting its eligibility for registration.
+========================================
+Input Brand: 버드리
+Registration Status: approve
+Reason: The application for the trademark "버드리" must be approved as there is an existing trademark registered by the same applicant. Additionally, while there are considerations regarding the distinctiveness and potential descriptiveness of the mark, the presence of the same applicant's prior registration necessitates approval without exception.
+========================================
+Input Brand: 다함께 차차차
+Registration Status: approve
+Reason: The trademark "다함께 차차차" demonstrates potential for distinctiveness and uniqueness, as it does not directly describe the goods or services associated with it. While there are concerns regarding its commonality and potential confusion with existing trademarks, the positive aspects of its suggestive nature and the lack of direct descriptiveness support its eligibility for registration. Additionally, since there is no similar trademark registered by the same applicant, the application should be approved, allowing for further market evaluation and brand recognition development.
+========================================
+Input Brand: 하프밀
+Registration Status: approve
+Reason: The trademark "하프밀" is eligible for registration as there are no highly similar trademarks registered by the same applicant, and the examination results indicate that it possesses distinctiveness due to its unique presentation and potential for brand recognition. While there are concerns regarding its descriptive nature and possible common usage, the overall assessment leans towards approval, especially given the absence of conflicting trademarks. Further examination of its use in commerce will be essential to solidify its distinctiveness.
+========================================
+Input Brand: 히비초
+Registration Status: Approve
+Reason: The trademark "히비초" is distinctive and appears to be a coined term that does not describe the goods or services it may represent. It is not commonly used in the trade society, and if presented uniquely, it enhances its distinctiveness. There is no indication of existing similar trademarks registered by the same applicant, which supports its approval.
+========================================
+Input Brand: 별미당 별미당
+Registration Status: approve
+Reason: The trademark "별미당 별미당" has been assessed and found to have no highly similar trademarks registered by the same applicant, allowing for its approval. While there are concerns regarding its distinctiveness due to the potential commonality of the term "별미당" in the food industry, the unique repetition and suggestive nature of the trademark may provide sufficient differentiation. Additionally, there are no conflicting trademarks that would prevent registration, and further review can explore its distinctiveness based on actual market usage.
+========================================
+Input Brand: 살박사은좌
+Registration Status: Approve
+Reason: The trademark "살박사은좌" (translated as "Sal Park Sa Eun Jwa") demonstrates potential for approval due to its uniqueness and lack of common usage in the relevant trade. It does not appear to be descriptive or commonly recognized among consumers or industry professionals, which supports its distinctiveness under Article 6, Paragraph 1, Item 1 of the Law. Additionally, if the trademark is presented in a stylized manner or includes unique elements, it further enhances its eligibility for registration. Given that a similar trademark is already registered by the same applicant, this application must be approved without exception.
+========================================
+Input Brand: 통일한의원
+Registration Status: Approve
+Reason: The trademark "통일한의원" demonstrates a level of distinctiveness due to the unique prefix "통일" (Unification), which differentiates it from the common term "한의원" (Oriental Medicine Clinic). Although "한의원" is widely used in the industry, the combination with "통일" creates a unique branding element that could serve as a source identifier for the services offered. Given that a similar trademark is already registered by the same applicant, this application must be approved without exception, aligning with the guidelines for trademark registration.
+========================================
+Input Brand: 태양점보히터
+Registration Status: Approve
+Reason: The trademark "태양점보히터" (Sun Jumbo Heater) exhibits a combination of distinctive elements that may not solely consist of common names for the goods. While there are concerns regarding its descriptive nature, the unique combination of "태양" (Sun) and "점보" (Jumbo) creates a suggestive mark that implies a large heater associated with the sun, which could be interpreted as a product that provides warmth or energy. Given that the trademark is presented in a stylized manner or with distinctive branding elements, it enhances its potential for distinctiveness, making it less likely to be categorized as merely descriptive. Therefore, the application should be approved.
+========================================
+Input Brand: 문영월
+Registration Status: Approve
+Reason: The trademark "문영월" demonstrates distinctiveness as it does not appear to be a common or descriptive term related to specific goods. It has the potential to serve as a source identifier, especially if it has been used in a unique stylization or has cultural significance. Additionally, if there are no existing similar trademarks registered by the same applicant, the application must be approved without exception. A thorough examination of its usage in commerce and any existing trademarks is necessary, but the current analysis supports its eligibility for registration.
+========================================
+Input Brand: 칼로바이 프로틴 에이드
+Registration Status: Approve
+Reason: The trademark "칼로바이 프로틴 에이드" (Calobye Protein Aid) exhibits a level of distinctiveness primarily due to the coined term "칼로바이" (Calobye), which does not directly describe the goods and suggests a unique relationship to calorie management or protein supplementation. While there are concerns regarding the descriptive nature of "프로틴" (protein) and "에이드" (aid), the overall impression created by the combination of these elements, particularly if presented in a stylized manner, enhances its potential for trademark registration. Given that a similar trademark is already registered by the same applicant, this application must be approved without exception.
+========================================
+Input Brand: 무스웰 미니컵
+Registration Status: Approve
+Reason: The trademark "무스웰 미니컵" possesses distinctiveness primarily due to the unique term "무스웰," which is not commonly used in the industry, thus enhancing its registrability. While "미니컵" is descriptive, the overall combination suggests a quality associated with the product, and if there is evidence of consumer recognition, it could support the claim of distinctiveness. Additionally, if a similar trademark is already registered by the same applicant, the application must be approved without exception.
+========================================
+Input Brand: 당신의 피부혈액형은 무엇입니까?
+Registration Status: Approve
+Reason: The trademark "당신의 피부혈액형은 무엇입니까?" demonstrates potential distinctiveness due to its unique phrasing and suggestive nature, which does not directly describe a specific product or service. While there are concerns regarding its possible descriptive interpretation, the overall assessment leans towards its eligibility for registration, especially if it is perceived as distinctive within the relevant market context. Additionally, if the trademark is already registered by the same applicant, it must be approved without exception, reinforcing its status as a recognizable brand identity.
+========================================
+Input Brand: 나티커
+Registration Status: Approve
+Reason: The trademark "나티커" is a coined term that exhibits distinctiveness and uniqueness, making it eligible for registration. It does not appear to be commonly used or descriptive within the relevant market, and if there are no existing similar trademarks registered by the same applicant, it should be approved without exception.
+========================================
+Input Brand: 살 빼주는 언니
+Registration Status: Approve
+Reason: The trademark "살 빼주는 언니" demonstrates a distinctive character due to its unique combination of a colloquial expression and a specific service connotation. While it describes weight loss assistance, the personalization through the term "언니" (sister) adds a unique branding element that differentiates it from other similar services. This distinctiveness, coupled with the potential for stylization, supports its eligibility for registration. Additionally, if the trademark is already registered by the same applicant, it must be approved without exception, reinforcing its status as a source identifier in the market.
+========================================
+Input Brand: 어른이놀이터
+Registration Status: approve
+Reason: The trademark "어른이놀이터" is not highly similar to any registered trademarks by the same applicant, allowing for approval based on the absence of conflicting marks. While there are arguments regarding its distinctiveness, the unique combination of common words creates a suggestive mark that implies a specific concept rather than merely describing the services. The potential for descriptiveness exists, but the overall assessment leans towards its eligibility for registration, especially if presented with distinctive design elements. Further review may be necessary to confirm its distinctiveness in the context of the specific goods or services offered.
+========================================
+Input Brand: 현자의 돌 생활과 윤리
+Registration Status: Approve
+Reason: The trademark "현자의 돌 생활과 윤리" (Philosopher's Stone Life and Ethics) exhibits a unique composition that enhances its potential distinctiveness. While there are concerns regarding its descriptiveness and the commonality of the term "현자의 돌," the overall combination of words suggests a deeper philosophical context that is not generic. Given that a similar trademark is already registered by the same applicant, the application must be approved without exception, aligning with the guidelines for trademark registration.
+========================================
+Input Brand: 대성자동문
+Registration Status: Approve
+Reason: The trademark "대성자동문" demonstrates distinctiveness due to its unique combination of terms, with "대성" serving as a proper noun that adds a level of uniqueness. While "자동문" is descriptive of the goods, the overall mark does not solely consist of common names and has the potential for brand recognition. If the applicant has previously registered similar trademarks, this application must be approved without exception, as it aligns with the guidelines for distinctiveness and non-descriptiveness.
+========================================
+Input Brand: 아마존펫
+Registration Status: Reject
+Reason: The trademark "아마존펫" presents significant challenges for registration due to its potential descriptiveness and the risk of confusion with the well-established "Amazon" brand. While there are arguments for its distinctiveness, particularly in its combination of terms, the strong association with the Amazon trademark raises concerns about consumer confusion and the likelihood of dilution of a well-known mark. Additionally, if "아마존" is perceived as a common term in the industry, it could further complicate the registration process, leading to a conclusion that the mark does not meet the necessary distinctiveness requirements for trademark eligibility.
+========================================

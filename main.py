@@ -355,13 +355,10 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
             1. If a highly similar trademark is already registered by the same applicant, this application must be approved without exception. In such cases, ignore any other considerations—this trademark must be approved.
             2. Check similarity based only on the trademark name, not the applicant.
             3. If the'similar_code_match' is 'False', the application can be temporarily approved.
-            4. Any overlap between an element in the similar_code_name list and the input trademark in the search results results in rejection.
-                - similar_code_name list of Input trademark = [{application_info['similar_code_name']}]
-                - similar_code_name list of Search Results = [{similar_application_info[0]['similar_code_name']}]
 
         2. Output Format
         Predict Status: choice approve or reject
-        Reason: [Do not state whether the application is approved or rejected in the rationale. Only mention approval if the applicant is the same as an existing registered trademark.]
+        Reason: [Do not state whether the application is approved or rejected in the rationale. Write down one simple reason specifically.]
         """
 
 
@@ -375,7 +372,6 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
             Please use the following format for your response:
 
             Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
-
             Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
         """
 
@@ -398,13 +394,16 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
         template = f"""
         1. Please make a comprehensive conclusion based on the results of each examination, 
-        If "Result for Code Code 1" finds that a similar trademark is already registered by the same applicant, this application must be approved without exception.
-        
-        Note: While Code 1 > Code 3 > Code 2 may generally indicate the relative importance of criteria, this order is flexible and should not limit the assessment.
+        2. If "Result for Code Code 1" finds that a similar trademark is already registered by the same applicant, this application must be approved without exception.
+        3. You need to think slowly and determine the reason specifically.
+
+        Trademark name to be reviewed: {application_info['title']}
 
         Detailed Examination Results:
         {detailed_results}
-        
+
+        Note: While Code 1 > Code 3 > Code 2 may generally indicate the relative importance of criteria, this order is flexible and should not limit the assessment.
+
         Please provide the output in the following format:
         Trademark Status: (Must choose between approve or reject)
         Reason: [Your summary reason here]
@@ -435,8 +434,8 @@ def generate_template(input_brand, application_info):
 # If there is an identical trademark by the same applicant, the application is permissible
 # final_execute_gpt('4020190066112', '모두웰')
 # final_execute_gpt('4020190027144', '살 빼주는 언니')
-final_execute_gpt('4020190018027', '어른이놀이터')
-final_execute_gpt('4020190095000', '포모나')
+# final_execute_gpt('4020190018027', '어른이놀이터')
+# final_execute_gpt('4020190095000', '포모나')
 
 # final_execute_gpt('4020190051360', '현자의 돌 생활과 윤리')
 # final_execute_gpt('4020190087323', '하프밀')

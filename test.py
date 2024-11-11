@@ -96,8 +96,8 @@ def parsing_gpt_output_result(output):
     pass
    
 
-# sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
-sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
-myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
+sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
+# sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+# myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
 # test_by_myj_test_data(myj_exl_file)
 test_by_sample_data(sample_file_path)
