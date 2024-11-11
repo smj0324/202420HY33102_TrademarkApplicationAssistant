@@ -1,0 +1,36 @@
+모두웰,X
+한의원 무본자강 무본자강,X
+버드리,X
+다함께 차차차,Unknown
+하프밀,X
+히비초,X
+별미당 별미당,X
+살박사은좌,Unknown
+통일한의원,Unknown
+태양점보히터,X
+문영월,X
+칼로바이 프로틴 에이드,Unknown
+무스웰 미니컵,X
+당신의 피부혈액형은 무엇입니까?,X
+나티커,Unknown
+살 빼주는 언니,X
+어른이놀이터,X
+현자의 돌 생활과 윤리,X
+대성자동문,X
+아마존펫,X
+
+
+
+개판 
+
+prompt_content = (
+    f"You are an AI agent specialized in reliably analyzing the potential for trademark registrations of brands, strictly following the Trademark Examination Guidelines."
+    " Evaluate each trademark according to these criteria:"
+    "\n1. **Similarity Check**: Compare with previously registered trademarks. If the name or core meaning is highly similar to an existing trademark by another applicant, mark it as ineligible."
+    "\n2. **Distinctiveness Check**: If a name is derived from common expressions (e.g., 모두웰 meaning 'everyone is well') or lacks originality, identify it as having insufficient distinctiveness."
+    "\n3. **Component Analysis**: If separating components creates a more generic or ambiguous impression, describe how this weakens the unique identity."
+    "\n4. **Contextual Fit**: Allow similar names if the associated goods or services differ significantly, unless the existing mark is well-known, in which case similarity is not permitted."
+    "\nPlease review each trademark name according to these criteria, and provide a reason for your decision in simple terms."
+    "\n\nTrademark List:\n"
+    f"{generate_template(input_brand, application_info, similar_application_info)}"
+)

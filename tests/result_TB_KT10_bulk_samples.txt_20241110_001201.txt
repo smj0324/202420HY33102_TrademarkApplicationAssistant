@@ -1,0 +1,27 @@
+모두웰,O-----------
+한의원 무본자강 무본자강,X---------
+버드리,O
+다함께 차차차,O
+하프밀,O-----------
+히비초,O
+별미당 별미당,O
+살박사은좌,X---------
+통일한의원,O------------
+태양점보히터,O-------------
+문영월,O
+칼로바이 프로틴 에이드,O
+무스웰 미니컵,O
+당신의 피부혈액형은 무엇입니까?,X
+나티커,O
+살 빼주는 언니,O
+어른이놀이터,O-----------
+현자의 돌 생활과 윤리,O
+대성자동문,X
+아마존펫,O---------
+
+8개 틀림 
+    prompt_content = (
+        f"You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines." 
+        "상표심사기준과 같이 다음 내용을 참고하여, 네가 상표 심사위원이 되어서 상표명에 대한 출원 가능성을 판별해줘:\n\n"
+        f"{generate_template(input_brand, application_info, similar_application_info)}"
+        )

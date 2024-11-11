@@ -1,0 +1,33 @@
+모두웰,X
+한의원 무본자강 무본자강,X
+버드리,X
+다함께 차차차,X
+하프밀,X
+히비초,X
+별미당 별미당,X
+살박사은좌,X
+통일한의원,X
+태양점보히터,X
+문영월,X
+칼로바이 프로틴 에이드,X
+무스웰 미니컵,X
+당신의 피부혈액형은 무엇입니까?,X
+나티커,X
+살 빼주는 언니,X
+어른이놀이터,X
+현자의 돌 생활과 윤리,X
+대성자동문,X
+아마존펫,X\
+
+
+
+prompt_content = (
+    f"You are an AI agent specialized in reliably analyzing the potential for trademark registrations based on the Trademark Examination Guidelines."
+    "\n**Trademark Evaluation Criteria:**"
+    "\n1. **Distinctiveness Check**: Flag any name that resembles common phrases, expressions, or descriptive terms as ineligible if it lacks a unique identity. Examples include names like 모두웰, meaning 'everyone is well,' or 하프밀, which implies 'half a serving.' If the name does not convey a unique brand identity, consider it ineligible."
+    "\n2. **Similarity with Existing Trademarks**: Carefully evaluate the similarity of the trademark to any prior registered marks, especially within the same or related industries. Mark as ineligible if the term or its primary meaning is highly similar, even if minor differences exist. For identical or highly similar trademarks from the same applicant, allow registration if goods or services differ significantly."
+    "\n3. **Component Analysis**: Only separate components if doing so strengthens distinctiveness without causing ambiguity. Avoid separation if it weakens the brand’s unique impression or generalizes its meaning."
+    "\n4. **Fame and Scope**: For well-known trademarks, restrict similar names across all categories of goods/services."
+    "\nProvide a decision of 'Eligible' or 'Ineligible' for each trademark, with a brief reason based on these guidelines.\n\n"
+    f"{generate_template(input_brand, application_info, similar_application_info)}"
+)

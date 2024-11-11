@@ -42,36 +42,46 @@ def main_gpt(application_code, input_brand):
             "application_info": application_info,
             "similar_application_info": "No search results."
         }
+        final_result = final_excute_gpt(input_brand, application_info, similar_application_info)
     else:
         final_result = {
             "output": final_excute_gpt(input_brand, application_info, similar_application_info),
             "application_info": application_info,
             "similar_application_info": similar_application_info
         }
+        final_result = final_excute_gpt(input_brand, application_info, similar_application_info)
         
     #print("*"*50)
     #print(application_info)
     #print("*"*50)
     #print(similar_application_info)
+    #print("****************************************"+final_result+"*****************************************")
 
     return final_result
 
 def final_excute_gpt(input_brand, application_info, similar_application_info):
     # 프롬프트 내용 구성
     prompt_content = (
-        f" 상표심사기준과 다음 내용을 참고하여, 네가 심사위원이 되어서 상표명에 대한 출원 가능성을 판별해줘:\n\n"
+        f"You are an AI agent specialized in smartly and reliably analyzing the potential for trademark registrations of particular brands, following the Trademark Examination Guidelines." 
+        "1. **If the applicant is the same as a previously registered trademark with similar features**, consider the application permissible as a variation."
+        "2. **If the applicant differs**, assess the distinctiveness of the name itself without considering other registered trademarks unless the existing trademark is widely recognized and could easily be confused by the public."
+        ''' **Trademark Name Analysis**:
+        - Determine if separating components would alter or weaken the intended meaning.
+        - If a main part is identified, describe its overall meaning. Avoid separation if it dilutes the brand’s unique impression.
+        - If separation creates ambiguity or generalizes the brand's specific meaning, explain this in a single sentence in the "Reason" section, focusing on how separation may confuse the intended impression of the full trademark.'''
+        "\nProvide a clear eligibility decision and a brief reason for each trademark according to these guidelines.\n\n"
         f"{generate_template(input_brand, application_info, similar_application_info)}"
-    )
+        )
 
     # OpenAI ChatCompletion API 호출
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are a legal expert in trademark law."},
+            {"role": "system", "content": "You are an AI agent specialized in analyzing potential trademark registrations according to the Trademark Examination Guidelines. "},
             {"role": "user", "content": prompt_content}
         ],
         max_tokens=2000,  # 답변 길이 제어
-        temperature=0  # 낮은 temperature로 결정적인 답변 생성
+        temperature=0.000000001  # 낮은 temperature로 결정적인 답변 생성
     )
 
     # 답변 텍스트 반환
@@ -174,7 +184,7 @@ def generate_template(input_brand, application_info, similar_application_info):
 # If there is an identical trademark by the same applicant, the application is permissible
 
 #print(main_gpt('4020230020425', '탑퓨전포차 무한리필')['output']) # 탑퓨전포차 무한리필
-#print(main_gpt('4020190084056', '좋은 집 좋은 자재')['output']) # 좋은 집 좋은 자재
+#print(main_gpt('4020190102212', '건강하고 맛있는 치킨! 삼계치킨 GINSENG CHICKEN')) # 좋은 집 좋은 자재
 #print(main_gpt('4020190099709', '메이크케어')['output']) # 메이크케어
 #print(main_gpt('4020190109038', "자연 담은 유리병")['output']) # 자연 담은 유리병
 

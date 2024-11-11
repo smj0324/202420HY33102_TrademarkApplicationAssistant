@@ -1,0 +1,35 @@
+Application Code: 4020190099709
+Predict Registration Status: None
+Reason: None
+Registration Status: 등록
+========================================
+Application Code: 4020190109038
+Predict Registration Status: None
+Reason: None
+Registration Status: 등록
+========================================
+Application Code: 4020230020425
+Predict Registration Status: None
+Reason: None
+Registration Status: 거절
+========================================
+Application Code: 4020190123361
+Predict Registration Status: None
+Reason: None
+Registration Status: 거절
+========================================
+Application Code: 4020200140652
+Predict Registration Status: None
+Reason: None
+Registration Status: 거절
+========================================
+Application Code: 4020190086428
+Predict Registration Status: None
+Reason: None
+Registration Status: 등록
+========================================
+Application Code: 4020200112705
+Predict Registration Status: None
+Reason: None
+Registration Status: 등록
+========================================
