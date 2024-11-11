@@ -39,7 +39,7 @@ class CodeSearchKipris:
             print("Failed to retrieve general data from KIPRIS API")
             return None
         
-        if not response_general.text or "<title>" not in response_general.text:
+        if not response_general.text or "<title>" or "정보 없음" not in response_general.text:
             return None
         
         else:
@@ -87,7 +87,7 @@ class CodeSearchKipris:
                     print(f"Failed to retrieve similar group data for application number {target_code} from KIPRIS API")
                     continue
 
-                if not response_similar.text or "<SimilargroupCode>" not in response_similar.text:
+                if not response_similar.text or "<SimilargroupCode>" or "정보 없음" not in response_similar.text:
                     return None
                 
                 else:
