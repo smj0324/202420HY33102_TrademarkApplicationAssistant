@@ -226,6 +226,7 @@ def generate_template(input_brand, application_info, similar_application_info):
     # 등록 상태: (승인 또는 거절 중 하나 선택)
     # 이유: (0-4번 검토 결과를 바탕으로 이유를 설명)
     # '''
+    
     #13개/7개 정답 프롬프트 
     # f'''
     # "{input_brand}" 상표의 출원 가능성을 단계별로 검토해줘. 상표 심사 기준에 따라 다음과 같은 항목을 검토해야 해.

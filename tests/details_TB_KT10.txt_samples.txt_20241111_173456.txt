@@ -1,0 +1,40 @@
+Input Brand: 메이크케어
+Registration Status: 메이크케어,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 래쉬픽
+Registration Status: 래쉬픽,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 포모나
+Registration Status: 포모나,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 패티온
+Registration Status: 패티온,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 좋은 집 좋은 자재
+Registration Status: 좋은 집 좋은 자재,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 엑토인
+Registration Status: 엑토인,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 예지미인 데일리 코튼
+Registration Status: 예지미인 데일리 코튼,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 한국정품인증
+Registration Status: 한국정품인증,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수
+Registration Status: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수,Unknown
+Reason: No reason provided
+========================================
+Input Brand: 자연 담은 유리병
+Registration Status: 자연 담은 유리병,Unknown
+Reason: No reason provided
+========================================

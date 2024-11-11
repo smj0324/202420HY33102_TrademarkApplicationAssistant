@@ -19,8 +19,8 @@ Reason: No reason provided
 Registration Status: 거절
 ========================================
 Application Code: 4020200140652
-Predict Registration Status: 굿데이 GOOD DAY,Unknown
-Reason: No reason provided
+Predict Registration Status: 굿데이 GOOD DAY,X
+Reason: "굿데이 GOOD DAY"는 일반적인 표현으로 보통명칭에 해당하여 식별력이 부족하므로 상표법 제33조 제1항 제1호에 따라 등록이 거절됩니다. 유사 상표가 존재하지 않지만, 독창성과 적합성 모두 결여되어 있어 등록이 불가능합니다.
 Registration Status: 거절
 ========================================
 Application Code: 4020190086428
@@ -29,8 +29,8 @@ Reason: No reason provided
 Registration Status: 등록
 ========================================
 Application Code: 4020200112705
-Predict Registration Status: 굿데이 Good Day,Unknown
-Reason: No reason provided
+Predict Registration Status: 굿데이 Good Day,X
+Reason: "굿데이 Good Day"는 일반적인 표현으로 보통명칭에 해당하여 독창성이 결여되어 있으며, 식별력이 없기 때문에 상표 등록이 불가능합니다. 유사 상표 분석 결과에서도 동일 출원인의 유사 상표가 발견되지 않았으나, 보통명칭으로서의 특성 때문에 등록이 거절됩니다.
 Registration Status: 등록
 ========================================
 Application Code: 4020190067029
@@ -90,7 +90,7 @@ Registration Status: 거절
 ========================================
 Application Code: 4020200104764
 Predict Registration Status: 잼나리 치킨,O
-Reason: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록되지 않았고, "잼나리"라는 독창적인 조어가 포함되어 있어 독창성과 적합성을 모두 갖추고 있습니다. 따라서, "잼나리 치킨"은 상표로서 등록될 수 있습니다.
+Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았고, "잼나리"라는 독창적인 조어가 포함되어 있어 독창성을 인정받을 수 있으며, 지정된 상품인 치킨에 대해 식별력을 갖추고 있습니다. 따라서, "잼나리 치킨"은 상표 등록이 가능하다고 판단됩니다.
 Registration Status: 거절
 ========================================
 Application Code: 4020190106084
@@ -104,13 +104,13 @@ Reason: No reason provided
 Registration Status: 거절
 ========================================
 Application Code: 4020200008243
-Predict Registration Status: 깐족 치킨,X
-Reason: "깐족 치킨"은 "치킨"이라는 보통명칭이 포함되어 있어 식별력이 없으며, "깐족"이 독창성을 갖추고 있더라도 전체적으로 식별력이 부족하다고 판단됨. 유사 상표가 존재하지 않지만, 독창성과 적합성 모두 결여되어 있어 등록이 거절됨.
+Predict Registration Status: 깐족 치킨,Unknown
+Reason: No reason provided
 Registration Status: 거절
 ========================================
 Application Code: 4020210081460
 Predict Registration Status: 불로꾼 치킨,O
-Reason: 유사 상표가 존재하지 않으며, "불로꾼"이라는 독창적인 요소가 포함되어 있어 독창성을 갖추고 있습니다. 또한, "불로꾼 치킨"은 지정된 상품에 대해 식별력을 갖추고 있어 상표 등록이 가능하다고 판단됩니다. 따라서, 해당 출원은 승인되어야 합니다.
+Reason: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록되지 않았고, "불로꾼"이라는 독창적인 조어가 포함되어 있어 독창성을 갖추고 있으며, 지정된 상품에 대해 식별력을 충분히 갖추고 있음. 따라서, 상표 등록이 승인되어야 함.
 Registration Status: 거절
 ========================================
 Application Code: 4020200111751
@@ -140,12 +140,12 @@ Registration Status: 거절
 ========================================
 Application Code: 4020230051156
 Predict Registration Status: 하이텐 에스테틱,O
-Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았으며, "하이텐 에스테틱"은 독창성을 갖추고 있고, 지정된 상품이나 서비스에 대해 식별력을 충분히 갖추고 있습니다. 따라서, 상표 등록이 승인되어야 합니다.
+Reason: 유사 상표 분석 결과, 동일 출원인의 유사 상표가 등록되지 않았으며, "하이텐 에스테틱"은 독창성을 갖추고 있고, 지정된 상품이나 서비스에 대해 식별력을 충분히 갖추고 있어 상표 심사 기준에 부합함. 따라서, 해당 출원은 승인되어야 함.
 Registration Status: 거절
 ========================================
 Application Code: 4020200152541
-Predict Registration Status: 모도리 에스테틱,O
-Reason: 유사 상표 분석 결과, 동일 출원인의 유사 상표가 존재하지 않으며, "모도리"가 독창적인 조어로 인정될 경우 "모도리 에스테틱"은 식별력을 갖추고 있어 상표 등록이 가능하다고 판단됩니다. 따라서, 해당 출원은 승인되어야 합니다.
+Predict Registration Status: 모도리 에스테틱,Unknown
+Reason: No reason provided
 Registration Status: 거절
 ========================================
 Application Code: 7020230000987
@@ -180,13 +180,13 @@ Registration Status: 등록
 ========================================
 Application Code: 4020240065550
 Predict Registration Status: 러브스팟 LoveSpot,O
-Reason: 1. **유사 상표 분석**: "러브스팟 LoveSpot"에 대해 유사 상표 검색 결과, 동일 출원인에 의해 등록된 유사 상표가 없으며, 유사 코드 매칭도 이루어지지 않았습니다. 따라서, 유사 상표가 존재하지 않으므로 이 단계에서의 거절 사유는 없습니다.
+Reason: 1. **유사 상표 분석**: "러브스팟 LoveSpot"에 대해 검색한 결과, 유사 상표가 발견되지 않았습니다. 입력된 상표 정보와 유사 상표 검색 결과 모두 유사 상표가 없음을 나타내고 있습니다. 따라서 동일 출원인에 의해 등록된 유사 상표가 없으므로, 이 기준에 따라 출원은 승인되어야 합니다.
 
-2. **독창성 확인**: "러브스팟 LoveSpot"은 임의선택 표장으로 분류될 수 있습니다. '러브스팟'이라는 용어는 특정 상품이나 서비스와 직접적인 연관이 없는 창작된 조합으로, 일반적으로 사용되는 단어의 조합이지만, 특정한 의미를 부여하여 독창성을 갖추고 있습니다. 따라서, 독창성이 인정됩니다.
+2. **독창성 확인**: "러브스팟 LoveSpot"은 임의선택 표장으로 분류될 수 있습니다. '러브스팟'이라는 용어는 특정 상품이나 서비스와 직접적인 연관이 없는 일반적인 단어의 조합으로, 독창성을 갖추고 있습니다. 법 제33조 제1항 제4호에 따르면, 임의선택 표장은 원래 식별력이 있으며, 등록이 가능합니다. 따라서 이 상표는 독창성을 갖추고 있다고 판단됩니다.
 
-3. **적합성 확인**: "러브스팟 LoveSpot"은 특정 상품이나 서비스에 대해 식별력을 갖추고 있습니다. 상표가 소비자에게 특정 상품의 출처를 명확히 인식할 수 있도록 하며, 일반적인 거래 관행에 비추어 볼 때, 해당 상표는 소비자에게 혼동을 일으킬 우려가 없습니다. 따라서, 식별력이 인정됩니다.
+3. **적합성 확인**: "러브스팟 LoveSpot"은 특정 상품이나 서비스에 대해 식별력을 갖추고 있습니다. 상표가 소비자에게 특정 상품의 출처를 명확히 인식시킬 수 있는 경우, 식별력이 인정됩니다. "러브스팟"이라는 상표는 소비자에게 특정한 이미지나 감정을 연상시킬 수 있어, 지정된 상품이나 서비스에 대해 식별력을 갖추고 있다고 볼 수 있습니다.
 
-4. **종합 결론 도출**: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우가 없고, 독창성과 적합성 모두 긍정적으로 평가되었습니다. 따라서, "러브스팟 LoveSpot"의 출원은 승인되어야 합니다.
+4. **종합 결론 도출**: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록되지 않았고, 독창성과 적합성 모두 긍정적으로 평가되었습니다. 따라서 "러브스팟 LoveSpot" 상표는 상표 심사 기준에 부합하며, 등록이 승인되어야 합니다.
 Registration Status: 등록
 ========================================
 Application Code: 4020240109947
@@ -201,17 +201,17 @@ Registration Status: 등록
 ========================================
 Application Code: 4020240062822
 Predict Registration Status: 감사패드림,O
-Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았으며, "감사패드림"은 독창성을 갖추고 있고, 지정된 상품이나 서비스에 대해 식별력을 갖추고 있어 상표 등록이 가능하다고 판단됩니다.
+Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 없으며, "감사패드림"은 독창성을 갖추고 있고, 지정된 상품이나 서비스에 대해 식별력을 충분히 갖추고 있습니다. 따라서, 상표 등록이 승인되어야 합니다.
 Registration Status: 등록
 ========================================
 Application Code: 4020240117108
-Predict Registration Status: 김치찜 팝니다,Unknown
-Reason: No reason provided
+Predict Registration Status: 김치찜 팝니다,X
+Reason: "김치찜 팝니다"는 보통명칭으로 구성되어 있어 독창성이 부족하며, 상품의 출처를 식별할 수 있는 기능이 결여되어 있습니다. 유사 상표가 존재하지 않지만, 상표 심사 기준에 따라 식별력이 없는 상표로 판단되어 등록이 거절됩니다.
 Registration Status: 등록
 ========================================
 Application Code: 4020240063665
-Predict Registration Status: 당당하이,O
-Reason: 유사 상표 분석 결과, 동일 출원인의 유사 상표가 등록되지 않았고, "당당하이"는 독창성을 갖춘 조어로서 식별력을 충분히 갖추고 있다. 따라서, 상표 심사 기준에 따라 해당 출원은 승인되어야 한다.
+Predict Registration Status: 당당하이,Unknown
+Reason: No reason provided
 Registration Status: 등록
 ========================================
 Application Code: 4020240040021
@@ -231,16 +231,21 @@ Registration Status: 등록
 ========================================
 Application Code: 4020220238116
 Predict Registration Status: 슈퍼큐트 suupercute,O
-Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았으며, "슈퍼큐트 suupercute"는 독창성을 갖춘 조어로 인정될 수 있고, 지정된 상품에 대해 식별력을 갖추고 있습니다. 따라서, 상표 등록이 승인되어야 합니다.
+Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았고, "슈퍼큐트 suupercute"는 독창성을 갖춘 조어로서 식별력을 인정받을 수 있는 상표입니다. 따라서, 상표 심사 기준에 따라 해당 출원은 승인되어야 합니다.
 Registration Status: 등록
 ========================================
 Application Code: 4020240016511
-Predict Registration Status: Hello Town,X
-Reason: "Hello Town"은 일반적인 영어 단어의 조합으로 구성되어 있어 독창성이 부족하고, 식별력이 없으므로 상표 등록이 거절됨. 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았으나, 독창성과 적합성 검토에서 식별력이 결여된 것으로 판단되어 거절됨.
+Predict Registration Status: Hello Town,Unknown
+Reason: No reason provided
 Registration Status: 등록
 ========================================
 Application Code: 4020230162026
 Predict Registration Status: HelloKimchi,O
-Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록되지 않았으며, "HelloKimchi"는 조어로서 독창성을 갖추고 있고, 지정된 상품에 대해 식별력을 충분히 갖추고 있습니다. 따라서, 상표 등록이 승인되어야 합니다.
+Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 없으며, "HelloKimchi"는 독창성을 갖춘 상표로 판단됩니다. 또한, 지정된 상품에 대해 식별력을 갖추고 있어 상표 심사 기준에 적합합니다. 따라서, 해당 출원은 승인되어야 합니다.
 Registration Status: 등록
+========================================
+Application Code: 4020190102212
+Predict Registration Status: 건강하고 맛있는 치킨! 삼계치킨 GINSENG CHICKEN,Unknown
+Reason: No reason provided
+Registration Status: 거절
 ========================================

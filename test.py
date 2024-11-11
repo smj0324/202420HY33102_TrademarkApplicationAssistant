@@ -22,9 +22,12 @@ def write_results(status_file_path, details_file_path, output_results, details_r
         details_file.writelines(details_results)
 
 def test_by_myj_test_data(excel_file_path):
+    current_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
     base_name = os.path.basename(excel_file_path).replace('.xlsx', '')  
-    status_file_path = os.path.join(base_path, f"predict_status_{base_name}.txt")
-    details_file_path = os.path.join(base_path, f"details_{base_name}.txt")
+    status_file_path = os.path.join(base_path, f"predict_status_{base_name}_{current_datetime}.txt")
+    details_file_path = os.path.join(base_path, f"details_{base_name}_{current_datetime}.txt")
+
+    start_time = time.time()
 
     df = pd.read_excel(excel_file_path)
     application_code_list = df.iloc[:, 0].astype(str).tolist()
@@ -48,6 +51,10 @@ def test_by_myj_test_data(excel_file_path):
             details_file.write(f"Reason: {reason}\n")
             details_file.write(f"Registration Status: {application_status_list[i]}\n")
             details_file.write("="*40 + "\n")
+
+    end_time = time.time()
+    elapsed_time = end_time - start_time    
+    print(f"전체 데이터를 처리하는 데 걸린 시간: {elapsed_time:.2f}초")
 
 def test_by_sample_data(file_path):
     base_name = os.path.basename(file_path)
@@ -77,6 +84,7 @@ def test_by_sample_data(file_path):
                     main_gpt(application_code, input_brand)['output'],
                     input_brand
                 )
+                print(main_gpt(application_code, input_brand)['output'])
             else:
                 input_brand = "N/A"
                 predict_registration_status = "N/A"
@@ -131,15 +139,15 @@ def test_by_sample_data(file_path):
 #         details_results.append(f"Registration Status: {application_status_list[i]}\n")
 #         details_results.append("="*40 + "\n")
     
-    # End timing the entire process
-    end_time = time.time()
-    elapsed_time = end_time - start_time
+    # # End timing the entire process
+    # end_time = time.time()
+    # elapsed_time = end_time - start_time
     
-    # Save results
-    write_results(status_file_path, details_file_path, output_results, details_results)
+    # # Save results
+    # write_results(status_file_path, details_file_path, output_results, details_results)
     
-    # Print total time taken
-    print(f"전체 데이터를 처리하는 데 걸린 시간: {elapsed_time:.2f}초")
+    # # Print total time taken
+    # print(f"전체 데이터를 처리하는 데 걸린 시간: {elapsed_time:.2f}초")
 
 def parsing_agent_output_result(output):
     status_match = re.search(r"등록 상태:\s*(.+)", output)
@@ -166,10 +174,10 @@ def parsing_gpt_output_result(output, input_brand):
 
     return predict_registration_status, reason
 
-myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
-test_by_myj_test_data(myj_exl_file)
-# sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
-# test_by_sample_data(sample_file_path)
+# myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
+# test_by_myj_test_data(myj_exl_file)
+sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
+test_by_sample_data(sample_file_path)
 # # print(test_by_sample_data(sample_file_path))
 
 
