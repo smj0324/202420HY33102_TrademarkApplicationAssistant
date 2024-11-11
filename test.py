@@ -60,10 +60,8 @@ def test_by_myj_test_data(excel_file_path):
     input_brand_list = df.iloc[:, 1].tolist()
     application_status_list = df.iloc[:, 3].tolist()
 
-    with open(status_file_path, 'a', encoding='utf-8') as status_file, open(details_file_path, 'w', encoding='utf-8') as details_file:
+    with open(status_file_path, 'w', encoding='utf-8') as status_file, open(details_file_path, 'w', encoding='utf-8') as details_file:
         for i in range(len(application_code_list)):
-            if i == 1:
-                break
             predict_registration_status, reason = parsing_agent_output_result(final_execute_gpt(application_code_list[i], input_brand_list[i]))
             
             status_file.write(f"{predict_registration_status}\n")
@@ -82,6 +80,8 @@ def parsing_agent_output_result(text):
     reason = None
 
     for line in lines:
+        if "Trademark Status:" in line or "Predict Status:" or "Status" in line:
+            status = line.split(":")[-1].strip()
         if "Trademark Status:" in line or "Predict Status:" in line:
             status = line.split(":")[-1].strip()
         elif "Reason:" in line:
@@ -97,7 +97,8 @@ def parsing_gpt_output_result(output):
    
 
 sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
-# sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
-# myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
-# test_by_myj_test_data(myj_exl_file)
-test_by_sample_data(sample_file_path)
+# samples_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
+test_by_myj_test_data(myj_exl_file)
+# test_by_sample_data(sample_file_path)
+# test_by_sample_data(sample_file_path)

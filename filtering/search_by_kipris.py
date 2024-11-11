@@ -39,7 +39,7 @@ class CodeSearchKipris:
             print("Failed to retrieve general data from KIPRIS API")
             return None
         
-        if not response_general.text or "<response>" not in response_general.text:
+        if not response_general.text or "<title>" not in response_general.text:
             return None
         
         else:
@@ -87,7 +87,7 @@ class CodeSearchKipris:
                     print(f"Failed to retrieve similar group data for application number {target_code} from KIPRIS API")
                     continue
 
-                if not response_similar.text or "<response>" not in response_similar.text:
+                if not response_similar.text or "<SimilargroupCode>" not in response_similar.text:
                     return None
                 
                 else:
@@ -128,7 +128,6 @@ class CodeSearchKipris:
 
 
 def parsing_application_data(response_general, application_code, single=True):
-    # print("*****************,",response_general.text)
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
 
@@ -191,15 +190,16 @@ def parsing_nice_code(response_similar):
         return [], [], []
     
     trademark_info = items.get('trademarkDesignationGoodstInfo', [])
-    if trademark_info is None:
-        trademark_info = []
+    if isinstance(trademark_info, dict):
+        trademark_info = [trademark_info]
 
-    # defaultdict(list)를 사용하여 중복 제거 없이 순서대로 'SimilargroupCode'를 수집
     grouped_data = defaultdict(list)
 
     classification_codes = set()
     en_names = set()
+    # print(f"Initial type of trademark_info: {type(trademark_info)}")
     for item in trademark_info:
+        # print(f"Initial type of item: {type(trademark_info)}")
         try:
             classification_code = int(item.get('DesignationGoodsClassificationInformationCode', 0))
             similargroup_code = item.get('SimilargroupCode', "")

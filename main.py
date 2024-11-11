@@ -245,6 +245,17 @@ def final_execute_gpt(application_code, input_brand):
                 return final_result
             else:
                 continue
+        elif "approve" in each_result.lower():
+             if code == 1:
+                result.pop()
+                result.append("출원인이 같기 때문에 승인되어야 함")
+                # Immediate return if code 1 produces a rejection
+                final_template = generate_gpt_template(application_info, similar_application_info, code)
+                final_result = main_gpt(final_template)
+                return final_result
+        else:
+            result.pop()
+            continue
     
     # If no rejections for code 1 or if all codes complete, compile and return final result
     final_template = generate_gpt_template(application_info, similar_application_info, 4, result=result)
@@ -252,7 +263,6 @@ def final_execute_gpt(application_code, input_brand):
     result.append(f"--- Final Result ---\n{final_result}\n")
     print(final_result)
     return final_result
-
 
 
 def main_agent(application_code, input_brand):
@@ -329,6 +339,7 @@ def final_excute_agent(application_info, similar_application_info):
 
     return final_result
 
+
 def generate_gpt_template(application_info, similar_application_info, code, result=""):
     """
     Generates a template for GPT based on the given code.
@@ -351,16 +362,14 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         - Input trademark: "{application_info}"
         - Search Results: {similar_application_info[0]}
         
-        - Guidelines:
-            1. If a highly similar trademark is already registered by the same applicant, this application must be approved without exception. In such cases, ignore any other considerations—this trademark must be approved.
-            2. Check similarity based only on the trademark name, not the applicant.
-            3. If the'similar_code_match' is 'False', the application can be temporarily approved.
+        Guidelines-
+        - Automatic Approval for Similar Registered Trademarks: If the same applicant has already registered a highly similar trademark, approve this application without any further review or exceptions. Ignore other considerations—this trademark must be approved.
+        - Similarity Based on Name Only: Determine trademark similarity solely based on the trademark name; ignore the applicant’s identity in this assessment.
+        - Temporary Approval for Non-Matching Codes: If the trademark names are similar but 'similar_code_match' is 'False', the application can receive temporary "pass"
 
-        2. Output Format
-        Predict Status: choice approve or reject
-        Reason: [Do not state whether the application is approved or rejected in the rationale. Write down one simple reason specifically.]
+        Please provide the output in the following format:
+        Status: [Only write "approve", "pass" or "reject"]
         """
-
 
     elif code == 2:
         template = f"""
@@ -371,8 +380,8 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
             If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{sample}]
             Please use the following format for your response:
 
-            Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
-            Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
+            Positive Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be approved.]
+            Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
         """
 
     elif code == 3:
@@ -386,8 +395,8 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         **Trademark Examination Standards**: [{standards_trademark}]
 
         **Output Format**:
-        Positive Reason: [Provide specific and accurate reasons, based on applicable standards, why this trademark may be approved.]
-        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may not be approved.]
+        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
+        Positive Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be approved.]
         """
 
     elif code == 4:
@@ -401,8 +410,6 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
 
         Detailed Examination Results:
         {detailed_results}
-
-        Note: While Code 1 > Code 3 > Code 2 may generally indicate the relative importance of criteria, this order is flexible and should not limit the assessment.
 
         Please provide the output in the following format:
         Trademark Status: (Must choose between approve or reject)
@@ -432,7 +439,7 @@ def generate_template(input_brand, application_info):
     
 # "Please answer without using tools."
 # If there is an identical trademark by the same applicant, the application is permissible
-# final_execute_gpt('4020190066112', '모두웰')
+# final_execute_gpt('4020190102212', '건강하고 맛있는 치킨! 삼계치킨 GINSENG CHICKEN')
 # final_execute_gpt('4020190027144', '살 빼주는 언니')
 # final_execute_gpt('4020190018027', '어른이놀이터')
 # final_execute_gpt('4020190095000', '포모나')
@@ -443,7 +450,7 @@ def generate_template(input_brand, application_info):
 # final_execute_gpt('4020190054525', '아마존펫')
 # final_execute_gpt('4020190053381', '통일한의원')
 # final_execute_gpt('4020190015159', '당신의 피부혈액형은 무엇입니까?')
-# final_execute_gpt('4020190006385', '버드리')
+# final_execute_gpt('4020190067029', 'simplus')
 
 # print(main_agent('4020190068309', '대성자동문')['output'])
 # print(main_agent('4020190054525', '아마존펫')['output'])
