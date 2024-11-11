@@ -129,7 +129,7 @@ def compare_ipa_similarity(word1: str, word2: str) -> float:
 
         sim_score = similarity(embedd_ipa1, embedd_ipa2)
 
-        return sim_score
+        return round(sim_score, 2)
 
     except Exception as e:
         print(f"Error in compare_ipa_similarity: {e}")

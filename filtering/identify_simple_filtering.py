@@ -61,13 +61,13 @@ def compare_records(application_info, similar_records,
             'trademark_name': similar_record['title'],
             'applicant_name': similar_record['applicant_name'],
             'similar_code_name': similar_record['similar_code_name'],
-            # 'trademark_IPA_similarity': 0.0,
+            'trademark_IPA_similarity': 0.0,
             'applicant_name_match': False,
             'similar_code_match': False
         }
 
         # Title similarity check
-        # record_result['trademark_IPA_similarity'] = compare_ipa_similarity(input_title, similar_record['title'])
+        record_result['trademark_IPA_similarity'] = compare_ipa_similarity(application_info['title'], similar_record['title'])
 
         # Applicant name similarity check
         record_result['applicant_match'] = (input_applicant == similar_record['applicant_name'])

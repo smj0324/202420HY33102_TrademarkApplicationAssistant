@@ -341,7 +341,7 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
 
     title = application_info['title']
     template = ""
-    print(similar_application_info[0])
+
     if code == 1:
         template = f"""
         Please evaluate the trademark registration eligibility of "{title}" based on the following criteria.
@@ -354,11 +354,10 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         - Guidelines:
             1. If a highly similar trademark is already registered by the same applicant, this application must be approved without exception. In such cases, ignore any other considerations—this trademark must be approved.
             2. Check similarity based only on the trademark name, not the applicant.
-            3. If the designated product has a different 'similar_code_match', the application can be temporarily approved.
-            4. If the trademark is similar "and" there is a "similar_code_name" in "Search Results" that is Same to "Input trademark", the application for "Input trademark" is rejected.
-                - Similar_code_name of Input trademark = {application_info['similar_code_name']}
-                - Similar_code_name of Search Results = {similar_application_info[0]['similar_code_name']}
-                => If there is no similar code name, it must be approved temporarily.
+            3. If the'similar_code_match' is 'False', the application can be temporarily approved.
+            4. Any overlap between an element in the similar_code_name list and the input trademark in the search results results in rejection.
+                - similar_code_name list of Input trademark = [{application_info['similar_code_name']}]
+                - similar_code_name list of Search Results = [{similar_application_info[0]['similar_code_name']}]
 
         2. Output Format
         Predict Status: choice approve or reject
@@ -437,7 +436,7 @@ def generate_template(input_brand, application_info):
 # final_execute_gpt('4020190066112', '모두웰')
 # final_execute_gpt('4020190027144', '살 빼주는 언니')
 final_execute_gpt('4020190018027', '어른이놀이터')
-# final_execute_gpt('4020190095000', '포모나')
+final_execute_gpt('4020190095000', '포모나')
 
 # final_execute_gpt('4020190051360', '현자의 돌 생활과 윤리')
 # final_execute_gpt('4020190087323', '하프밀')

@@ -1,0 +1,5 @@
+Application Code: 4020190099709
+Predict Registration Status: reject
+Reason: While "메이크케어" has potential for distinctiveness and suggestiveness, it faces significant challenges due to the commonality of its components, particularly the term "케어," which is widely used in the personal care industry. This raises concerns about its descriptiveness and the risk of confusion with existing trademarks. A thorough examination of existing marks indicates that "메이크케어" may not sufficiently distinguish the goods from those of competitors, leading to a determination that it lacks the necessary distinctiveness for trademark registration.
+Registration Status: 등록
+========================================

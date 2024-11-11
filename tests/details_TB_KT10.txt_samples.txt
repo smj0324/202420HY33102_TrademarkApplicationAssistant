@@ -1,8 +1,8 @@
-Input Brand: 자연 담은 유리병
-Registration Status: Status not found
-Reason: Reason not found
+Input Brand: 포모나
+Registration Status: approve
+Reason: The trademark "포모나" is eligible for approval as it is already registered under a different applicant, and there are no identical similar code names found in the search results. Additionally, the examination results indicate that "포모나" possesses distinctiveness and is likely a fanciful mark, which supports its registration potential. While there are considerations regarding common usage and potential confusion with existing trademarks, the absence of identical similar marks and the unique nature of "포모나" strengthen the case for approval.
 ========================================
-Input Brand: 예지미인 데일리 코튼
-Registration Status: Status not found
-Reason: Reason not found
+Input Brand: 메이크케어
+Registration Status: approve
+Reason: The trademark "메이크케어" demonstrates potential for distinctiveness and suggestiveness, as it combines unique elements that do not directly describe the goods. While there are concerns regarding its commonality in the personal care industry and the risk of confusion with existing trademarks, the absence of a highly similar trademark registered by the same applicant allows for temporary approval. The mark's suggestive quality and potential for brand recognition further support its eligibility for registration.
 ========================================
