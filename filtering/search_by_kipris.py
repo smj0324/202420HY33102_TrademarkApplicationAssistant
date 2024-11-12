@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY = os.getenv('_KIPRIS_API_KEY')
+KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
 # DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
 # TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
 

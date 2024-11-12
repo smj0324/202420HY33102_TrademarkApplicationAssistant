@@ -11,173 +11,13 @@ from langchain.agents.format_scratchpad.openai_tools import (
 )
 from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
 from custom_tools.tools import asigned_tools, search_law_by_pdf
-from custom_tools.load_data import load_json_law_guidelines
+from custom_tools.load_data import read_text_file
 from filtering.search_by_kipris import CodeSearchKipris
 from filtering.identify_simple_filtering import result_by_simple_test
 
-
-sample = """
-Chapter 2 Requirements for Trademark Registration
-
-<Law, Article 6, Paragraph 1, Item 1>
-
-A trademark that solely consists of marks generally used as common names for the relevant goods.
-
-Article 6 (Trademarks for Common Names of Goods)
-
-According to Item 1 of Article 6, Paragraph 1 of the Law (hereinafter referred to as "this Item"), the term "common name of the goods" includes abbreviated names, colloquial names, or other names commonly used in the trade society (consisting of general consumers and industry professionals) to refer to the goods in question.
-
-Even if a trademark contains a common name as defined in Paragraph 1, if it is displayed in a unique manner, or if the common name is used only as an additional detail and is not a primary component of the trademark, allowing it to be distinctive, then this Item does not apply.
-
-When distinctiveness is recognized due to the circumstances described in Paragraph 2, if there is a risk of confusion or misunderstanding about the designated goods, the scope of the designated goods may be limited to those related to the common name as per Article 7, Paragraph 1, Item 11 of the Law.
-
-Reference Materials for Interpretation:
-
-The common name referred to in this Item means a name that is actually used and recognized by the trade society (including general consumers and the industry) to identify the goods in question. However, for a name to be considered a common name, it is not enough for the general consumer to merely perceive it as such; the name must be genuinely used in the trade as a general name for the specific goods.
-Examples of Designated Goods and Trademarks:
-
-Automobile: CAR
-Car bulbs: Truck Lite
-Clothing: Jeans
-Packaging film: Wrap
-Corn snacks: Corn Chips
-Walnut-based cookies: Walnut Cookie
-Copying machine: Copier
-Plastic laminated sheets for furniture: Formica
-Stomach medicine containing Greosote: Jeongro-hwan
-Fermented milk: YOGURT
-Foundation cream: Foundation
-Advertising services: Radio Advertising, Television Advertising
-Communication services: Computer Communication, Telephone Communication
-Insurance services: Life Insurance, Auto Insurance
-Restaurant services: Restaurant, Cafe, Grill
-For unregistered varieties under the Seed Industry Act, if a trademark identical to the name of a widely known variety of agricultural products is registered for seeds or similar products, this Item applies, and if the trademark indicates the nature of the goods, Item 3 of Article 6, Paragraph 1 will also apply.
-Law, Article 6, Paragraph 1, Item 2
-
-A trademark that is commonly used for the goods in question.
-
-Article 7 (Commonly Used Trademarks)
-
-According to Item 2 of Article 6, Paragraph 1 of the Law (hereinafter referred to as "this Item"), "commonly used trademark" refers to marks that have been commonly used among competitors to such an extent that they no longer serve as an indication of the source of goods.
-
-However, if a commonly used mark is used as an additional detail rather than a major part of the trademark, and other parts provide distinctiveness, this Item does not apply.
-
-Reference Materials for Interpretation:
-
-To be a commonly used trademark, it must meet the following requirements:
-The trademark is generally used by various unspecified individuals, such as manufacturers or sellers, for specific goods.
-As a result, the trademark has lost its source-indicating function or distinctiveness.
-The trademark owner has not taken necessary measures to protect the trademark.
-Examples of Commonly Used Trademarks and Designated Goods:
-
-Sake: Seishu
-Cognac: Napoleon
-Cold lozenges: In-dan
-Fabric: TEX, LON, RAN
-Decorative sheets: Deco Sheet
-Snacks: Crackers
-Cold cream: Vaseline
-Communication services: Cyber, Web, Tel, Com, Net
-Hospitality: Tourist Hotel, Park
-Restaurant services: Garden, Pavilion, Hall
-Law, Article 6, Paragraph 1, Item 3
-
-A trademark that solely consists of marks indicating the origin, quality, material, effectiveness, use, quantity, shape (including packaging shape), price, production method, processing method, usage, or timing of the goods.
-
-Article 8 (Descriptive Trademarks)
-
-A "mark indicating origin" under Item 3 of Article 6, Paragraph 1 of the Law (hereinafter referred to as "this Item") refers to a place that enables consumers to directly perceive the characteristics of the goods due to the geographical conditions of the region. The mark applies even if the goods were historically or currently produced in that area, or if consumers generally associate the goods with that location.
-
-A "mark indicating quality" refers to a mark directly representing the quality or superiority of the designated goods.
-
-A "mark indicating material" refers to a mark that represents a primary or secondary component actually or potentially used in the designated goods.
-
-A "mark indicating effectiveness" represents the performance or effect of the goods.
-
-A "mark indicating use" represents the use or purpose of the designated goods.
-
-A "mark indicating quantity" refers to a mark commonly recognized in trade to represent the quantity, unit, and symbol of the designated goods.
-
-A "mark indicating shape or packaging shape" represents the external appearance, form, pattern, or specifications of the goods.
-
-A "mark indicating price" represents the price and price indication units generally recognized in trade.
-
-A "mark indicating production, processing, or usage method" refers to marks that directly represent how the designated goods are produced, processed, or used.
-
-A "mark indicating timing" represents the season, time, or period of sale or use for the goods.
-
-Examples of Descriptive Marks and Designated Goods:
-
-Ginseng: Geumsan
-Apples: Daegu
-Dried fish: Yeonggwang
-Fabrics: Hansan
-Squid: Ulleungdo
-Glasses: VIENNA
-Korean cuisine management (hangover soup): Cheongjindong
-Simple dining services (buckwheat noodles, spicy grilled chicken): Chuncheon
-Korean cuisine management (spicy fish stew): Masan
-Restaurant services (grilled ribs): Idong
-Tea: Pu’er (茶)
-If indicating the origin (including sales location) enhances the value or reputation of the goods, and there is a risk of misrepresentation or confusion when goods produced or sold outside of the designated origin bear that origin’s name, Article 7, Paragraph 1, Item 11 of the Law applies.
-
-Quality indications as defined in Paragraph 2 may include indicators of grade, quality assurance, aesthetic qualities, or even the reputation of the product. The actual quality may not be relevant, but if the indicated quality is absent or exaggerated, Article 7, Paragraph 1, Item 11 of the Law also applies.
-
-Examples of Quality Indications and Designated Goods:
-
-All goods: Superior, Standard, Pure, Original, Genuine, Deluxe, New, Complete, First-class, Specialty, Excellent, KS, JIS
-Environment-related goods: Clean, Eco-friendly, GREEN, BIO
-Cosmetics: Soft Brown
-Green tea: Vitality water
-Undershirts: High-running
-Clothing: ELEGANCE BOUTIQUE, SHEER ELEGANCE
-Technology-related products: Hitec
-Hospitality: TRAVEL LODGE
-Raw materials as defined in Paragraph 3 include primary and secondary components that significantly affect the goods’ quality or performance. Even if the component is not widely used but could potentially be used, and its inclusion causes misrepresentation or confusion, Article 7, Paragraph 1, Item 11 of the Law applies.
-Examples of Raw Material Indications and Designated Goods:
-
-Tofu: Soybeans
-Suits: WOOL
-Window frames: Aluminum
-Safes: STEEL
-Blouses: SILK
-Cosmetics, soaps, etc.: KERATIN
-Performance indications under Paragraph 4 include not only objective qualities of the product but also subjective qualities like comfort or satisfaction. The actual existence of these properties is irrelevant; Article 7, Paragraph 1, Item 11 also applies if the representation is absent or misleading.
-Examples of Performance Indications and Designated Goods:
-
-Medicine: Effective
-Tea: Vitality water
-Cosmetics: Smooth
-Furniture: Elegant
-Microwave: One-touch
-Copier: Quick copy
-Eyeliner, mascara: Decoration Eyes
-Communication software, computers: Efficient Network
-Paints, dyes: Glass Deco
-Lipstick, nail polish: Color Wearing
-Use indications under Paragraph 5 represent purposes such as application areas, target consumer groups, versatility, or leisure-oriented functions.
-Examples of Use Indications and Designated Goods:
-
-Fertilizer: Gardening
-Cola: DIET COLA
-Soccer shoes: KICKERS
-Bags: Student
-Clothing: Baby
-Sports equipment: Professional
-Books: Market Report
-Cosmetics:
-Additional Notes:
-
-For combinations of technical (descriptive) marks related to goods, if they convey characteristics in a way that the general public would recognize as descriptive, then Item 3 of Article 6, Paragraph 1 applies.
-
-For trademarks indicating qualities that may mislead or deceive consumers regarding the nature or characteristics of goods, Article 7, Paragraph 1, Item 11 applies.
-
-"""
-
-
 load_dotenv(verbose=True)
 OPENAI_API_KEY = os.getenv('_OPENAI_API_KEY')
-standards_trademark = load_json_law_guidelines()
+standards_trademark = read_text_file()
 
 def extract_reason(text):
     # Use regex to find the Reason section
@@ -201,7 +41,7 @@ def main_gpt(template):
                 "content": template
             }
         ],
-        temperature=0
+        temperature=0.0
     )
 
     response = completion.choices[0].message.content
@@ -213,6 +53,9 @@ def extract_status(text):
     return status_match.group(1).strip() if status_match else None
 
 def final_execute_gpt(application_code, input_brand):
+
+    application_status_value = None
+
     _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
     _application_info._search_by_code()
     _application_info._search_by_application_code()
@@ -229,11 +72,11 @@ def final_execute_gpt(application_code, input_brand):
 
     # Determine codes based on the presence of similar application info
     if not similar_application_info.get('applicant_name'):
-        codes = [2, 3, 4]
+        codes = [2]
     else:
         similar_application_info = result_by_simple_test(application_info, similar_application_info)
         print("\n\n\n\n\nsimilar_application_info:", similar_application_info)
-        codes = [1, 2, 3, 4]
+        codes = [1, 2]
     
     for code in codes[:-1]:
         template = generate_gpt_template(application_info, similar_application_info, code)
@@ -242,30 +85,23 @@ def final_execute_gpt(application_code, input_brand):
         formatted_result = f"--- Result for Code {code} ---\n{each_result}\n"
         print(formatted_result)
         result.append(formatted_result)
-        
-        # Check for rejection in the current result
-        if "pending" in each_result.lower():
-            result.pop()
-            continue
-        elif "reject" in each_result.lower():
-            if code == 1:
-                # Immediate return if code 1 produces a rejection
+
+        if code == 1:
+            if "pending" in each_result.lower():
+                result.pop()
+                continue
+            elif "reject" in each_result.lower():
                 final_template = generate_gpt_template(application_info, similar_application_info, code)
                 final_result = main_gpt(final_template)
                 return final_result
-            else:
-                continue
-        elif "approve" in each_result.lower():
-             if code == 1:
+            elif "approve" in each_result.lower():
                 result.pop()
                 result.append("출원인이 같기 때문에 승인되어야 함")
-                # Immediate return if code 1 produces a rejection
                 final_template = generate_gpt_template(application_info, similar_application_info, code)
                 final_result = main_gpt(final_template)
-                return final_result            
+                return application_status_value, final_result            
     
-    # If no rejections for code 1 or if all codes complete, compile and return final result
-    final_template = generate_gpt_template(application_info, similar_application_info, 4, result=result)
+    final_template = generate_gpt_template(application_info, similar_application_info, 2, result=result)
     final_result = main_gpt(final_template)
     result.append(f"--- Final Result ---\n{final_result}\n")
     print(final_result)
@@ -383,43 +219,11 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         template = f"""
             Please evaluate the trademark registration eligibility of "{title}" based on the following criteria and provide a response with specific and accurate reasoning grounded in the trademark examination standards.
 
-            1. If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{sample}]
+            1. If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{standards_trademark}]
 
             ** Please use the following format for your response:
-            Positive Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be approved.]
-            Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
-        """
-
-    elif code == 3:
-        template = f"""
-        Please verify the trademark registration eligibility of "{title}" according to the Trademark Examination Guidelines.
-
-        Trademark Examination Guidelines:
-        1. The guidelines are broad, so please review them by table of contents for a thorough review of each section.
-        2. Assess whether "{title}" meets the criteria by considering the unique impression it may create for the relevant goods or services, particularly in the market where it will be applied.
-
-        **Trademark Examination Standards**: [{standards_trademark}]
-
-        ** Please use the following format for your response:
-        Positive Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be approved.]
-        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
-        """
-
-    elif code == 4:
-        detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
-        template = f"""
-        1. Please make a comprehensive conclusion based on the results of each examination.
-        2. You need to think slowly and determine the reason specifically.
-        3. Review the 'Detailed Examination Results' carefully and determine whether the application is eligible for registration. If there are any unfamiliar words, it might be better to consider them as unique.
-
-        Trademark name to be reviewed: {application_info['title']}
-
-        Detailed Examination Results:
-        {detailed_results}
-
-        ** Please use the following format for your response:
-        Reason:
-        Trademark Status: [Only Write approve or reject]
+            Reason: []
+            Trademark Status: [Only Write approve or reject]
         """
     
     return template

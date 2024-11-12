@@ -1,0 +1,61 @@
+Input Brand: 래쉬픽
+Registration Status: ** reject
+Reason: **  
+The trademark "래쉬픽" (transliterated as "Lash Pick") may be considered distinctive as it does not appear to directly indicate the quality, origin, or characteristics of the goods it represents. The term does not fall under the categories of common names or generic trademarks as defined in Article 6, Paragraph 1, Subparagraphs 1 and 2. It does not seem to describe a specific product or service in a way that would be commonly understood by consumers, thus maintaining a level of distinctiveness. Additionally, if the trademark is stylized or presented in a unique manner, it could further enhance its distinctiveness, making it eligible for registration.
+
+**Negative Reason:**  
+However, there is a potential concern regarding the trademark's distinctiveness. If "래쉬픽" is perceived by consumers as a descriptive term related to eyelash products (e.g., "lash" referring to eyelashes and "pick" suggesting a selection or choice), it may be rejected under Article 6, Paragraph 1, Subparagraph 1, as it could be seen as a common name for a type of product. Furthermore, if there are existing trademarks that are similar or identical, it could lead to confusion among consumers, which would violate Article 7, Paragraph 1, Subparagraph 7.
+
+**Trademark Status:** reject
+Application Status: 등록
+========================================
+Input Brand: 예지미인 데일리 코튼
+Registration Status: ** reject
+Reason: **  
+The trademark "예지미인 데일리 코튼" (translated as "Yejimiin Daily Cotton") may be approved for registration because it combines distinctive elements that are not merely descriptive or generic. The term "예지미인" (Yejimiin) appears to be a coined term or a brand name that does not directly indicate the quality, origin, or characteristics of the goods, which in this case are likely cotton products. The addition of "데일리 코튼" (Daily Cotton) suggests a specific product line but does not solely describe the goods in a way that would render the entire mark generic. If "예지미인" is recognized as a unique brand name, it could provide the necessary distinctiveness to overcome potential objections under Article 6 regarding common names and generic trademarks.
+
+**Negative Reason:**  
+On the other hand, there is a risk that "데일리 코튼" (Daily Cotton) could be viewed as a descriptive term that indicates the nature of the goods (cotton products intended for daily use). If the term "데일리 코튼" is commonly used in the marketplace to describe similar products, it may be considered a common name under Article 6, Paragraph 1, Subparagraph 1, which could lead to a rejection based on lack of distinctiveness. Additionally, if "예지미인" does not sufficiently distinguish the mark from other similar trademarks, there could be a risk of confusion with existing marks, leading to a potential rejection under Article 7, Paragraph 1, Subparagraph 11.
+
+**Trademark Status:** reject
+Application Status: 등록
+========================================
+Input Brand: 한국정품인증
+Registration Status: ** reject
+Reason: **  
+The trademark "한국정품인증" (translated as "Korean Genuine Product Certification") could be considered distinctive as it combines the term "정품" (genuine product) with "인증" (certification), which may not be commonly used together in the marketplace. This combination could create a unique identifier for goods that are certified as genuine products from Korea. If presented in a stylized manner or combined with distinctive elements, it may enhance its registrability under Article 6, Paragraph 1, Subparagraph 2, which allows for distinctiveness even in common names when presented uniquely.
+
+**Negative Reason:**  
+However, the term "정품" (genuine product) is descriptive and may indicate the quality or authenticity of the goods, which falls under Article 8, Paragraph 2 regarding indications of quality. As such, it may be viewed as a quality-indicating mark that lacks distinctiveness on its own. Additionally, if the mark is perceived as merely descriptive of the goods being certified, it could be rejected under Article 6, Paragraph 1, Subparagraph 1, which states that common names cannot be registered as trademarks.
+
+**Trademark Status:** reject
+Application Status: 거절
+========================================
+Input Brand: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수
+Registration Status: ** reject
+Reason: **  
+The trademark "천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수" could be considered for approval based on its distinctive elements. The inclusion of "주식회사 피톤치드 수" (which translates to "Phytocide Co., Ltd.") provides a unique identifier that distinguishes the brand from others in the marketplace. Additionally, the phrase "천연성분 편백나무 향이 그대로" (which translates to "Natural Ingredients, the Scent of Hinoki Wood as it is") may be seen as descriptive of the product's characteristics but is combined with the company name, which adds a layer of distinctiveness. This combination may help the trademark avoid being classified as a generic or common name under Article 6, Paragraph 1, Subparagraph 1, as it does not solely rely on common terms but rather integrates them with a unique business name.
+
+**Negative Reason:**  
+However, the trademark may face rejection due to its potential classification as an indication of quality or raw material under Article 8. The phrase "천연성분 편백나무 향이 그대로" directly describes the product's quality and raw materials, which could lead to it being perceived as merely informative rather than distinctive. This aligns with Article 8, Paragraph 12, which states that marks presented in a generally used manner are not registrable unless they are combined with distinctive elements. If the descriptive elements are deemed to dominate the trademark, it may be rejected for failing to meet the distinctiveness requirement.
+
+**Trademark Status:** reject
+Application Status: 거절
+========================================
+Input Brand: 포모나
+Registration Status: None
+Reason: The trademark "포모나" has multiple existing registrations that are highly similar, including "포모나" and "포모나 POMONA" from different applicants. According to the guidelines, since there are already registered trademarks that are highly similar, the application should be automatically approved without further review. 
+
+Status: approve
+Application Status: 등록
+========================================
+Input Brand: 패티온
+Registration Status: approve
+Reason: The trademark "패티온" does not appear to fall under any of the disqualifying categories outlined in the Trademark Examination Guidelines. It does not indicate quality, origin, raw material, efficacy, usage, quantity, shape, price, production methods, or timing in a way that would render it descriptive or generic. Additionally, there is no indication that it is a common name or a simple symbol that lacks distinctiveness. The mark seems to be distinctive enough to identify the source of the goods or services it represents. There are no precedents suggesting that "패티온" is similar to existing trademarks or that it would mislead consumers. Therefore, it meets the requirements for trademark registration.
+Application Status: 등록
+========================================
+Input Brand: 엑토인
+Registration Status: approve
+Reason: The trademark "엑토인" does not appear to fall under any of the disqualifying criteria outlined in the Trademark Examination Guidelines. It does not indicate quality, origin, raw material, efficacy, usage, quantity, form, price, production methods, or timing in a way that would render it descriptive or generic. Additionally, it does not consist solely of common names, simple symbols, or elements that lack distinctiveness. There is no indication that it is similar to any prior filed trademarks or that it violates public order or morality. Therefore, it can be considered distinctive enough for registration.
+Application Status: 등록
+========================================

@@ -1,0 +1,100 @@
+### Article 8 (Indication of Quality in Trademarks)
+
+1. **Indication of Origin**: Under Article 6, Paragraph 1, Subparagraph 3 (hereinafter referred to as "this Article"), the “indication of origin for the goods” refers to the region where the characteristics of the goods can be directly associated with specific geographical conditions such as climate or soil. This includes cases where the goods are either produced in that region historically or presently, or are widely recognized by consumers as being from that region. However, in cases where applications for certification marks of geographical indications are filed, even if such marks correspond to indications of origin, this Article does not apply. Also, for trademark applications for wines and distilled spirits indicating origin (with exceptions provided under Article 7, Paragraph 1, Subparagraph 14), Article 7, Paragraph 1, Subparagraph 14 applies.
+
+2. **Indication of Quality**: The “indication of quality for the goods” under this Article refers to a direct indication of the state or excellence of quality of the goods in relation to the designated goods.
+
+3. **Indication of Raw Material**: The “indication of raw material of the goods” under this Article pertains to raw materials (including major components) that are actually used or are recognized as being potentially usable in the designated goods.
+
+4. **Indication of Efficacy**: The “indication of efficacy of the goods” under this Article refers to a direct indication of the performance or effect of the goods in relation to the designated goods.
+
+5. **Indication of Usage**: The “indication of usage for the goods” under this Article refers to a direct indication of the use of the designated goods.
+
+6. **Indication of Quantity**: The “indication of quantity of the goods” under this Article refers to the quantity and quantity units or symbols used in the transaction for the designated goods.
+
+7. **Indication of Form**: The “indication of form of the goods or packaging” under this Article refers to a direct representation of the appearance, shape (including patterns), or specifications of the goods or packaging in relation to the designated goods. In particular, in the case of three-dimensional trademarks, if the shape of the goods or packaging is recognized as a common form, it falls under this Article.
+
+8. **Indication of Price**: The “indication of price of the goods” under this Article refers to the price and price unit or symbols commonly used in the relevant transaction.
+
+9. **Indication of Production, Processing, or Use Method**: The “indication of production, processing, or use method of the goods” under this Article refers to a direct indication of the production, processing, or use methods of the designated goods.
+
+10. **Indication of Timing**: The “indication of timing of the goods” under this Article refers to a direct indication of the season, time period, or specific time when the designated goods are to be sold or used.
+
+11. **Titles of Books and Periodicals**: Titles of books and periodicals that directly indicate the contents of such publications fall under the quality indication specified in this Article. This also applies to titles of recorded tapes, disks, CDs, and films containing recorded content.
+
+12. **Method of Using Indications**: This Article applies only to “marks presented in a generally used manner.” Therefore, marks that are displayed in a distinctive manner or combined with other distinguishable elements that clearly identify the goods are not subject to this Article. However, even if a mark is used in a special manner, if it is so stylized that a general person, without particular attention, cannot directly associate it with descriptive or informative content, or if the combined elements are secondary or merely supplementary, it may still be perceived as a quality-indicative mark.
+
+13. **Combination of Quality-Indicating Marks**: The Article applies to combined marks that include quality-indicating marks specified in Paragraphs 1 to 10.
+
+14. **Misleading or Deceptive Representation**: If a mark that falls under this Article may also mislead consumers about the quality of the goods or deceive consumers, Article 7, Paragraph 1, Subparagraph 11 shall also apply.
+
+
+### Chapter 2: Requirements for Trademark Registration
+
+#### Article 6 (Trademarks Representing Common Names of Goods)
+1. **Common Names**: Article 6, Paragraph 1, Subparagraph 1 of the Act includes abbreviations, nicknames, or other names commonly used in the marketplace as “common names” for goods.
+2. **Distinctiveness in Common Names**: Even if a name is a common name, distinctiveness may be recognized if it is presented in a special way or combined with other distinctive elements. In such cases, Article 6, Paragraph 1, Subparagraph 1 does not apply.
+3. **Cases with Risk of Confusion**: Even if distinctiveness is recognized, if there is a risk of confusion or misunderstanding regarding the goods, the scope of the goods may be restricted under Article 7, Paragraph 1, Subparagraph 11.
+
+#### Article 7 (Generic Trademarks)
+1. **Definition of Generic Trademarks**: Generic trademarks refer to those that have become common terms in the marketplace, thus losing distinctiveness as trademarks.
+2. **Exceptions for Generic Trademarks**: Even if a trademark is considered generic, it will not be viewed as a generic trademark if it is combined with other distinctive elements that, in totality, create distinctiveness.
+
+#### Article 8 (Trademarks Indicating Qualities)
+1. **Indication of Origin**: Refers to a trademark that indicates a region whose geographical characteristics, such as climate or soil, relate to the specific qualities of the goods.
+2. **Indication of Quality**: A trademark that directly indicates the state or excellence of the goods.
+3. **Indication of Raw Material**: A trademark indicating the primary raw material used in the goods.
+4. **Indication of Efficacy**: A trademark that directly conveys the performance or effects of the goods.
+5. **Indication of Usage**: A trademark directly indicating the use or purpose of the goods.
+6. **Indication of Quantity**: A trademark indicating the size, weight, or other quantities of the goods.
+7. **Indication of Shape**: A trademark that directly conveys the appearance, shape, or packaging of the goods.
+8. **Indication of Price**: A trademark indicating standard price units commonly used in transactions.
+9. **Indication of Production, Processing, or Use Method**: A trademark indicating the production, processing, or usage methods of the goods.
+10. **Indication of Timing**: A trademark indicating the season or time when the goods are to be sold.
+11. **Book Titles**: Book or periodical titles that directly describe the content are regarded as quality indicators.
+12. **Commonly Used Qualitative Indicators**: Qualitative indicators used in a general manner, rather than distinctively, are not registrable; however, if combined with other distinctive elements, this article does not apply.
+
+### Interpretative Reference Materials
+1. **Conditions for Common Names**: A term is recognized as a common name if it is widely used in the goods’ marketplace as a general designation.
+2. **Conditions for Generic Trademarks**: A trademark is considered generic if it is widely used as a product name and has lost distinctiveness.
+3. **Examples of Origin Indications**: Examples include ginseng from Geumsan, apples from Daegu, and dried yellow corvina from Yeonggwang, which indicate regionally specific characteristics.
+4. **Examples of Quality Indicators**: Expressions denoting quality or grade, such as superior, standard, genuine, premium, and super, are also considered quality indicators.
+5. **Examples of Raw Material Indicators**: Examples include tofu (soybeans) and window frames (aluminum) when the material represents a main component.
+6. **Examples of Efficacy Indicators**: Examples include pharmaceuticals (effective) and cosmetics (soft) that directly indicate the product’s effectiveness.
+7. **Examples of Usage Indicators**: Fertilizer (horticultural use), cola (diet cola) are examples that directly indicate the intended use.
+
+### Article 6, Paragraph 1, Subparagraph 4 (Trademarks with Prominent Geographical Names, Abbreviations, or Maps Only)
+- **Prominent Geographical Names**: Includes country names, names of special and metropolitan cities or provinces, and major cities and tourist destinations domestically and abroad.
+- **Maps**: Applies to maps of the world or specific countries that are recognizable by the general public as maps.
+- **Exception for Trademarks with Geographical Names**: If the geographical name is not a primary element of the trademark, an exception may be recognized. However, this does not apply if the geographical name is a main component or closely combined with other significant elements.
+
+### Article 6, Paragraph 1, Subparagraph 5 (Trademarks with Common Names Only)
+- **Common Names**: Includes commonly used family names, given names, and business names.
+- **Name and Trade Name Combinations**: Cases where common family names are combined with general business terms (e.g., “Company,” “Firm,” etc.) are also covered.
+- **Exception**: If combined with unique graphics or other distinguishing marks that grant distinctiveness, this provision does not apply.
+
+### Article 6, Paragraph 1, Subparagraph 6 (Trademarks Consisting Only of Simple and Common Symbols)
+- **Simple Symbols**: This includes simple symbols like single characters in Korean or Chinese, foreign characters of two letters or fewer, or two-digit numbers.
+- **Graphic Trademarks**: Commonly used shapes like circles, triangles, and other simple forms are also included.
+- **3D Trademarks**: Simple 3D shapes such as spheres, cubes, or cylinders also fall under this provision.
+- **Exception**: Trademarks with added color or other distinctive elements may be recognized as exceptions.
+
+### Article 6, Paragraph 1, Subparagraph 7 (Trademarks Indistinguishable to Consumers)
+- **Indistinct Trademarks**: Trademarks lacking distinctiveness, such as slogans, greetings, or popular phrases.
+- **Simple Year Indications, Names of Famous People or Religions**: Also applies to cases where there is a risk of misleading or insulting use of such names or references.
+
+### Article 7, Paragraph 1, Subparagraph 1 to 1-5 (Trademarks Similar to National Symbols)
+- **National Symbols**: Trademarks similar to national symbols, including flags, emblems, orders, and distinctions, cannot be registered. This provision also includes names and symbols of international organizations such as the International Olympic Committee and the Red Cross.
+
+### Article 7, Paragraph 1, Subparagraph 2 (Trademarks Insulting Public Organizations or Famous Individuals)
+- **Public Organizations or Famous Deceased Individuals**: Trademarks with false associations or those with the potential to insult or harm the reputation of public entities, religions, or renowned deceased individuals are not permitted.
+
+### Article 7, Paragraph 1, Subparagraph 4 (Trademarks Violating Public Order and Morality)
+- **Violation of Good Morals**: Trademarks that may harm public order or morals cannot be registered.
+- **Criminal or Fraudulent Expressions, Promotion of Superstition**: Trademarks containing these elements are also considered against public order.
+
+### Article 7, Paragraph 1, Subparagraph 6 (Trademarks Containing Names of Notable Individuals)
+- **Inclusion of Notable Names**: Trademarks that include the names or business names of well-known individuals are not permitted. Exceptions are made only if explicit permission has been granted by the individual.
+
+### Article 7, Paragraph 1, Subparagraph 7 (Trademarks Identical or Similar to Prior Filed Trademarks)
+- **Similarity with Prior Filed Trademarks**: Trademarks that are identical or similar to previously filed trademarks cannot be registered, considering the potential for consumer confusion regarding the source of the goods.

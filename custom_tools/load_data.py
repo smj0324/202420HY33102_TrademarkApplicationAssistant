@@ -36,3 +36,11 @@ def load_json_law_guidelines(json_file='.\custom_tools\data\eng_law_text.json'):
         print(f"오류가 발생했습니다: {e}")
 
     return guidelines_json
+
+
+def read_text_file(file_path='.\custom_tools\data\eng_law_text.txt'):
+    # 파일을 읽고 내용을 반환
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+        
+    return content
