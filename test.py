@@ -79,12 +79,13 @@ def test_by_sample_data(file_path):
             if len(data) > 5:
                 application_code = data[0]
                 input_brand = data[6]
+                application_status_value, final_result = main_gpt(application_code, input_brand)
                 # Pass input_brand to parsing_gpt_output_result for output formatting
                 predict_registration_status, reason = parsing_gpt_output_result(
-                    main_gpt(application_code, input_brand)['output'],
+                    final_result['output'],
                     input_brand
                 )
-                print(main_gpt(application_code, input_brand)['output'])
+                print(final_result['output'])
             else:
                 input_brand = "N/A"
                 predict_registration_status = "N/A"
@@ -94,6 +95,7 @@ def test_by_sample_data(file_path):
             details_results.append(f"Input Brand: {input_brand}\n")
             details_results.append(f"Registration Status: {predict_registration_status}\n")
             details_results.append(f"Reason: {reason}\n")
+            details_results.append(f"Application Status: {application_status_value}\n")
             details_results.append("="*40 + "\n")
     
     # End timing the entire process
@@ -174,9 +176,10 @@ def parsing_gpt_output_result(output, input_brand):
 
     return predict_registration_status, reason
 
-# myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
+# myj_exl_file = '.\\tests\\MYJ_TEST_DATA2.xlsx'
 # test_by_myj_test_data(myj_exl_file)
-sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
+# sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
+sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
 test_by_sample_data(sample_file_path)
 # # print(test_by_sample_data(sample_file_path))
 

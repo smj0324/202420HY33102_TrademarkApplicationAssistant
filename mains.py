@@ -17,7 +17,7 @@ from filtering.identify_simple_filtering import result_by_simple_test
 
 
 load_dotenv(verbose=True)
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEYs')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 standards_trademark = load_json_law_guidelines()
@@ -35,6 +35,7 @@ def main_gpt(application_code, input_brand):
     _similar_application_info._search_by_application_code()
 
     similar_application_info = _similar_application_info.to_dict()
+    application_status_value = application_info.pop('application_status')
 
     if not similar_application_info['application_code']:
         final_result = {
@@ -54,7 +55,7 @@ def main_gpt(application_code, input_brand):
     print("*"*50)
     print(similar_application_info)
 
-    return final_result
+    return application_status_value, final_result
 
 def final_excute_gpt(input_brand, application_info, similar_application_info):
     # 프롬프트 내용 구성
@@ -226,7 +227,7 @@ def generate_template(input_brand, application_info, similar_application_info):
     # 등록 상태: (승인 또는 거절 중 하나 선택)
     # 이유: (0-4번 검토 결과를 바탕으로 이유를 설명)
     # '''
-    
+
     #13개/7개 정답 프롬프트 
     # f'''
     # "{input_brand}" 상표의 출원 가능성을 단계별로 검토해줘. 상표 심사 기준에 따라 다음과 같은 항목을 검토해야 해.
@@ -326,7 +327,19 @@ def generate_template(input_brand, application_info, similar_application_info):
 # print(main_gpt('4020190069854', '한국정품인증')['output'])
 # print(main_gpt('4020190046577', '천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수')['output'])
 # print(main_gpt('4020190109038', '자연 담은 유리병')['output'])
-
+# print(main_gpt('4020200170589', '스타트업 오르골')['output'])
+# print(main_gpt('4020230067448', '창문팜')['output'])
+# print(main_gpt('4020230144169', '창문을열다')['output'])
+# print(main_gpt('4020230030722', '지적 대화를 위한 넓고 얕은 지식')['output'])
+# print(main_gpt('4020210247479', '에쿠오 빨대 Eqo straw')['output'])
+# print(main_gpt('4020220173108', '지식 실용화 공장')['output'])
+# print(main_gpt('4020190036124', '벨라 Bella')['output'])
+# print(main_gpt('4020220181881', '하트')['output'])
+# print(main_gpt('4020210249216', '감자')['output'])
+# print(main_gpt('4020220199355', '스컬프트 립 쉐이퍼')['output'])
+# print(main_gpt('1540211', '안수 あんじゅ')['output'])
+a, b = main_gpt('4020190054525', '아마존펫')
+print(b['output'])
 
 
 # print("타입:", main_agent('4020190109038')['output'])

@@ -191,7 +191,7 @@ class CodeSearchKipris:
             "title": self.title,
             "single_flag": self.single_flag,
             "applicant_name": self.applicant_name,
-            # "application_status": self.application_status,
+            "application_status": self.application_status,
             "nice_code": self.nice_code,
             "similar_code": self.similar_code,
             "similar_code_hangle": self.similar_code_hangle,
