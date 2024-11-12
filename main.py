@@ -207,25 +207,32 @@ def main_gpt(template):
     response = completion.choices[0].message.content
     return response
 
+def extract_status(text):
+    # Use regular expression to search for "status" or "Status" followed by any text until the end of line
+    status_match = re.search(r'(?i)status:\s*(.*)', text)  # (?i) makes the regex case-insensitive
+    return status_match.group(1).strip() if status_match else None
+
 def final_execute_gpt(application_code, input_brand):
     _application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=True)
     _application_info._search_by_code()
     _application_info._search_by_application_code()
     application_info = _application_info.to_dict()
     print("\n\n\n\n\napplication_info:",application_info)
+    application_status_value = application_info.pop('application_status')
     _similar_application_info = CodeSearchKipris(title=input_brand, application_code=application_code, single_flag=False)
     _similar_application_info._search_by_code()
     _similar_application_info._search_by_application_code()
     similar_application_info = _similar_application_info.to_dict()
+    print("\n\n\n\n\nsimilar_application_info:",similar_application_info)
 
     result = []
 
     # Determine codes based on the presence of similar application info
-    if not similar_application_info.get('application_code') or not similar_application_info.get('applicant_name'):
+    if not similar_application_info.get('applicant_name'):
         codes = [2, 3, 4]
     else:
         similar_application_info = result_by_simple_test(application_info, similar_application_info)
-        print("\n\n\n\n\nsimilar_application_info:",similar_application_info)
+        print("\n\n\n\n\nsimilar_application_info:", similar_application_info)
         codes = [1, 2, 3, 4]
     
     for code in codes[:-1]:
@@ -237,7 +244,10 @@ def final_execute_gpt(application_code, input_brand):
         result.append(formatted_result)
         
         # Check for rejection in the current result
-        if "reject" in each_result.lower():
+        if "pending" in each_result.lower():
+            result.pop()
+            continue
+        elif "reject" in each_result.lower():
             if code == 1:
                 # Immediate return if code 1 produces a rejection
                 final_template = generate_gpt_template(application_info, similar_application_info, code)
@@ -252,17 +262,14 @@ def final_execute_gpt(application_code, input_brand):
                 # Immediate return if code 1 produces a rejection
                 final_template = generate_gpt_template(application_info, similar_application_info, code)
                 final_result = main_gpt(final_template)
-                return final_result
-        else:
-            result.pop()
-            continue
+                return final_result            
     
     # If no rejections for code 1 or if all codes complete, compile and return final result
     final_template = generate_gpt_template(application_info, similar_application_info, 4, result=result)
     final_result = main_gpt(final_template)
     result.append(f"--- Final Result ---\n{final_result}\n")
     print(final_result)
-    return final_result
+    return application_status_value, final_result
 
 
 def main_agent(application_code, input_brand):
@@ -282,7 +289,7 @@ def main_agent(application_code, input_brand):
         final_result = final_excute_agent(application_info, "No search results.")
     else:
         similar_application_info = result_by_simple_test(application_info, similar_application_info)
-        final_result = final_excute_agent(application_info, similar_application_info[0])
+        final_result = final_excute_agent(application_info, similar_application_info)
         
     return final_result
 
@@ -360,26 +367,25 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         1. Similar Trademark Analysis
         - Start by checking the "patent information search service" results for "{title}":
         - Input trademark: "{application_info}"
-        - Search Results: {similar_application_info[0]}
+        - Search Results: {similar_application_info}
         
         Guidelines-
-        - Automatic Approval for Similar Registered Trademarks: If the same applicant has already registered a highly similar trademark, approve this application without any further review or exceptions. Ignore other considerations—this trademark must be approved.
+        - Automatic Approval for Similar Registered Trademarks: If the "applicant_name" in "Input trademark" matches an applicant who has already registered a highly similar trademark approve this application without further review or exceptions.
         - Similarity Based on Name Only: Determine trademark similarity solely based on the trademark name; ignore the applicant’s identity in this assessment.
-        - Temporary Approval for Non-Matching Codes: If the trademark names are similar but 'similar_code_match' is 'False', the application can receive temporary "pass"
+        - Temporary Approval for Non-Matching Codes: If the trademark names are similar but 'similar_code_match' is 'False', the application can receive temporary "pending"
 
         Please provide the output in the following format:
-        Status: [Only write "approve", "pass" or "reject"]
+        Reason: [Provide specific and accurate reasons]
+        Status: [Only write "approve", "pending" or "reject"]
         """
 
     elif code == 2:
         template = f"""
-            Here’s a refined version that emphasizes the need for detailed and precise reasoning:
-
             Please evaluate the trademark registration eligibility of "{title}" based on the following criteria and provide a response with specific and accurate reasoning grounded in the trademark examination standards.
 
-            If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{sample}]
-            Please use the following format for your response:
+            1. If any related precedents are applicable, please reference them and provide a detailed explanation based on those precedents. [{sample}]
 
+            ** Please use the following format for your response:
             Positive Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be approved.]
             Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
         """
@@ -389,31 +395,31 @@ def generate_gpt_template(application_info, similar_application_info, code, resu
         Please verify the trademark registration eligibility of "{title}" according to the Trademark Examination Guidelines.
 
         Trademark Examination Guidelines:
-        - The guidelines are broad, so please review them by table of contents for a thorough review of each section..
-        - Assess whether "{title}" meets the criteria by considering the unique impression it may create for the relevant goods or services, particularly in the market where it will be applied.
+        1. The guidelines are broad, so please review them by table of contents for a thorough review of each section.
+        2. Assess whether "{title}" meets the criteria by considering the unique impression it may create for the relevant goods or services, particularly in the market where it will be applied.
 
         **Trademark Examination Standards**: [{standards_trademark}]
 
-        **Output Format**:
-        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
+        ** Please use the following format for your response:
         Positive Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be approved.]
+        Negative Reason: [Provide specific and accurate reasons, grounded in examination standards, why this trademark may be reject.]
         """
 
     elif code == 4:
         detailed_results = "\n".join([f"Result for Code {i+1}: {res}" for i, res in enumerate(result)])
         template = f"""
-        1. Please make a comprehensive conclusion based on the results of each examination, 
-        2. If "Result for Code Code 1" finds that a similar trademark is already registered by the same applicant, this application must be approved without exception.
-        3. You need to think slowly and determine the reason specifically.
+        1. Please make a comprehensive conclusion based on the results of each examination.
+        2. You need to think slowly and determine the reason specifically.
+        3. Review the 'Detailed Examination Results' carefully and determine whether the application is eligible for registration. If there are any unfamiliar words, it might be better to consider them as unique.
 
         Trademark name to be reviewed: {application_info['title']}
 
         Detailed Examination Results:
         {detailed_results}
 
-        Please provide the output in the following format:
-        Trademark Status: (Must choose between approve or reject)
-        Reason: [Your summary reason here]
+        ** Please use the following format for your response:
+        Reason:
+        Trademark Status: [Only Write approve or reject]
         """
     
     return template

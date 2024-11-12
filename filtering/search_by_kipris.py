@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
+KIPRIS_API_KEY = os.getenv('_KIPRIS_API_KEY')
 # DEEPL_API_KEY = os.getenv('DEEPL_API_KEY')
 # TRANSLATOR = deepl.Translator(DEEPL_API_KEY)
 
@@ -39,8 +39,9 @@ class CodeSearchKipris:
             print("Failed to retrieve general data from KIPRIS API")
             return None
         
-        if not response_general.text or "<title>" or "정보 없음" not in response_general.text:
+        if not response_general.text or "<title>" not in response_general.text or "정보 없음" in response_general.text:
             return None
+
         
         else:
             application_general_dict = parsing_application_data(response_general, self.application_code, self.single_flag)
@@ -86,8 +87,8 @@ class CodeSearchKipris:
                 if response_similar.status_code != 200:
                     print(f"Failed to retrieve similar group data for application number {target_code} from KIPRIS API")
                     continue
-
-                if not response_similar.text or "<SimilargroupCode>" or "정보 없음" not in response_similar.text:
+                
+                if not response_similar.text or ("<SimilargroupCode>" not in response_similar.text):
                     return None
                 
                 else:
@@ -113,7 +114,7 @@ class CodeSearchKipris:
             "title": self.title,
             "fulltitle": self.fulltitle,
             "applicant_name": self.applicant_name,
-            # "application_status": self.application_status,
+            "application_status": self.application_status,
             "nice_code": self.nice_code,
             "similar_code": self.similar_code,
             "similar_code_name": self.similar_code_hangle,
@@ -128,6 +129,7 @@ class CodeSearchKipris:
 
 
 def parsing_application_data(response_general, application_code, single=True):
+    # print("\n\n\n\n\n****************",response_general.text)
     dict_general = xml_to_dict(response_general)
     items = dict_general.get('response', {}).get('body', {}).get('items', {}).get('item', [])
 

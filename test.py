@@ -14,7 +14,6 @@ def test_data():
     pass
 
 
-
 def write_results(status_file_path, details_file_path, output_results, details_results):
     with open(status_file_path, 'w', encoding='utf-8') as status_file:
         status_file.write("\n".join(output_results))
@@ -36,7 +35,8 @@ def test_by_sample_data(file_path):
                 if len(data) > 5:
                     application_code = data[0]
                     input_brand = data[6]
-                    predict_registration_status, reason = parsing_agent_output_result(final_execute_gpt(application_code, input_brand))
+                    application_status_value, gpt_result = final_execute_gpt(application_code, input_brand)
+                    reason, predict_registration_status = extract_reason_and_status(gpt_result)
                 else:
                     input_brand = "N/A"
                     predict_registration_status = "N/A"
@@ -46,6 +46,7 @@ def test_by_sample_data(file_path):
                 details_file.write(f"Input Brand: {input_brand}\n")
                 details_file.write(f"Registration Status: {predict_registration_status}\n")
                 details_file.write(f"Reason: {reason}\n")
+                details_file.write(f"Application Status: {application_status_value}\n")
                 details_file.write("="*40 + "\n")
 
 
@@ -62,7 +63,8 @@ def test_by_myj_test_data(excel_file_path):
 
     with open(status_file_path, 'w', encoding='utf-8') as status_file, open(details_file_path, 'w', encoding='utf-8') as details_file:
         for i in range(len(application_code_list)):
-            predict_registration_status, reason = parsing_agent_output_result(final_execute_gpt(application_code_list[i], input_brand_list[i]))
+            application_status_value, gpt_result = final_execute_gpt(final_execute_gpt(application_code_list[i], input_brand_list[i]))
+            predict_registration_status, reason = extract_reason_and_status(gpt_result)
             
             status_file.write(f"{predict_registration_status}\n")
             details_file.write(f"Application Code: {application_code_list[i]}\n")
@@ -72,23 +74,16 @@ def test_by_myj_test_data(excel_file_path):
             details_file.write("="*40 + "\n")
 
 
-def parsing_agent_output_result(text):
-    lines = text.splitlines()
-    lines = [line.strip() for line in lines if line.strip()]
+def extract_reason_and_status(text):
+    # Extract "Reason:" content
+    reason_match = re.search(r'Reason:\s*(.*?)(?=\nTrademark Status:|$)', text, re.DOTALL)
+    reason = reason_match.group(1).strip() if reason_match else None
 
-    status = None
-    reason = None
+    # Extract "Trademark Status:" content
+    status_match = re.search(r'Trademark Status:\s*(.*)', text)
+    status = status_match.group(1).strip() if status_match else None
 
-    for line in lines:
-        if "Trademark Status:" in line or "Predict Status:" or "Status" in line:
-            status = line.split(":")[-1].strip()
-        if "Trademark Status:" in line or "Predict Status:" in line:
-            status = line.split(":")[-1].strip()
-        elif "Reason:" in line:
-            reason = line.split("Reason:")[-1].strip()
-
-    return status, reason
-
+    return reason, status
 
 
 def parsing_gpt_output_result(output):
@@ -97,8 +92,8 @@ def parsing_gpt_output_result(output):
    
 
 sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
-# samples_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
-myj_exl_file = '.\\tests\\MYJ_TEST_DATA.xlsx'
-test_by_myj_test_data(myj_exl_file)
+samples_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+# myj_exl_file = '.\\tests\\MYJ_TEST_DATA2.xlsx'
+# test_by_myj_test_data(myj_exl_file)
 # test_by_sample_data(sample_file_path)
-# test_by_sample_data(sample_file_path)
+test_by_sample_data(samples_file_path)

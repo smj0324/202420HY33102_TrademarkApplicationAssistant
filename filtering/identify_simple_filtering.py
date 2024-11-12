@@ -15,15 +15,16 @@ def convert_similar_application_info(similar_application_info):
                 'application_code': similar_application_info['application_code'][i],
                 'title': similar_application_info['title'][i],
                 'applicant_name': similar_application_info['applicant_name'][i],
-                'similar_code': similar_application_info['similar_code'][i],
-                'similar_code_name': similar_application_info['similar_code_name'][i]
+                'similar_code': similar_application_info['similar_code'][i] if i < len(similar_application_info['similar_code']) else [],
+                'similar_code_name': similar_application_info['similar_code_name'][i] if i < len(similar_application_info['similar_code_name']) else []
             }
-        except:
-            records = {}
+        except Exception as e:
+            print(f"Error occurred at index {i}: {e}")
             continue
         records.append(record)
 
     return records
+
 
 def compare_records(application_info, similar_records, 
                    title_threshold=80, 
