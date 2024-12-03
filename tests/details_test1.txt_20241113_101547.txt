@@ -1,0 +1,138 @@
+Input Brand: 특급찬's
+Registration Status: 특급찬's,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 마펠
+Registration Status: 마펠,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 팔레트
+Registration Status: 팔레트,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 철쓰
+Registration Status: 철쓰,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 페페
+Registration Status: 페페,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 천이
+Registration Status: 천이,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 레드카펫
+Registration Status: 레드카펫,X
+Reason: "레드카펫"은 이미 등록된 유사 상표가 존재하며, 해당 상표는 동일한 출원인에 의해 등록된 경우로, 상표법 제34조 제1항 제9호에 따라 거절됩니다. 또한, "레드카펫"은 일반적으로 사용되는 용어로 독창성이 부족하며, 식별력 또한 결여되어 있어 상표 등록이 적합하지 않습니다.
+Application Status: 거절
+========================================
+Input Brand: 지니솝
+Registration Status: 지니솝,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 베드연구소
+Registration Status: 베드연구소,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 한얼 크러쉬
+Registration Status: 한얼 크러쉬,O
+Reason: 1. **유사 상표 분석**:
+   - "한얼 크러쉬"와 유사한 상표로는 "캔디 크러쉬", "HE 크러쉬" 등이 있으며, 이들은 모두 '크러쉬'라는 공통 요소를 가지고 있습니다. 그러나 "한얼 크러쉬"의 출원인은 '주식회사 한얼싸이언스'로, 이와 동일한 출원인이 등록한 유사 상표가 존재하므로, 해당 출원은 무조건 승인되어야 합니다. 
+   - 또한, 유사 코드 매칭이 'G1004'로 동일한 경우, 이는 '가정용 살충제'와 관련된 코드로, 지정 상품이 다르기 때문에 임시 승인이 가능합니다.
+
+2. **독창성 확인**:
+   - "한얼 크러쉬"는 '한얼'이라는 고유명사와 '크러쉬'라는 일반적인 단어의 조합으로 이루어져 있습니다. '한얼'은 특정한 의미를 가지며, '크러쉬'는 일반적으로 '부수다'라는 의미를 가지고 있습니다. 
+   - 상표법 제33조 제1항 제4호에 따르면, 상표가 특정인의 상품을 표시하는 것이라고 인식될 수 있는 경우, 독창성이 인정될 수 있습니다. '한얼'이라는 고유명사가 포함되어 있어, 일반 소비자에게 특정한 출처를 연상시킬 수 있으므로 독창성이 있다고 판단됩니다.
+
+3. **적합성 확인**:
+   - "한얼 크러쉬"는 '한얼'이라는 고유명사와 '크러쉬'라는 일반적인 단어의 조합으로, 특정 상품이나 서비스에 대해 식별력을 갖추고 있습니다. 
+   - 상표법 제33조 제1항 제1호에 따라, 상표가 자타상품의 출처를 구별할 수 있는 기능을 할 수 있는지를 판단해야 합니다. '한얼'이라는 고유명사가 소비자에게 특정 상품의 출처를 명확히 인식시킬 수 있으므로, 식별력을 갖추고 있다고 볼 수 있습니다.
+
+### 종합 결론 도출:
+"한얼 크러쉬"는 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우로, 다른 기준과 관계없이 해당 출원은 승인되어야 합니다. 독창성과 적합성 또한 충분히 갖추고 있어, 상표 등록이 가능하다고 판단됩니다. 따라서, "한얼 크러쉬"는 승인되어야 합니다.
+Application Status: 거절
+========================================
+Input Brand: 땅콩초코스틱
+Registration Status: 땅콩초코스틱,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 김태연 국민 동태탕 Since 2014
+Registration Status: 김태연 국민 동태탕 Since 2014,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 이태리벤또 이태리 도시락 전문점
+Registration Status: 이태리벤또 이태리 도시락 전문점,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 설지화구
+Registration Status: 설지화구,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 알통 p2p
+Registration Status: 알통 p2p,X
+Reason: "알통 p2p"는 "p2p"라는 일반적인 용어가 포함되어 있어 식별력이 낮고, "알통" 부분이 독창성을 갖추더라도 전체적으로 소비자에게 특정 출처를 명확히 인식시키기 어려운 점에서 식별력이 부족하다고 판단됨. 유사 상표 분석 결과, 동일 출원인의 유사 상표가 없으나, "p2p"의 일반성으로 인해 식별력이 결여되어 거절됨.
+Application Status: 등록
+========================================
+Input Brand: 다이즐
+Registration Status: 다이즐,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 에네르빗
+Registration Status: 에네르빗,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 온뇨온뇨
+Registration Status: 온뇨온뇨,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 쏘야
+Registration Status: 쏘야,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 아침바다
+Registration Status: 아침바다,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 에코클린
+Registration Status: 에코클린,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 금실 금실
+Registration Status: 금실 금실,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 젬블로 보드게임 코딩
+Registration Status: 젬블로 보드게임 코딩,O
+Reason: 유사 상표 분석 결과, 동일 출원인의 유사 상표가 등록된 경우가 없으며, "젬블로"가 조어로서 독창성을 인정받을 가능성이 높습니다. 또한, "젬블로 보드게임 코딩"은 지정된 상품에 대해 식별력을 갖추고 있어 상표 등록이 가능하다고 판단됩니다.
+Application Status: 등록
+========================================
+Input Brand: 아몬푸드
+Registration Status: 아몬푸드,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 딥하이
+Registration Status: 딥하이,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================

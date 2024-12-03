@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from collections import defaultdict
 from custom_tools.tools import ryu_and_similarity_code
 
-KIPRIS_API_KEY1 = os.getenv('KIPRIS_API_KEYs')
+KIPRIS_API_KEY = os.getenv('KIPRIS_API_KEY')
 
 class CodeSearchKipris:
     '''
@@ -70,7 +70,7 @@ class CodeSearchKipris:
     #         self.title = [item.get('title', "") for item in application_general_dict]
     #         self.application_status = [item.get('applicationStatus', "") for item in application_general_dict]
     def _search_by_code(self):
-        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY1}"
+        url_general = f"http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString={self.application_code if self.single_flag else self.title}&searchRecentYear=0&ServiceKey={KIPRIS_API_KEY}"
         
         response_general = requests.get(url_general)
         if response_general.status_code != 200:
@@ -97,7 +97,7 @@ class CodeSearchKipris:
     def _search_by_application_code(self):
 
         if self.single_flag:
-            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY1}"
+            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY}"
             
             response_similar = requests.get(url_similar)
             if response_similar.status_code != 200:
@@ -142,7 +142,7 @@ class CodeSearchKipris:
     def _search_by_application_code(self):
 
         if self.single_flag:
-            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY1}"
+            url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={self.application_code}&accessKey={KIPRIS_API_KEY}"
             
             response_similar = requests.get(url_similar)
             if response_similar.status_code != 200:
@@ -162,7 +162,7 @@ class CodeSearchKipris:
             # all_similar_hangle = []
 
             for target_code in self.application_code:
-                url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY1}"
+                url_similar = f"http://plus.kipris.or.kr/openapi/rest/trademarkInfoSearchService/trademarkDesignationGoodstInfo?applicationNumber={target_code}&accessKey={KIPRIS_API_KEY}"
                 
                 response_similar = requests.get(url_similar)
                 if response_similar.status_code != 200:

@@ -338,7 +338,7 @@ def generate_template(input_brand, application_info, similar_application_info):
 # print(main_gpt('4020210249216', '감자')['output'])
 # print(main_gpt('4020220199355', '스컬프트 립 쉐이퍼')['output'])
 # print(main_gpt('1540211', '안수 あんじゅ')['output'])
-a, b = main_gpt('4020190054525', '아마존펫')
+a, b = main_gpt('4020190095594', '다함께 차차차')
 print(b['output'])
 
 

@@ -179,7 +179,7 @@ def parsing_gpt_output_result(output, input_brand):
 # myj_exl_file = '.\\tests\\MYJ_TEST_DATA2.xlsx'
 # test_by_myj_test_data(myj_exl_file)
 # sample_file_path = '.\\tests\\TB_KT10_bulk_samples.txt'
-sample_file_path = '.\\tests\\TB_KT10.txt_samples.txt'
+sample_file_path = '.\\tests\\output_part_2.txt'
 test_by_sample_data(sample_file_path)
 # # print(test_by_sample_data(sample_file_path))
 

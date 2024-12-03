@@ -1,0 +1,126 @@
+Input Brand: 수루기
+Registration Status: 수루기,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 돈까스프라이(돈까스FRY)
+Registration Status: 돈까스프라이(돈까스FRY),Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 사바이자이
+Registration Status: 사바이자이,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 경성1984삼겹살
+Registration Status: 경성1984삼겹살,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 빅톨
+Registration Status: 빅톨,Unknown
+Reason: No reason provided
+Application Status: 포기
+========================================
+Input Brand: 오토빌
+Registration Status: 오토빌,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 대파꽈배기
+Registration Status: 대파꽈배기,O
+Reason: 1. **유사 상표 분석**: "대파꽈배기"와 유사한 상표가 검색된 결과, 유사 코드가 다수 존재하였으나, 동일 출원인에 의해 등록된 유사 상표가 없으므로, 해당 출원은 승인되어야 합니다. 유사 상표가 존재하더라도, 동일 출원인에 의해 등록된 유사 상표가 없기 때문에, 법적 기준에 따라 거절 사유가 발생하지 않습니다.
+
+2. **독창성 확인**: "대파꽈배기"는 특정한 식품을 지칭하는 조어로, 대파와 꽈배기를 결합한 형태입니다. 이는 일반적인 명칭이 아닌 조어(창작) 표장으로 볼 수 있으며, 따라서 독창성을 갖추고 있습니다. 법 제33조 제1항 제1호에 따르면, 보통명칭으로 사용되는 표장은 등록이 불가하나, "대파꽈배기"는 보통명칭이 아닌 조어로서 식별력을 인정받을 수 있습니다.
+
+3. **적합성 확인**: "대파꽈배기"는 지정된 상품이나 서비스에 대해 식별력을 갖추고 있습니다. 상표 심사 기준에 따르면, 상표가 자타상품의 출처를 구별할 수 있는 기능을 갖추고 있어야 하며, "대파꽈배기"는 특정한 상품을 지칭하는 독창적인 명칭으로, 소비자에게 특정 출처를 인식시킬 수 있는 가능성이 높습니다. 따라서, 식별력을 갖추고 있다고 판단됩니다.
+
+4. **종합 결론 도출**: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우, 다른 기준과 관계없이 해당 출원은 승인되어야 하며, "대파꽈배기"는 독창성을 갖추고 있고, 지정된 상품에 대해 식별력을 갖추고 있습니다. 따라서, 모든 검토 결과를 종합적으로 고려할 때, "대파꽈배기"는 상표 등록이 승인되어야 합니다.
+Application Status: 거절
+========================================
+Input Brand: 아이 브
+Registration Status: 아이 브,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 스터디카페 The PEN
+Registration Status: 스터디카페 The PEN,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 공감언론 뉴시스
+Registration Status: 공감언론 뉴시스,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 쾌남시대 4080
+Registration Status: 쾌남시대 4080,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 손씨
+Registration Status: 손씨,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 라라이프
+Registration Status: 라라이프,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 래쉬퀸
+Registration Status: 래쉬퀸,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 달빛한옥
+Registration Status: 달빛한옥,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 서울리얼 성형외과
+Registration Status: 서울리얼 성형외과,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 별빛에 취한 와인싸롱뱅뱅
+Registration Status: 별빛에 취한 와인싸롱뱅뱅,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 해이바디
+Registration Status: 해이바디,Unknown
+Reason: No reason provided
+Application Status: 포기
+========================================
+Input Brand: 무사
+Registration Status: 무사,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 실비야 보험의 모든것 한보연
+Registration Status: 실비야 보험의 모든것 한보연,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 젠네트
+Registration Status: 젠네트,X
+Reason: "젠네트"는 독창성을 갖추고 있으나, 유사 상표 "하우젠네트워크"가 등록되어 있어, 동일 출원인의 유사 상표가 존재함에 따라 출원은 거절됩니다. 상표법 제34조 제1항 제9호에 따라, 타인의 상품을 표시하는 것이라고 수요자들에게 널리 인식되어 있는 상표와 동일·유사한 상표로서 그 타인의 상품과 동일·유사한 상품에 사용하는 상표이기 때문에 등록이 불가능합니다.
+Application Status: 거절
+========================================
+Input Brand: 안경에반하다with렌즈
+Registration Status: 안경에반하다with렌즈,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 올바른
+Registration Status: 올바른,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 실비김치
+Registration Status: 실비김치,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================

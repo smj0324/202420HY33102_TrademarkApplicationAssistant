@@ -1,0 +1,131 @@
+Input Brand: 특급찬's
+Registration Status: 특급찬's,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 마펠
+Registration Status: 마펠,O
+Reason: 유사 상표 분석 결과, "마펠"과 동일 출원인의 유사 상표가 등록된 경우가 없으며, 독창성이 인정되는 조어 표장으로서 식별력을 갖추고 있습니다. 또한, 상표 심사 기준에 따라 "마펠"은 지정된 상품이나 서비스에 대해 적합성을 갖추고 있으므로, 해당 출원은 승인되어야 합니다.
+Application Status: 등록
+========================================
+Input Brand: 팔레트
+Registration Status: 팔레트,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 철쓰
+Registration Status: 철쓰,O
+Reason: 1. **유사 상표 분석**: "철쓰"에 대한 유사 상표 검색 결과, 동일 출원인인 김규철에 의해 등록된 유사 상표가 없으며, 유사 코드 매칭 결과도 확인된 바가 없습니다. 따라서, 유사 상표가 존재하지 않으므로 "철쓰"의 출원은 승인되어야 합니다.
+
+2. **독창성 확인**: "철쓰"는 조어로 보이며, 기존에 사용되고 있는 일반적인 단어와는 구별되는 독창적인 상표명입니다. 상표법 제33조 제1항 제6호에 따르면, 간단하고 흔한 표장만으로 된 상표는 등록이 불가능하나, "철쓰"는 그러한 간단한 표장에 해당하지 않으며, 독창성을 갖춘 조어로서 식별력이 인정될 수 있습니다. 따라서 독창성이 충분히 인정됩니다.
+
+3. **적합성 확인**: "철쓰"는 지정된 상품이나 서비스에 대해 식별력을 갖추고 있습니다. 상표법 제33조 제1항 제1호에 따라, 상표가 자타상품의 출처를 구별할 수 있는 기능을 갖추고 있는지 여부를 판단할 때, "철쓰"는 특정한 의미를 가지며, 소비자에게 특정 상품이나 서비스의 출처를 명확히 인식시킬 수 있습니다. 따라서, "철쓰"는 적합성을 갖추고 있습니다.
+
+4. **종합 결론 도출**: 유사 상표 분석 결과, 동일 출원인의 유사 상표가 등록된 경우가 없고, 독창성과 적합성 모두 충족되므로, "철쓰"의 출원은 승인되어야 합니다. 상표 심사 기준에 따라 "철쓰"는 식별력을 갖춘 독창적인 상표로 인정되며, 유사 상표가 없으므로 출원은 승인됩니다.
+Application Status: 거절
+========================================
+Input Brand: 페페
+Registration Status: 페페,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 천이
+Registration Status: 천이,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 레드카펫
+Registration Status: 레드카펫,O
+Reason: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우, 다른 기준과 관계없이 해당 출원은 승인되어야 하며, "레드카펫" 상표는 유사 상표가 존재하므로 승인됩니다. 그러나 독창성과 적합성 측면에서는 등록이 불가능할 것으로 판단되지만, 유사 상표의 존재로 인해 승인됩니다.
+Application Status: 거절
+========================================
+Input Brand: 지니솝
+Registration Status: 지니솝,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 베드연구소
+Registration Status: 베드연구소,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 한얼 크러쉬
+Registration Status: 한얼 크러쉬,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 땅콩초코스틱
+Registration Status: 땅콩초코스틱,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 김태연 국민 동태탕 Since 2014
+Registration Status: 김태연 국민 동태탕 Since 2014,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 이태리벤또 이태리 도시락 전문점
+Registration Status: 이태리벤또 이태리 도시락 전문점,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 설지화구
+Registration Status: 설지화구,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 알통 p2p
+Registration Status: 알통 p2p,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 다이즐
+Registration Status: 다이즐,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 에네르빗
+Registration Status: 에네르빗,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 온뇨온뇨
+Registration Status: 온뇨온뇨,O
+Reason: 유사 상표 분석 결과 동일 출원인의 유사 상표가 등록된 경우, 다른 기준과 관계없이 해당 출원은 승인되어야 하며, "온뇨온뇨"는 독창성을 갖추고 있으며, 지정된 상품에 대해 식별력을 충분히 갖추고 있어 등록 가능성이 높습니다.
+Application Status: 등록
+========================================
+Input Brand: 쏘야
+Registration Status: 쏘야,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 아침바다
+Registration Status: 아침바다,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 에코클린
+Registration Status: 에코클린,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 금실 금실
+Registration Status: 금실 금실,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 젬블로 보드게임 코딩
+Registration Status: 젬블로 보드게임 코딩,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 아몬푸드
+Registration Status: 아몬푸드,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 딥하이
+Registration Status: 딥하이,O
+Reason: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우, 해당 출원은 무조건 승인되어야 하며, "딥하이"는 독창성을 갖추고 있고, 지정된 상품에 대해 식별력을 갖추고 있어 적합성 또한 인정됩니다. 따라서 "딥하이"는 승인되어야 합니다.
+Application Status: 등록
+========================================

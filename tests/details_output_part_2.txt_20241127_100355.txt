@@ -1,0 +1,162 @@
+Input Brand: 파워쉴드
+Registration Status: 파워쉴드,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 알레르텍
+Registration Status: 알레르텍,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: #꿀잼 꿀잼교육놀이터
+Registration Status: #꿀잼 꿀잼교육놀이터,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 숯불갈비전문점 서울가든
+Registration Status: 숯불갈비전문점 서울가든,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 한국워터소믈리에협회
+Registration Status: 한국워터소믈리에협회,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 조선찰옥수수
+Registration Status: 조선찰옥수수,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 법률방송 뉴스
+Registration Status: 법률방송 뉴스,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 베르디움
+Registration Status: 베르디움,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 프로칼
+Registration Status: 프로칼,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 더마 에이징
+Registration Status: 더마 에이징,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 하품싱글즈
+Registration Status: 하품싱글즈,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 꽃:술
+Registration Status: 꽃:술,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 탱커
+Registration Status: 탱커,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 해외e-커머스연구소
+Registration Status: 해외e-커머스연구소,O
+Reason: 1. **유사 상표 분석**: "해외e-커머스연구소"와 유사한 상표가 검색된 결과, 동일 출원인인 '주식회사 리치힐'에 의해 등록된 유사 상표가 없었습니다. 따라서, 유사 상표가 존재하지 않으므로 이 단계에서 거절 사유는 발생하지 않습니다. 
+
+2. **독창성 확인**: "해외e-커머스연구소"는 '해외', 'e-커머스', '연구소'라는 세 가지 요소로 구성되어 있습니다. 이 상표는 특정한 의미를 가지며, 일반적으로 사용되는 용어의 조합이지만, 'e-커머스'라는 용어는 특정한 분야를 지칭하는 조어로서 독창성을 어느 정도 갖추고 있습니다. 그러나 '연구소'와 '해외'는 일반적인 용어이므로, 전체적으로는 식별력이 약할 수 있습니다. 하지만, 'e-커머스'라는 특정 분야의 조합으로 인해 독창성을 어느 정도 인정할 수 있습니다.
+
+3. **적합성 확인**: "해외e-커머스연구소"는 교육 및 연구 관련 서비스에 해당하는 상표로, 지정된 상품이나 서비스에 대해 식별력을 갖추고 있습니다. '해외'와 'e-커머스'라는 조합은 특정한 서비스의 출처를 나타내는 데 기여할 수 있으며, 이는 소비자에게 해당 서비스의 출처를 명확히 인식시킬 수 있습니다. 따라서, 이 상표는 상표 심사 기준에 부합하여 적합성을 갖추고 있습니다.
+
+4. **종합 결론 도출**: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우가 없고, 독창성과 적합성 모두 긍정적으로 평가되었습니다. 따라서, "해외e-커머스연구소"는 상표 등록이 승인되어야 합니다.
+Application Status: 거절
+========================================
+Input Brand: 어드벤쳐
+Registration Status: 어드벤쳐,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 테라팜
+Registration Status: 테라팜,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 도배나라
+Registration Status: 도배나라,X
+Reason: "도배나라"는 보통명칭인 "도배"와 결합된 상표로, 독창성이 결여되어 있으며, 지정된 상품에 대한 식별력을 갖추고 있지 않기 때문에 상표 등록이 불가능합니다. 유사 상표 분석 결과에서도 유사 상표가 없으나, 보통명칭으로서의 특성으로 인해 등록이 거절됩니다.
+Application Status: 포기
+========================================
+Input Brand: 순수 Art gallery
+Registration Status: 순수 Art gallery,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 기사텐1909
+Registration Status: 기사텐1909,O
+Reason: 1. **유사 상표 분석**: "기사텐1909"에 대한 유사 상표 검색 결과, 동일 출원인에 의해 등록된 유사 상표가 없으며, 유사 코드 매칭이 다르기 때문에 임시 승인이 가능합니다. 따라서 유사 상표 분석 결과는 긍정적입니다.
+
+2. **독창성 확인**: "기사텐1909"는 기존의 상표와 비교했을 때 독창성이 있는 조어로 판단됩니다. 상표법 제33조 제1항 제6호에 따르면, 간단하고 흔한 표장만으로 된 상표는 등록이 불가능하나, "기사텐1909"는 특정한 의미를 가지지 않는 조어로, 기존의 상표와 유사성이 없고, 일반 수요자에게 혼동을 일으킬 가능성이 낮습니다. 따라서 독창성이 인정됩니다.
+
+3. **적합성 확인**: "기사텐1909"는 지정된 상품이나 서비스에 대해 식별력을 갖추고 있습니다. 상표법 제33조 제1항 제1호에 따라, 상표가 자타상품의 출처를 구별할 수 있는 기능을 갖추고 있으며, 특정인에게 독점적인 권리를 부여해도 경업자 간의 자유경쟁을 해칠 우려가 없습니다. 따라서 적합성 또한 긍정적입니다.
+
+4. **종합 결론 도출**: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우가 없고, 독창성과 적합성 모두 긍정적으로 평가되었습니다. 따라서 "기사텐1909"는 상표 등록이 승인되어야 합니다.
+Application Status: 거절
+========================================
+Input Brand: 올로마켓
+Registration Status: 올로마켓,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 작은창
+Registration Status: 작은창,Unknown
+Reason: No reason provided
+Application Status: 포기
+========================================
+Input Brand: 데티스 라이트바디
+Registration Status: 데티스 라이트바디,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 블링블링아이
+Registration Status: 블링블링아이,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 휴 휴 청년 성인심리상담센터
+Registration Status: 휴 휴 청년 성인심리상담센터,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 빨간색가방
+Registration Status: 빨간색가방,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 탠젠트GC
+Registration Status: 탠젠트GC,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 레오나르도 다빈치
+Registration Status: 레오나르도 다빈치,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 아론
+Registration Status: 아론,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 컬러풀 유
+Registration Status: 컬러풀 유,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 마꼬창
+Registration Status: 마꼬창,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================

@@ -1,0 +1,50 @@
+Input Brand: 메이크케어
+Registration Status: 메이크케어,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 래쉬픽
+Registration Status: 래쉬픽,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 포모나
+Registration Status: 포모나,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 패티온
+Registration Status: 패티온,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 좋은 집 좋은 자재
+Registration Status: 좋은 집 좋은 자재,Unknown
+Reason: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우, 해당 출원은 승인되어야 하지만, "좋은 집 좋은 자재"는 일반적인 표현으로 구성되어 있어 독창성이 부족하고, 기술적 표장으로 해석될 수 있어 식별력이 없으므로 거절됩니다.
+Application Status: 거절
+========================================
+Input Brand: 엑토인
+Registration Status: 엑토인,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 예지미인 데일리 코튼
+Registration Status: 예지미인 데일리 코튼,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 한국정품인증
+Registration Status: 한국정품인증,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수
+Registration Status: 천연성분 편백나무 향이 그대로- 주식회사 피톤치드 수,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 자연 담은 유리병
+Registration Status: 자연 담은 유리병,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================

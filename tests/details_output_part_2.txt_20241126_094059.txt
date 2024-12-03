@@ -1,0 +1,110 @@
+Input Brand: 에코클린
+Registration Status: 에코클린,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 금실 금실
+Registration Status: 금실 금실,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 젬블로 보드게임 코딩
+Registration Status: 젬블로 보드게임 코딩,O
+Reason: 1. **유사 상표 분석**:
+   - "젬블로 보드게임 코딩"의 출원인은 "주식회사 젬블로컴퍼니"로, 유사 상표 검색 결과에서 동일 출원인에 의해 등록된 유사 상표가 없으므로, 유사 상표가 존재하지 않음에도 불구하고 동일 출원인의 유사 상표가 등록된 경우에는 해당 출원은 무조건 승인되어야 한다는 기준에 따라 승인된다.
+
+2. **독창성 확인**:
+   - "젬블로 보드게임 코딩"은 '젬블로'라는 조어와 '보드게임 코딩'이라는 설명적 요소가 결합된 형태이다. '젬블로'는 기존에 존재하지 않는 조어로, 임의선택 표장에 해당하여 원래 식별력이 있다고 볼 수 있다. '보드게임 코딩'은 기술적 표장으로, 보드게임의 특성을 설명하는 부분이지만, '젬블로'와 결합하여 전체적으로 식별력을 갖춘 상표로 인식될 수 있다. 따라서 독창성이 인정된다.
+
+3. **적합성 확인**:
+   - "젬블로 보드게임 코딩"은 지정된 상품인 보드게임 및 관련 서비스와의 관계에서 자타상품의 출처를 구별할 수 있는 기능을 갖추고 있다. '젬블로'라는 독창적인 조어가 포함되어 있어 소비자에게 특정 상품의 출처를 명확히 인식시킬 수 있으며, '보드게임 코딩'이라는 설명적 요소가 추가되어 상품의 성격을 명확히 전달한다. 따라서 식별력을 갖추고 있다고 판단된다.
+
+### 종합 결론 도출:
+각 검토 단계의 결과를 바탕으로 "젬블로 보드게임 코딩"은 유사 상표가 존재하지 않으며, 독창성과 적합성을 모두 충족하므로, 해당 출원은 승인되어야 한다.
+Application Status: 등록
+========================================
+Input Brand: 아몬푸드
+Registration Status: 아몬푸드,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 딥하이
+Registration Status: 딥하이,O
+Reason: 유사 상표 분석에서 동일 출원인의 유사 상표가 등록된 경우, 다른 기준과 관계없이 해당 출원은 승인되어야 하며, "딥하이"는 독창성과 식별력을 갖추고 있어 등록이 가능합니다.
+Application Status: 등록
+========================================
+Input Brand: 수루기
+Registration Status: 수루기,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 돈까스프라이(돈까스FRY)
+Registration Status: 돈까스프라이(돈까스FRY),X
+Reason: "돈까스프라이(돈까스FRY)"는 '돈까스'라는 보통명칭과 '프라이'라는 조리 방법을 결합한 것으로, 일반 소비자에게 특정인의 상품으로 인식될 가능성이 낮습니다. 따라서 식별력이 부족하여 등록이 거절될 수 있습니다. 유사 상표 분석 결과, 동일 출원인의 유사 상표가 등록된 경우는 아니지만, 독창성과 적합성 측면에서 식별력이 결여된 것으로 판단됩니다.
+Application Status: 거절
+========================================
+Input Brand: 사바이자이
+Registration Status: 사바이자이,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 경성1984삼겹살
+Registration Status: 경성1984삼겹살,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 빅톨
+Registration Status: 빅톨,Unknown
+Reason: No reason provided
+Application Status: 포기
+========================================
+Input Brand: 오토빌
+Registration Status: 오토빌,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 대파꽈배기
+Registration Status: 대파꽈배기,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 아이 브
+Registration Status: 아이 브,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 스터디카페 The PEN
+Registration Status: 스터디카페 The PEN,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 공감언론 뉴시스
+Registration Status: 공감언론 뉴시스,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 쾌남시대 4080
+Registration Status: 쾌남시대 4080,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 손씨
+Registration Status: 손씨,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 라라이프
+Registration Status: 라라이프,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
+Input Brand: 래쉬퀸
+Registration Status: 래쉬퀸,Unknown
+Reason: No reason provided
+Application Status: 거절
+========================================
+Input Brand: 달빛한옥
+Registration Status: 달빛한옥,Unknown
+Reason: No reason provided
+Application Status: 등록
+========================================
